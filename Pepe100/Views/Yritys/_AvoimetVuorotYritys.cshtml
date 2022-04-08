@@ -1,0 +1,260 @@
+﻿@*@model IEnumerable<WorkMVC2021.ViewModels.TehtavaRivit>*@
+@model IEnumerable<Pepe100.Models.tehtavia>
+
+<div class="container-fluid">
+	@*<table class="table table-bordered active">*@
+	<table class="table">
+		<thead>
+			@foreach (var item in Model)
+			{
+				<tr class="table-success active">
+					@if (item.Lahihoitaja != null)
+					{
+						<td>Lahihoitaja</td>
+					}
+					@if (item.Sairaanhoitaja != null)
+					{
+						<td>Sairaanhoitaja</td>
+					}
+					@if (item.LOP != null)
+					{
+						<td>LOP</td>
+					}
+					@if (item.KIPU != null)
+					{
+						<td>KIPU</td>
+					}
+					@if (item.I_V != null)
+					{
+						<td>I_V</td>
+					}
+					@if (item.LAS != null)
+					{
+						<td>LAS</td>
+					}
+				@*<th>@Html.DisplayNameFor(model => model.Lahihoitaja)</th>
+				<th>@Html.DisplayNameFor(model => model.Sairaanhoitaja)</th>
+				<th>@Html.DisplayNameFor(model => model.LOP)</th>
+				<th>@Html.DisplayNameFor(model => model.KIPU)</th>
+				<th>@Html.DisplayNameFor(model => model.I_V)</th>
+				<th>@Html.DisplayNameFor(model => model.LAS)</th>*@
+
+				</tr>
+			 } 
+			</thead>
+
+		<tbody>
+			@foreach (var item in Model)
+			{
+			<tr>
+				  @*<td>@Html.DisplayFor(modelItem => item.Lahihoitaja)</td>*@
+				  @*<td>@Html.DisplayFor(modelItem => item.Sairaanhoitaja)</td>
+					<td>@Html.DisplayFor(modelItem => item.LOP)</td>
+					<td>@Html.DisplayFor(modelItem => item.KIPU)</td>
+					<td>@Html.DisplayFor(modelItem => item.I_V)</td>
+					<td>@Html.DisplayFor(modelItem => item.LAS)</td>*@
+				@if (item.Lahihoitaja != null)
+				{
+					<td>Valittu</td>
+				}
+				@if (item.Sairaanhoitaja != null)
+				{
+					<td>Valittu</td>
+				}
+				@if (item.LOP != null)
+				{
+					<td>Valittu</td>
+				}
+				@if (item.KIPU != null)
+				{
+					<td>Valittu</td>
+				}
+				@if (item.I_V != null)
+				{
+					<td>Valittu</td>
+				}
+				@if (item.LAS != null)
+				{
+					<td>Valittu</td>
+				}
+
+
+			</tr>
+			}
+		</tbody>
+		<thead>
+			<tr>
+				<th>@Html.DisplayNameFor(model => model.GER)</th>
+				<th>@Html.DisplayNameFor(model => model.PSYK)</th>
+				<th>@Html.DisplayNameFor(model => model.ROKOTUS)</th>
+				<th>@Html.DisplayNameFor(model => model.Tyokokemus)</th>
+				<th>@Html.DisplayNameFor(model => model.Vanhustenhoito_kotihoito)</th>
+				<th>@Html.DisplayNameFor(model => model.Mielenterveys)</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+
+			<tr>
+				@*<td>@Html.DisplayFor(modelItem => item.GER)</td>
+		<td>@Html.DisplayFor(modelItem => item.PSYK)</td>
+		<td>@Html.DisplayFor(modelItem => item.ROKOTUS)</td>
+		<td>@Html.DisplayFor(modelItem => item.Tyokokemus)</td>
+		<td>@Html.DisplayFor(modelItem => item.Vanhustenhoito_kotihoito)</td>
+		<td>@Html.DisplayFor(modelItem => item.Mielenterveys)</td>*@
+				@if (item.GER != null)
+				{
+					<td>Valittu</td>
+				}
+				@if (item.PSYK != null)
+				{
+					<td>Valittu</td>
+				}
+				@if (item.ROKOTUS != null)
+				{
+					<td>Valittu</td>
+
+				}
+				@if (item.Tyokokemus != null)
+				{
+					if (item.Tyokokemus == 1)
+					{
+						<td>
+							Työkokemus: 0-1 v.
+						</td>
+ }
+					else if (item.Tyokokemus == 25)
+					{
+						<td>
+							Työkokemus: 2-5 v.
+						</td>
+ }
+					else if (item.Tyokokemus == 610)
+					{
+						<td>
+							Työkokemus: 6-10 v.
+						</td>
+ }
+					else if (item.Tyokokemus == 1000)
+					{
+						<td>
+							Työkokemus: 10+ v.
+						</td>
+}
+				}
+				@if (item.Vanhustenhoito_kotihoito != null)
+				{
+					<td>Valittu</td>
+				}
+				@if (item.Mielenterveys != null)
+				{
+					<td>Valittu</td>
+				}
+
+			</tr>
+			}
+		</tbody>
+		<thead>
+			<tr>
+
+				<th>@Html.DisplayNameFor(model => model.Paivystys_Ensihoito)</th>
+				<th>@Html.DisplayNameFor(model => model.Lapset)</th>
+				<th>@Html.DisplayNameFor(model => model.Kehitysvammaiset)</th>
+				<th>@Html.DisplayNameFor(model => model.Hengityshalvaus)</th>
+				<th>@Html.DisplayNameFor(model => model.Ensihoitaja_AMK)</th>
+				<th>@Html.DisplayNameFor(model => model.Terveydenhoitaja)</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+
+			<tr>
+
+				@*<td>@Html.DisplayFor(modelItem => item.Paivystys_Ensihoito)</td>
+		<td>@Html.DisplayFor(modelItem => item.Lapset)</td>
+		<td>@Html.DisplayFor(modelItem => item.Kehitysvammaiset)</td>
+		<td>@Html.DisplayFor(modelItem => item.Hengityshalvaus)</td>
+		<td>@Html.DisplayFor(modelItem => item.Ensihoitaja_AMK)</td>
+		<td>@Html.DisplayFor(modelItem => item.Terveydenhoitaja)</td>*@
+				@if (item.Paivystys_Ensihoito != null)
+				{
+					<td>Valittu</td>
+				}
+				@if (item.Lapset != null)
+				{
+					<td>Valittu</td>
+				}
+				@if (item.Kehitysvammaiset != null)
+				{
+					<td>Valittu</td>
+				}
+				@if (item.Hengityshalvaus != null)
+				{
+					<td>Valittu</td>
+				}
+				@if (item.Ensihoitaja_AMK != null)
+				{
+					<td>Valittu</td>
+				}
+				@if (item.Terveydenhoitaja != null)
+				{
+					<td>Valittu</td>
+				}
+			</tr>
+			}
+		</tbody>
+		<thead>
+			<tr>
+
+				<th>@Html.DisplayNameFor(model => model.Katilo)</th>
+				<th>@Html.DisplayNameFor(model => model.Osastotyoskentely)</th>
+				<th>@Html.DisplayNameFor(model => model.Paivystys)</th>
+				<th>@Html.DisplayNameFor(model => model.Teho_osasto)</th>
+				<th>@Html.DisplayNameFor(model => model.Ensihoito)</th>
+				<th>@Html.DisplayNameFor(model => model.Kommentit)</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+
+			<tr>
+
+				@*<td>@Html.DisplayFor(modelItem => item.Katilo)</td>
+				<td>@Html.DisplayFor(modelItem => item.Osastotyoskentely)</td>
+				<td>@Html.DisplayFor(modelItem => item.Paivystys)</td>
+				<td>@Html.DisplayFor(modelItem => item.Teho_osasto)</td>
+				<td>@Html.DisplayFor(modelItem => item.Ensihoito)</td>
+				<td>@Html.DisplayFor(modelItem => item.Ensihoito)</td>*@
+				@if (item.Katilo != null)
+				{
+					<td>Valittu</td>
+				}
+				@if (item.Osastotyoskentely != null)
+				{
+					<td>Valittu</td>
+				}
+				@if (item.Paivystys != null)
+				{
+					<td>Valittu</td>
+				}
+				@if (item.Teho_osasto != null)
+				{
+					<td>Valittu</td>
+				}
+				@if (item.Ensihoito != null)
+				{
+					<td>Valittu</td>
+				}
+				@if (item.Kommentit != null)
+				{
+					<td>@Html.DisplayFor(modelItem => item.Kommentit)</td>
+				}
+			</tr>
+			}
+		</tbody>
+
+	</table>
+</div>

@@ -1,0 +1,826 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="pepeModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="login">
+          <Key>
+            <PropertyRef Name="LoginID" />
+          </Key>
+          <Property Name="LoginID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YritysID" Type="int" />
+          <Property Name="HenkiloID" Type="int" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LoginErrorMessage" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="loginyritys">
+          <Key>
+            <PropertyRef Name="LoginIDYritys" />
+          </Key>
+          <Property Name="LoginIDYritys" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YritysID" Type="int" />
+          <Property Name="UserNameYritys" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PasswordYritys" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LoginErrorMessageYritys" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tehtavia">
+          <Key>
+            <PropertyRef Name="TyoID" />
+          </Key>
+          <Property Name="TyoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HenkiloID" Type="int" />
+          <Property Name="YritysID" Type="int" />
+          <Property Name="LoginID" Type="int" />
+          <Property Name="Tehtava" Type="varchar" MaxLength="100" />
+          <Property Name="Kuukausipalkkalainen" Type="bit" />
+          <Property Name="Tuntipalkkalainen" Type="bit" />
+          <Property Name="TarjousHinta" Type="int" />
+          <Property Name="TarjousMaara" Type="int" />
+          <Property Name="Prosentti" Type="int" />
+          <Property Name="ToteutunutHinta" Type="int" />
+          <Property Name="TehtavaTaytetty" Type="bit" />
+          <Property Name="TehtavaValmis" Type="bit" />
+          <Property Name="Sijainti" Type="varchar" MaxLength="100" />
+          <Property Name="Etunimi" Type="varchar" MaxLength="50" />
+          <Property Name="Sukunimi" Type="varchar" MaxLength="50" />
+          <Property Name="Puhelin" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="EmailMessage" Type="varchar" MaxLength="1000" />
+          <Property Name="Aloitusaika" Type="datetime" Precision="0" />
+          <Property Name="Lopetusaika" Type="datetime" Precision="0" />
+          <Property Name="AikaYhteensa" Type="varchar" MaxLength="100" />
+          <Property Name="Luotu" Type="datetime" Precision="0" />
+          <Property Name="ViimeksiMuokattu" Type="datetime" Precision="0" />
+          <Property Name="Poistettu" Type="datetime" Precision="0" />
+          <Property Name="Aktiivinen" Type="bit" />
+          <Property Name="Lahihoitaja" Type="bit" />
+          <Property Name="Sairaanhoitaja" Type="bit" />
+          <Property Name="LOP" Type="bit" />
+          <Property Name="KIPU" Type="bit" />
+          <Property Name="I.V" Type="bit" />
+          <Property Name="LAS" Type="bit" />
+          <Property Name="GER" Type="bit" />
+          <Property Name="PSYK" Type="bit" />
+          <Property Name="ROKOTUS" Type="bit" />
+          <Property Name="Tyokokemus" Type="int" />
+          <Property Name="Vanhustenhoito/kotihoito" Type="bit" />
+          <Property Name="Mielenterveys" Type="bit" />
+          <Property Name="Paivystys/Ensihoito" Type="bit" />
+          <Property Name="Lapset" Type="bit" />
+          <Property Name="Kehitysvammaiset" Type="bit" />
+          <Property Name="Hengityshalvaus" Type="bit" />
+          <Property Name="Ensihoitaja AMK" Type="bit" />
+          <Property Name="Terveydenhoitaja" Type="bit" />
+          <Property Name="Katilo" Type="bit" />
+          <Property Name="Osastotyoskentely" Type="bit" />
+          <Property Name="Paivystys" Type="bit" />
+          <Property Name="Teho-osasto" Type="bit" />
+          <Property Name="Ensihoito" Type="bit" />
+          <Property Name="Kommentit" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="tyontekijat2">
+          <Key>
+            <PropertyRef Name="HenkiloID" />
+          </Key>
+          <Property Name="HenkiloID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoginID" Type="int" />
+          <Property Name="Etunimi" Type="varchar" MaxLength="50" />
+          <Property Name="Sukunimi" Type="varchar" MaxLength="50" />
+          <Property Name="Puhelin" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="EmailMessage" Type="varchar" MaxLength="1000" />
+          <Property Name="Luotu" Type="datetime" Precision="0" />
+          <Property Name="ViimeksiMuokattu" Type="datetime" Precision="0" />
+          <Property Name="Poistettu" Type="datetime" Precision="0" />
+          <Property Name="Sijainti" Type="varchar" MaxLength="100" />
+          <Property Name="Osoite" Type="varchar" MaxLength="100" />
+          <Property Name="Aktiivinen" Type="varchar" MaxLength="45" />
+          <Property Name="TarjousHinta" Type="int" />
+          <Property Name="Lahihoitaja" Type="bit" />
+          <Property Name="Sairaanhoitaja" Type="bit" />
+          <Property Name="LOP" Type="bit" />
+          <Property Name="KIPU" Type="bit" />
+          <Property Name="I.V" Type="bit" />
+          <Property Name="LAS" Type="bit" />
+          <Property Name="GER" Type="bit" />
+          <Property Name="PSYK" Type="bit" />
+          <Property Name="ROKOTUS" Type="bit" />
+          <Property Name="Tyokokemus" Type="int" />
+          <Property Name="Vanhustenhoito/kotihoito" Type="bit" />
+          <Property Name="Mielenterveys" Type="bit" />
+          <Property Name="Paivystys/Ensihoito" Type="bit" />
+          <Property Name="Lapset" Type="bit" />
+          <Property Name="Kehitysvammaiset" Type="bit" />
+          <Property Name="Hengityshalvaus" Type="bit" />
+          <Property Name="Ensihoitaja AMK" Type="bit" />
+          <Property Name="Terveydenhoitaja" Type="bit" />
+          <Property Name="Katilo" Type="bit" />
+          <Property Name="Osastotyoskentely" Type="bit" />
+          <Property Name="Paivystys" Type="bit" />
+          <Property Name="Teho-osasto" Type="bit" />
+          <Property Name="Ensihoito" Type="bit" />
+          <Property Name="Kommentit" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="vastatarjoukset">
+          <Key>
+            <PropertyRef Name="VastaTarjousID" />
+          </Key>
+          <Property Name="VastaTarjousID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TyoID" Type="int" />
+          <Property Name="YritysID" Type="int" />
+          <Property Name="HenkiloID" Type="int" />
+          <Property Name="TarjousHinta" Type="int" />
+          <Property Name="VastaTarjousHinta" Type="int" />
+          <Property Name="Prosentti" Type="int" />
+          <Property Name="ToteutunutHinta" Type="int" />
+        </EntityType>
+        <EntityType Name="yritys">
+          <Key>
+            <PropertyRef Name="YritysID" />
+          </Key>
+          <Property Name="YritysID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YritysNimi" Type="varchar" MaxLength="50" />
+          <Property Name="YritysEmail" Type="varchar" MaxLength="50" />
+          <Property Name="Prosentti" Type="int" />
+        </EntityType>
+        <Association Name="HenkiloID">
+          <End Role="tyontekijat2" Type="Self.tyontekijat2" Multiplicity="0..1" />
+          <End Role="vastatarjoukset" Type="Self.vastatarjoukset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tyontekijat2">
+              <PropertyRef Name="HenkiloID" />
+            </Principal>
+            <Dependent Role="vastatarjoukset">
+              <PropertyRef Name="HenkiloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HenkiloID1">
+          <End Role="tyontekijat2" Type="Self.tyontekijat2" Multiplicity="0..1" />
+          <End Role="tehtavia" Type="Self.tehtavia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tyontekijat2">
+              <PropertyRef Name="HenkiloID" />
+            </Principal>
+            <Dependent Role="tehtavia">
+              <PropertyRef Name="HenkiloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HenkiloID2">
+          <End Role="tyontekijat2" Type="Self.tyontekijat2" Multiplicity="0..1" />
+          <End Role="login" Type="Self.login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tyontekijat2">
+              <PropertyRef Name="HenkiloID" />
+            </Principal>
+            <Dependent Role="login">
+              <PropertyRef Name="HenkiloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LoginID">
+          <End Role="login" Type="Self.login" Multiplicity="0..1" />
+          <End Role="tyontekijat2" Type="Self.tyontekijat2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="login">
+              <PropertyRef Name="LoginID" />
+            </Principal>
+            <Dependent Role="tyontekijat2">
+              <PropertyRef Name="LoginID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LoginID1">
+          <End Role="login" Type="Self.login" Multiplicity="0..1" />
+          <End Role="tehtavia" Type="Self.tehtavia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="login">
+              <PropertyRef Name="LoginID" />
+            </Principal>
+            <Dependent Role="tehtavia">
+              <PropertyRef Name="LoginID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TyoID">
+          <End Role="tehtavia" Type="Self.tehtavia" Multiplicity="0..1" />
+          <End Role="vastatarjoukset" Type="Self.vastatarjoukset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tehtavia">
+              <PropertyRef Name="TyoID" />
+            </Principal>
+            <Dependent Role="vastatarjoukset">
+              <PropertyRef Name="TyoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="YritysID">
+          <End Role="yritys" Type="Self.yritys" Multiplicity="0..1" />
+          <End Role="vastatarjoukset" Type="Self.vastatarjoukset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="yritys">
+              <PropertyRef Name="YritysID" />
+            </Principal>
+            <Dependent Role="vastatarjoukset">
+              <PropertyRef Name="YritysID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="YritysID1">
+          <End Role="yritys" Type="Self.yritys" Multiplicity="0..1" />
+          <End Role="tehtavia" Type="Self.tehtavia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="yritys">
+              <PropertyRef Name="YritysID" />
+            </Principal>
+            <Dependent Role="tehtavia">
+              <PropertyRef Name="YritysID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="YritysID2">
+          <End Role="yritys" Type="Self.yritys" Multiplicity="0..1" />
+          <End Role="loginyritys" Type="Self.loginyritys" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="yritys">
+              <PropertyRef Name="YritysID" />
+            </Principal>
+            <Dependent Role="loginyritys">
+              <PropertyRef Name="YritysID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="YritysID3">
+          <End Role="yritys" Type="Self.yritys" Multiplicity="0..1" />
+          <End Role="login" Type="Self.login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="yritys">
+              <PropertyRef Name="YritysID" />
+            </Principal>
+            <Dependent Role="login">
+              <PropertyRef Name="YritysID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="pepeModelStoreContainer">
+          <EntitySet Name="login" EntityType="Self.login" Schema="pepe" store:Type="Tables" />
+          <EntitySet Name="loginyritys" EntityType="Self.loginyritys" Schema="pepe" store:Type="Tables" />
+          <EntitySet Name="tehtavia" EntityType="Self.tehtavia" Schema="pepe" store:Type="Tables" />
+          <EntitySet Name="tyontekijat2" EntityType="Self.tyontekijat2" Schema="pepe" store:Type="Tables" />
+          <EntitySet Name="vastatarjoukset" EntityType="Self.vastatarjoukset" Schema="pepe" store:Type="Tables" />
+          <EntitySet Name="yritys" EntityType="Self.yritys" Schema="pepe" store:Type="Tables" />
+          <AssociationSet Name="HenkiloID" Association="Self.HenkiloID">
+            <End Role="tyontekijat2" EntitySet="tyontekijat2" />
+            <End Role="vastatarjoukset" EntitySet="vastatarjoukset" />
+          </AssociationSet>
+          <AssociationSet Name="HenkiloID1" Association="Self.HenkiloID1">
+            <End Role="tyontekijat2" EntitySet="tyontekijat2" />
+            <End Role="tehtavia" EntitySet="tehtavia" />
+          </AssociationSet>
+          <AssociationSet Name="HenkiloID2" Association="Self.HenkiloID2">
+            <End Role="tyontekijat2" EntitySet="tyontekijat2" />
+            <End Role="login" EntitySet="login" />
+          </AssociationSet>
+          <AssociationSet Name="LoginID" Association="Self.LoginID">
+            <End Role="login" EntitySet="login" />
+            <End Role="tyontekijat2" EntitySet="tyontekijat2" />
+          </AssociationSet>
+          <AssociationSet Name="LoginID1" Association="Self.LoginID1">
+            <End Role="login" EntitySet="login" />
+            <End Role="tehtavia" EntitySet="tehtavia" />
+          </AssociationSet>
+          <AssociationSet Name="TyoID" Association="Self.TyoID">
+            <End Role="tehtavia" EntitySet="tehtavia" />
+            <End Role="vastatarjoukset" EntitySet="vastatarjoukset" />
+          </AssociationSet>
+          <AssociationSet Name="YritysID" Association="Self.YritysID">
+            <End Role="yritys" EntitySet="yritys" />
+            <End Role="vastatarjoukset" EntitySet="vastatarjoukset" />
+          </AssociationSet>
+          <AssociationSet Name="YritysID1" Association="Self.YritysID1">
+            <End Role="yritys" EntitySet="yritys" />
+            <End Role="tehtavia" EntitySet="tehtavia" />
+          </AssociationSet>
+          <AssociationSet Name="YritysID2" Association="Self.YritysID2">
+            <End Role="yritys" EntitySet="yritys" />
+            <End Role="loginyritys" EntitySet="loginyritys" />
+          </AssociationSet>
+          <AssociationSet Name="YritysID3" Association="Self.YritysID3">
+            <End Role="yritys" EntitySet="yritys" />
+            <End Role="login" EntitySet="login" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="pepeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="login">
+          <Key>
+            <PropertyRef Name="LoginID" />
+          </Key>
+          <Property Name="LoginID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="YritysID" Type="Int32" />
+          <Property Name="HenkiloID" Type="Int32" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LoginErrorMessage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tyontekijat2" Relationship="Self.HenkiloID2" FromRole="login" ToRole="tyontekijat2" />
+          <NavigationProperty Name="tyontekijat21" Relationship="Self.LoginID" FromRole="login" ToRole="tyontekijat2" />
+          <NavigationProperty Name="tehtavia" Relationship="Self.LoginID1" FromRole="login" ToRole="tehtavia" />
+          <NavigationProperty Name="yritys" Relationship="Self.YritysID3" FromRole="login" ToRole="yritys" />
+        </EntityType>
+        <EntityType Name="loginyritys">
+          <Key>
+            <PropertyRef Name="LoginIDYritys" />
+          </Key>
+          <Property Name="LoginIDYritys" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="YritysID" Type="Int32" />
+          <Property Name="UserNameYritys" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PasswordYritys" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LoginErrorMessageYritys" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="yritys" Relationship="Self.YritysID2" FromRole="loginyritys" ToRole="yritys" />
+        </EntityType>
+        <EntityType Name="tehtavia">
+          <Key>
+            <PropertyRef Name="TyoID" />
+          </Key>
+          <Property Name="TyoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HenkiloID" Type="Int32" />
+          <Property Name="YritysID" Type="Int32" />
+          <Property Name="LoginID" Type="Int32" />
+          <Property Name="Tehtava" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Kuukausipalkkalainen" Type="Boolean" />
+          <Property Name="Tuntipalkkalainen" Type="Boolean" />
+          <Property Name="TarjousHinta" Type="Int32" />
+          <Property Name="Prosentti" Type="Int32" />
+          <Property Name="ToteutunutHinta" Type="Int32" />
+          <Property Name="TehtavaTaytetty" Type="Boolean" />
+          <Property Name="TehtavaValmis" Type="Boolean" />
+          <Property Name="Sijainti" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Etunimi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sukunimi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Puhelin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EmailMessage" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Aloitusaika" Type="DateTime" />
+          <Property Name="Lopetusaika" Type="DateTime" />
+          <Property Name="AikaYhteensa" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Luotu" Type="DateTime" />
+          <Property Name="ViimeksiMuokattu" Type="DateTime" />
+          <Property Name="Poistettu" Type="DateTime" />
+          <Property Name="Aktiivinen" Type="Boolean" />
+          <Property Name="Lahihoitaja" Type="Boolean" />
+          <Property Name="Sairaanhoitaja" Type="Boolean" />
+          <Property Name="LOP" Type="Boolean" />
+          <Property Name="KIPU" Type="Boolean" />
+          <Property Name="I_V" Type="Boolean" />
+          <Property Name="LAS" Type="Boolean" />
+          <Property Name="GER" Type="Boolean" />
+          <Property Name="PSYK" Type="Boolean" />
+          <Property Name="ROKOTUS" Type="Boolean" />
+          <Property Name="Tyokokemus" Type="Int32" />
+          <Property Name="Vanhustenhoito_kotihoito" Type="Boolean" />
+          <Property Name="Mielenterveys" Type="Boolean" />
+          <Property Name="Paivystys_Ensihoito" Type="Boolean" />
+          <Property Name="Lapset" Type="Boolean" />
+          <Property Name="Kehitysvammaiset" Type="Boolean" />
+          <Property Name="Hengityshalvaus" Type="Boolean" />
+          <Property Name="Ensihoitaja_AMK" Type="Boolean" />
+          <Property Name="Terveydenhoitaja" Type="Boolean" />
+          <Property Name="Katilo" Type="Boolean" />
+          <Property Name="Osastotyoskentely" Type="Boolean" />
+          <Property Name="Paivystys" Type="Boolean" />
+          <Property Name="Teho_osasto" Type="Boolean" />
+          <Property Name="Ensihoito" Type="Boolean" />
+          <Property Name="Kommentit" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="login" Relationship="Self.LoginID1" FromRole="tehtavia" ToRole="login" />
+          <NavigationProperty Name="tyontekijat2" Relationship="Self.HenkiloID1" FromRole="tehtavia" ToRole="tyontekijat2" />
+          <NavigationProperty Name="vastatarjoukset" Relationship="Self.TyoID" FromRole="tehtavia" ToRole="vastatarjoukset" />
+          <NavigationProperty Name="yritys" Relationship="Self.YritysID1" FromRole="tehtavia" ToRole="yritys" />
+          <Property Name="TarjousMaara" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tyontekijat2">
+          <Key>
+            <PropertyRef Name="HenkiloID" />
+          </Key>
+          <Property Name="HenkiloID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoginID" Type="Int32" />
+          <Property Name="Etunimi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sukunimi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Puhelin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EmailMessage" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Luotu" Type="DateTime" />
+          <Property Name="ViimeksiMuokattu" Type="DateTime" />
+          <Property Name="Poistettu" Type="DateTime" />
+          <Property Name="Sijainti" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Osoite" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Aktiivinen" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="TarjousHinta" Type="Int32" />
+          <Property Name="Lahihoitaja" Type="Boolean" />
+          <Property Name="Sairaanhoitaja" Type="Boolean" />
+          <Property Name="LOP" Type="Boolean" />
+          <Property Name="KIPU" Type="Boolean" />
+          <Property Name="I_V" Type="Boolean" />
+          <Property Name="LAS" Type="Boolean" />
+          <Property Name="GER" Type="Boolean" />
+          <Property Name="PSYK" Type="Boolean" />
+          <Property Name="ROKOTUS" Type="Boolean" />
+          <Property Name="Tyokokemus" Type="Int32" />
+          <Property Name="Vanhustenhoito_kotihoito" Type="Boolean" />
+          <Property Name="Mielenterveys" Type="Boolean" />
+          <Property Name="Paivystys_Ensihoito" Type="Boolean" />
+          <Property Name="Lapset" Type="Boolean" />
+          <Property Name="Kehitysvammaiset" Type="Boolean" />
+          <Property Name="Hengityshalvaus" Type="Boolean" />
+          <Property Name="Ensihoitaja_AMK" Type="Boolean" />
+          <Property Name="Terveydenhoitaja" Type="Boolean" />
+          <Property Name="Katilo" Type="Boolean" />
+          <Property Name="Osastotyoskentely" Type="Boolean" />
+          <Property Name="Paivystys" Type="Boolean" />
+          <Property Name="Teho_osasto" Type="Boolean" />
+          <Property Name="Ensihoito" Type="Boolean" />
+          <Property Name="Kommentit" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="login" Relationship="Self.HenkiloID2" FromRole="tyontekijat2" ToRole="login" />
+          <NavigationProperty Name="login1" Relationship="Self.LoginID" FromRole="tyontekijat2" ToRole="login" />
+          <NavigationProperty Name="tehtavia" Relationship="Self.HenkiloID1" FromRole="tyontekijat2" ToRole="tehtavia" />
+          <NavigationProperty Name="vastatarjoukset" Relationship="Self.HenkiloID" FromRole="tyontekijat2" ToRole="vastatarjoukset" />
+        </EntityType>
+        <EntityType Name="vastatarjoukset">
+          <Key>
+            <PropertyRef Name="VastaTarjousID" />
+          </Key>
+          <Property Name="VastaTarjousID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TyoID" Type="Int32" />
+          <Property Name="YritysID" Type="Int32" />
+          <Property Name="HenkiloID" Type="Int32" />
+          <Property Name="TarjousHinta" Type="Int32" />
+          <Property Name="VastaTarjousHinta" Type="Int32" />
+          <Property Name="Prosentti" Type="Int32" />
+          <Property Name="ToteutunutHinta" Type="Int32" />
+          <NavigationProperty Name="tehtavia" Relationship="Self.TyoID" FromRole="vastatarjoukset" ToRole="tehtavia" />
+          <NavigationProperty Name="tyontekijat2" Relationship="Self.HenkiloID" FromRole="vastatarjoukset" ToRole="tyontekijat2" />
+          <NavigationProperty Name="yritys" Relationship="Self.YritysID" FromRole="vastatarjoukset" ToRole="yritys" />
+        </EntityType>
+        <EntityType Name="yritys">
+          <Key>
+            <PropertyRef Name="YritysID" />
+          </Key>
+          <Property Name="YritysID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="YritysNimi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="YritysEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Prosentti" Type="Int32" />
+          <NavigationProperty Name="login" Relationship="Self.YritysID3" FromRole="yritys" ToRole="login" />
+          <NavigationProperty Name="loginyritys" Relationship="Self.YritysID2" FromRole="yritys" ToRole="loginyritys" />
+          <NavigationProperty Name="tehtavia" Relationship="Self.YritysID1" FromRole="yritys" ToRole="tehtavia" />
+          <NavigationProperty Name="vastatarjoukset" Relationship="Self.YritysID" FromRole="yritys" ToRole="vastatarjoukset" />
+        </EntityType>
+        <Association Name="HenkiloID2">
+          <End Role="tyontekijat2" Type="Self.tyontekijat2" Multiplicity="0..1" />
+          <End Role="login" Type="Self.login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tyontekijat2">
+              <PropertyRef Name="HenkiloID" />
+            </Principal>
+            <Dependent Role="login">
+              <PropertyRef Name="HenkiloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LoginID">
+          <End Role="login" Type="Self.login" Multiplicity="0..1" />
+          <End Role="tyontekijat2" Type="Self.tyontekijat2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="login">
+              <PropertyRef Name="LoginID" />
+            </Principal>
+            <Dependent Role="tyontekijat2">
+              <PropertyRef Name="LoginID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LoginID1">
+          <End Role="login" Type="Self.login" Multiplicity="0..1" />
+          <End Role="tehtavia" Type="Self.tehtavia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="login">
+              <PropertyRef Name="LoginID" />
+            </Principal>
+            <Dependent Role="tehtavia">
+              <PropertyRef Name="LoginID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="YritysID3">
+          <End Role="yritys" Type="Self.yritys" Multiplicity="0..1" />
+          <End Role="login" Type="Self.login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="yritys">
+              <PropertyRef Name="YritysID" />
+            </Principal>
+            <Dependent Role="login">
+              <PropertyRef Name="YritysID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="YritysID2">
+          <End Role="yritys" Type="Self.yritys" Multiplicity="0..1" />
+          <End Role="loginyritys" Type="Self.loginyritys" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="yritys">
+              <PropertyRef Name="YritysID" />
+            </Principal>
+            <Dependent Role="loginyritys">
+              <PropertyRef Name="YritysID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HenkiloID1">
+          <End Role="tyontekijat2" Type="Self.tyontekijat2" Multiplicity="0..1" />
+          <End Role="tehtavia" Type="Self.tehtavia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tyontekijat2">
+              <PropertyRef Name="HenkiloID" />
+            </Principal>
+            <Dependent Role="tehtavia">
+              <PropertyRef Name="HenkiloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TyoID">
+          <End Role="tehtavia" Type="Self.tehtavia" Multiplicity="0..1" />
+          <End Role="vastatarjoukset" Type="Self.vastatarjoukset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tehtavia">
+              <PropertyRef Name="TyoID" />
+            </Principal>
+            <Dependent Role="vastatarjoukset">
+              <PropertyRef Name="TyoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="YritysID1">
+          <End Role="yritys" Type="Self.yritys" Multiplicity="0..1" />
+          <End Role="tehtavia" Type="Self.tehtavia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="yritys">
+              <PropertyRef Name="YritysID" />
+            </Principal>
+            <Dependent Role="tehtavia">
+              <PropertyRef Name="YritysID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HenkiloID">
+          <End Role="tyontekijat2" Type="Self.tyontekijat2" Multiplicity="0..1" />
+          <End Role="vastatarjoukset" Type="Self.vastatarjoukset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tyontekijat2">
+              <PropertyRef Name="HenkiloID" />
+            </Principal>
+            <Dependent Role="vastatarjoukset">
+              <PropertyRef Name="HenkiloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="YritysID">
+          <End Role="yritys" Type="Self.yritys" Multiplicity="0..1" />
+          <End Role="vastatarjoukset" Type="Self.vastatarjoukset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="yritys">
+              <PropertyRef Name="YritysID" />
+            </Principal>
+            <Dependent Role="vastatarjoukset">
+              <PropertyRef Name="YritysID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="pepeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="login" EntityType="Self.login" />
+          <EntitySet Name="loginyritys" EntityType="Self.loginyritys" />
+          <EntitySet Name="tehtavia" EntityType="Self.tehtavia" />
+          <EntitySet Name="tyontekijat2" EntityType="Self.tyontekijat2" />
+          <EntitySet Name="vastatarjoukset" EntityType="Self.vastatarjoukset" />
+          <EntitySet Name="yritys" EntityType="Self.yritys" />
+          <AssociationSet Name="HenkiloID2" Association="Self.HenkiloID2">
+            <End Role="tyontekijat2" EntitySet="tyontekijat2" />
+            <End Role="login" EntitySet="login" />
+          </AssociationSet>
+          <AssociationSet Name="LoginID" Association="Self.LoginID">
+            <End Role="login" EntitySet="login" />
+            <End Role="tyontekijat2" EntitySet="tyontekijat2" />
+          </AssociationSet>
+          <AssociationSet Name="LoginID1" Association="Self.LoginID1">
+            <End Role="login" EntitySet="login" />
+            <End Role="tehtavia" EntitySet="tehtavia" />
+          </AssociationSet>
+          <AssociationSet Name="YritysID3" Association="Self.YritysID3">
+            <End Role="yritys" EntitySet="yritys" />
+            <End Role="login" EntitySet="login" />
+          </AssociationSet>
+          <AssociationSet Name="YritysID2" Association="Self.YritysID2">
+            <End Role="yritys" EntitySet="yritys" />
+            <End Role="loginyritys" EntitySet="loginyritys" />
+          </AssociationSet>
+          <AssociationSet Name="HenkiloID1" Association="Self.HenkiloID1">
+            <End Role="tyontekijat2" EntitySet="tyontekijat2" />
+            <End Role="tehtavia" EntitySet="tehtavia" />
+          </AssociationSet>
+          <AssociationSet Name="TyoID" Association="Self.TyoID">
+            <End Role="tehtavia" EntitySet="tehtavia" />
+            <End Role="vastatarjoukset" EntitySet="vastatarjoukset" />
+          </AssociationSet>
+          <AssociationSet Name="YritysID1" Association="Self.YritysID1">
+            <End Role="yritys" EntitySet="yritys" />
+            <End Role="tehtavia" EntitySet="tehtavia" />
+          </AssociationSet>
+          <AssociationSet Name="HenkiloID" Association="Self.HenkiloID">
+            <End Role="tyontekijat2" EntitySet="tyontekijat2" />
+            <End Role="vastatarjoukset" EntitySet="vastatarjoukset" />
+          </AssociationSet>
+          <AssociationSet Name="YritysID" Association="Self.YritysID">
+            <End Role="yritys" EntitySet="yritys" />
+            <End Role="vastatarjoukset" EntitySet="vastatarjoukset" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="pepeModelStoreContainer" CdmEntityContainer="pepeEntities">
+          <EntitySetMapping Name="login">
+            <EntityTypeMapping TypeName="pepeModel.login">
+              <MappingFragment StoreEntitySet="login">
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+                <ScalarProperty Name="YritysID" ColumnName="YritysID" />
+                <ScalarProperty Name="HenkiloID" ColumnName="HenkiloID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LoginErrorMessage" ColumnName="LoginErrorMessage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="loginyritys">
+            <EntityTypeMapping TypeName="pepeModel.loginyritys">
+              <MappingFragment StoreEntitySet="loginyritys">
+                <ScalarProperty Name="LoginIDYritys" ColumnName="LoginIDYritys" />
+                <ScalarProperty Name="YritysID" ColumnName="YritysID" />
+                <ScalarProperty Name="UserNameYritys" ColumnName="UserNameYritys" />
+                <ScalarProperty Name="PasswordYritys" ColumnName="PasswordYritys" />
+                <ScalarProperty Name="LoginErrorMessageYritys" ColumnName="LoginErrorMessageYritys" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tehtavia">
+            <EntityTypeMapping TypeName="pepeModel.tehtavia">
+              <MappingFragment StoreEntitySet="tehtavia">
+                <ScalarProperty Name="TarjousMaara" ColumnName="TarjousMaara" />
+                <ScalarProperty Name="TyoID" ColumnName="TyoID" />
+                <ScalarProperty Name="HenkiloID" ColumnName="HenkiloID" />
+                <ScalarProperty Name="YritysID" ColumnName="YritysID" />
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+                <ScalarProperty Name="Tehtava" ColumnName="Tehtava" />
+                <ScalarProperty Name="Kuukausipalkkalainen" ColumnName="Kuukausipalkkalainen" />
+                <ScalarProperty Name="Tuntipalkkalainen" ColumnName="Tuntipalkkalainen" />
+                <ScalarProperty Name="TarjousHinta" ColumnName="TarjousHinta" />
+                <ScalarProperty Name="Prosentti" ColumnName="Prosentti" />
+                <ScalarProperty Name="ToteutunutHinta" ColumnName="ToteutunutHinta" />
+                <ScalarProperty Name="TehtavaTaytetty" ColumnName="TehtavaTaytetty" />
+                <ScalarProperty Name="TehtavaValmis" ColumnName="TehtavaValmis" />
+                <ScalarProperty Name="Sijainti" ColumnName="Sijainti" />
+                <ScalarProperty Name="Etunimi" ColumnName="Etunimi" />
+                <ScalarProperty Name="Sukunimi" ColumnName="Sukunimi" />
+                <ScalarProperty Name="Puhelin" ColumnName="Puhelin" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailMessage" ColumnName="EmailMessage" />
+                <ScalarProperty Name="Aloitusaika" ColumnName="Aloitusaika" />
+                <ScalarProperty Name="Lopetusaika" ColumnName="Lopetusaika" />
+                <ScalarProperty Name="AikaYhteensa" ColumnName="AikaYhteensa" />
+                <ScalarProperty Name="Luotu" ColumnName="Luotu" />
+                <ScalarProperty Name="ViimeksiMuokattu" ColumnName="ViimeksiMuokattu" />
+                <ScalarProperty Name="Poistettu" ColumnName="Poistettu" />
+                <ScalarProperty Name="Aktiivinen" ColumnName="Aktiivinen" />
+                <ScalarProperty Name="Lahihoitaja" ColumnName="Lahihoitaja" />
+                <ScalarProperty Name="Sairaanhoitaja" ColumnName="Sairaanhoitaja" />
+                <ScalarProperty Name="LOP" ColumnName="LOP" />
+                <ScalarProperty Name="KIPU" ColumnName="KIPU" />
+                <ScalarProperty Name="I_V" ColumnName="I.V" />
+                <ScalarProperty Name="LAS" ColumnName="LAS" />
+                <ScalarProperty Name="GER" ColumnName="GER" />
+                <ScalarProperty Name="PSYK" ColumnName="PSYK" />
+                <ScalarProperty Name="ROKOTUS" ColumnName="ROKOTUS" />
+                <ScalarProperty Name="Tyokokemus" ColumnName="Tyokokemus" />
+                <ScalarProperty Name="Vanhustenhoito_kotihoito" ColumnName="Vanhustenhoito/kotihoito" />
+                <ScalarProperty Name="Mielenterveys" ColumnName="Mielenterveys" />
+                <ScalarProperty Name="Paivystys_Ensihoito" ColumnName="Paivystys/Ensihoito" />
+                <ScalarProperty Name="Lapset" ColumnName="Lapset" />
+                <ScalarProperty Name="Kehitysvammaiset" ColumnName="Kehitysvammaiset" />
+                <ScalarProperty Name="Hengityshalvaus" ColumnName="Hengityshalvaus" />
+                <ScalarProperty Name="Ensihoitaja_AMK" ColumnName="Ensihoitaja AMK" />
+                <ScalarProperty Name="Terveydenhoitaja" ColumnName="Terveydenhoitaja" />
+                <ScalarProperty Name="Katilo" ColumnName="Katilo" />
+                <ScalarProperty Name="Osastotyoskentely" ColumnName="Osastotyoskentely" />
+                <ScalarProperty Name="Paivystys" ColumnName="Paivystys" />
+                <ScalarProperty Name="Teho_osasto" ColumnName="Teho-osasto" />
+                <ScalarProperty Name="Ensihoito" ColumnName="Ensihoito" />
+                <ScalarProperty Name="Kommentit" ColumnName="Kommentit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tyontekijat2">
+            <EntityTypeMapping TypeName="pepeModel.tyontekijat2">
+              <MappingFragment StoreEntitySet="tyontekijat2">
+                <ScalarProperty Name="HenkiloID" ColumnName="HenkiloID" />
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+                <ScalarProperty Name="Etunimi" ColumnName="Etunimi" />
+                <ScalarProperty Name="Sukunimi" ColumnName="Sukunimi" />
+                <ScalarProperty Name="Puhelin" ColumnName="Puhelin" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailMessage" ColumnName="EmailMessage" />
+                <ScalarProperty Name="Luotu" ColumnName="Luotu" />
+                <ScalarProperty Name="ViimeksiMuokattu" ColumnName="ViimeksiMuokattu" />
+                <ScalarProperty Name="Poistettu" ColumnName="Poistettu" />
+                <ScalarProperty Name="Sijainti" ColumnName="Sijainti" />
+                <ScalarProperty Name="Osoite" ColumnName="Osoite" />
+                <ScalarProperty Name="Aktiivinen" ColumnName="Aktiivinen" />
+                <ScalarProperty Name="TarjousHinta" ColumnName="TarjousHinta" />
+                <ScalarProperty Name="Lahihoitaja" ColumnName="Lahihoitaja" />
+                <ScalarProperty Name="Sairaanhoitaja" ColumnName="Sairaanhoitaja" />
+                <ScalarProperty Name="LOP" ColumnName="LOP" />
+                <ScalarProperty Name="KIPU" ColumnName="KIPU" />
+                <ScalarProperty Name="I_V" ColumnName="I.V" />
+                <ScalarProperty Name="LAS" ColumnName="LAS" />
+                <ScalarProperty Name="GER" ColumnName="GER" />
+                <ScalarProperty Name="PSYK" ColumnName="PSYK" />
+                <ScalarProperty Name="ROKOTUS" ColumnName="ROKOTUS" />
+                <ScalarProperty Name="Tyokokemus" ColumnName="Tyokokemus" />
+                <ScalarProperty Name="Vanhustenhoito_kotihoito" ColumnName="Vanhustenhoito/kotihoito" />
+                <ScalarProperty Name="Mielenterveys" ColumnName="Mielenterveys" />
+                <ScalarProperty Name="Paivystys_Ensihoito" ColumnName="Paivystys/Ensihoito" />
+                <ScalarProperty Name="Lapset" ColumnName="Lapset" />
+                <ScalarProperty Name="Kehitysvammaiset" ColumnName="Kehitysvammaiset" />
+                <ScalarProperty Name="Hengityshalvaus" ColumnName="Hengityshalvaus" />
+                <ScalarProperty Name="Ensihoitaja_AMK" ColumnName="Ensihoitaja AMK" />
+                <ScalarProperty Name="Terveydenhoitaja" ColumnName="Terveydenhoitaja" />
+                <ScalarProperty Name="Katilo" ColumnName="Katilo" />
+                <ScalarProperty Name="Osastotyoskentely" ColumnName="Osastotyoskentely" />
+                <ScalarProperty Name="Paivystys" ColumnName="Paivystys" />
+                <ScalarProperty Name="Teho_osasto" ColumnName="Teho-osasto" />
+                <ScalarProperty Name="Ensihoito" ColumnName="Ensihoito" />
+                <ScalarProperty Name="Kommentit" ColumnName="Kommentit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vastatarjoukset">
+            <EntityTypeMapping TypeName="pepeModel.vastatarjoukset">
+              <MappingFragment StoreEntitySet="vastatarjoukset">
+                <ScalarProperty Name="VastaTarjousID" ColumnName="VastaTarjousID" />
+                <ScalarProperty Name="TyoID" ColumnName="TyoID" />
+                <ScalarProperty Name="YritysID" ColumnName="YritysID" />
+                <ScalarProperty Name="HenkiloID" ColumnName="HenkiloID" />
+                <ScalarProperty Name="TarjousHinta" ColumnName="TarjousHinta" />
+                <ScalarProperty Name="VastaTarjousHinta" ColumnName="VastaTarjousHinta" />
+                <ScalarProperty Name="Prosentti" ColumnName="Prosentti" />
+                <ScalarProperty Name="ToteutunutHinta" ColumnName="ToteutunutHinta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="yritys">
+            <EntityTypeMapping TypeName="pepeModel.yritys">
+              <MappingFragment StoreEntitySet="yritys">
+                <ScalarProperty Name="YritysID" ColumnName="YritysID" />
+                <ScalarProperty Name="YritysNimi" ColumnName="YritysNimi" />
+                <ScalarProperty Name="YritysEmail" ColumnName="YritysEmail" />
+                <ScalarProperty Name="Prosentti" ColumnName="Prosentti" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,42 @@
+﻿@*@model Pepe100.Models.tyontekijat2*@
+@model IEnumerable<Pepe100.Models.tyontekijat2>
+
+<div class="modal" id="LoginRuutu">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 style="color:lightpink">NurseBid</h1>
+			</div>
+			<div class="modal-body">
+				<table class="table">
+					<tr>
+
+						<th>
+							@Html.DisplayNameFor(model => model.Etunimi)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Sukunimi)
+							@*@Html.DisplayName("Tarjoushinta")*@
+						</th>
+						<th></th>
+					</tr>
+
+				</table>
+
+
+			</div>
+			<div class="modal-footer justify-content-between">
+				<div>
+					<a href="@Url.Action("Index", "Home")" class="btn btn-primary">Peruuta</a>
+				</div>
+				<div>
+					<button type="submit" class="btn btn-outline-info" form="loginForm">Kirjaudu</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+

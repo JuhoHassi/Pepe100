@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Pepe100.Models.tehtavia>
+
+<br />
+<h2 style="color:lightblue">Avoimet Vuorosi Yritys Testi</h2>
+<hr />
+
+@section scripts{
+	<script type="text/javascript">$(function () {
+			$(".naytaTehtava").click(function () {
+				let tyoid = $(this).data("tyoid");
+				var url = "/Yritys/_AvoimetVuorotYritysTesti/?tyoid=" + tyoid;
+				$("#tehtavaDetails_" + tyoid).append(" <b>Ladataan tilauksen " + tyoid + " rivejä...</b>");
+				var $detailDiv = $("#tehtavaDetails_" + tyoid);
+				$.get(url, function (data) {
+					$detailDiv.replaceWith(data);
+				});
+			});
+		});</script>
+	@*<script type="text/javascript">
+		$(window).on('load', function () {
+			if (@ViewBag.TarjousError == 1) {
+				$('#TarjousRuutu').modal('show');
+			}
+		});
+	</script>*@
+}
+@*@{if (ViewBag.TarjousError == 1)
+	{
+		Html.RenderPartial("_JataTarjous");
+	} }*@
+
+
+<div class="accordion" id="accordion">
+
+	@foreach (var item in Model)
+	{
+		<div class="card border-light" style="width: 18rem;">
+			<div class="card-body text-white">
+				<h5 class="card-title text-center">@item.Tehtava.ToUpper()</h5>
+				<h5 class="card-title text-center">@item.Sijainti.ToUpper()</h5>
+					@if (item.Lahihoitaja != null)
+					{
+						<h5 class="card-title text-center">LÄHIHOITAJA</h5>
+					}
+					@if (item.Sairaanhoitaja != null)
+					{
+						<h5 class="card-title text-center">SAIRAANHOITAJA</h5>
+					}
+			</div>
+			<ul class="list-group">
+				<li class="list-group-item text-center">Aloitus: @item.Aloitusaika</li>
+				<li class="list-group-item text-center">Lopetus: @item.Lopetusaika</li>
+				<li class="list-group-item text-center">Yhteensä: @item.AikaYhteensa</li>
+					@if (item.Kuukausipalkkalainen != null)
+					{
+						<li class="list-group-item text-center">Kuukausipalkkalainen</li>
+					}
+					@if (item.Tuntipalkkalainen != null)
+					{
+						<li class="list-group-item text-center">Tuntipalkkalainen</li>
+					}
+				<li class="list-group-item text-center">Tarjoukset: @item.TarjousMaara</li>
+
+			</ul>
+
+			<div id="collapse_@item.TyoID" class="collapse" data-parent="#accordion">
+				<div class="card-body">
+					<div id="tehtavaDetails_@item.TyoID"></div>
+				</div>
+			</div>
+
+			<div class="card-link">
+				<div class="card-body" style="padding:10px 6px 6px 6px">
+					<h6 class="card-title text-center" style="color: lightblue">@Html.ActionLink("Tarjoukset", "KatsoTarjouksia", new { id1 = item.TyoID })</h6>
+				</div>
+			</div>
+
+			<a class="card-link naytaTehtava" data-tyoid="@item.TyoID" data-toggle="collapse" href="#collapse_@item.TyoID">
+				<div class="card-body" style="padding:10px 6px 6px 6px">
+					<h6 class="card-title text-center" style="color: lightblue">Katso lisätiedot tästä</h6>
+				</div>
+			</a>
+		</div>
+
+		<br>
+		<br>
+	}
+	@if (!Model.Any())
+	{
+		<h2>Ei avoimia vuoroja</h2>
+	}
+</div>
+

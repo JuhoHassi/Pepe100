@@ -1,0 +1,368 @@
+﻿@model Pepe100.Models.tehtavia
+@*<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>*@
+@{ ViewBag.Title = "SairaanhoitajaTilaus"; }
+
+@section scripts{
+	<script type="text/javascript">
+		$('#Aloitusaika').datetimepicker({ datepicker: { minDate: new Date() }, footer: true, modal: false, format: 'dd/mm/yyyy HH:MM', uiLibrary: 'bootstrap4' });
+		$('#Lopetusaika').datetimepicker({ datepicker: { minDate: new Date() }, footer: true, modal: false, format: 'dd/mm/yyyy HH:MM', uiLibrary: 'bootstrap4' });
+	</script>
+
+}
+
+
+@using (Html.BeginForm())
+{
+@Html.AntiForgeryToken()
+
+				<div class="form-horizontal">
+					<br />
+					<h3 style="color:lightblue">Sairaanhoitaja Tilaus</h3>
+					<hr />
+					<h4 style="color:red">@ViewBag.AikaError</h4>
+					<hr />
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.Tehtava, "Tehtävä", htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.EditorFor(model => model.Tehtava, new { htmlAttributes = new { @class = "form-control" } })
+							@Html.ValidationMessageFor(model => model.Tehtava, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.Sijainti, htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.EditorFor(model => model.Sijainti, new { htmlAttributes = new { @class = "form-control" } })
+							@Html.ValidationMessageFor(model => model.Sijainti, "", new { @class = "text-danger" })
+						</div>
+					</div>
+						<div class="form-group">
+							@Html.LabelFor(model => model.Aloitusaika, htmlAttributes: new { @class = "control-label col-md-2" })
+							<div class="col-md-10">
+								@Html.TextBoxFor(model => model.Aloitusaika, new { htmlAttributes = new { @class = "form-control" } })
+								@Html.ValidationMessageFor(model => model.Aloitusaika, "", new { @class = "text-danger" })
+							</div>
+						</div>
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.Lopetusaika, htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.EditorFor(model => model.Lopetusaika, new { htmlAttributes = new { @class = "form-control" } })
+							@Html.ValidationMessageFor(model => model.Lopetusaika, "", new { @class = "text-danger" })
+						</div>
+					</div>
+					<div class="form-group">
+						@Html.LabelFor(model => model.Kuukausipalkkalainen, htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.DropDownList("Kuukausipalkkalainen", new List<SelectListItem>
+										{
+														new SelectListItem{ Text="", Value = "" },
+														new SelectListItem{ Text="Valittu", Value = "True" },
+														new SelectListItem{ Text="Ei valittu", Value = "False" }
+													})
+							@Html.ValidationMessageFor(model => model.Kuukausipalkkalainen, "", new { @class = "text-danger" })
+						</div>
+					</div>
+					<div class="form-group">
+						@Html.LabelFor(model => model.Tuntipalkkalainen, htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.DropDownList("Tuntipalkkalainen", new List<SelectListItem>
+										{
+														new SelectListItem{ Text="", Value = "" },
+														new SelectListItem{ Text="Valittu", Value = "True" },
+														new SelectListItem{ Text="Ei valittu", Value = "False" }
+													})
+							@Html.ValidationMessageFor(model => model.Tuntipalkkalainen, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<br />
+					<h4 style="color:lightblue">LOVET</h4>
+					
+					<div class="form-group">
+						@Html.LabelFor(model => model.LOP, htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.DropDownList("LOP", new List<SelectListItem>
+										{
+														new SelectListItem{ Text="", Value = "" },
+														new SelectListItem{ Text="Valittu", Value = "True" },
+														new SelectListItem{ Text="Ei valittu", Value = "False" }
+													})
+							@Html.ValidationMessageFor(model => model.LOP, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.I_V,"I.V", htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.DropDownList("I_V", new List<SelectListItem>
+										{
+														new SelectListItem{ Text="", Value = "" },
+														new SelectListItem{ Text="Valittu", Value = "True" },
+														new SelectListItem{ Text="Ei valittu", Value = "False" }
+													})
+							@Html.ValidationMessageFor(model => model.I_V, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.KIPU, htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.DropDownList("KIPU", new List<SelectListItem>
+										{
+														new SelectListItem{ Text="", Value = "" },
+														new SelectListItem{ Text="Valittu", Value = "True" },
+														new SelectListItem{ Text="Ei valittu", Value = "False" }
+													})
+							@Html.ValidationMessageFor(model => model.KIPU, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.LAS, htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.DropDownList("LAS", new List<SelectListItem>
+										{
+														new SelectListItem{ Text="", Value = "" },
+														new SelectListItem{ Text="Valittu", Value = "True" },
+														new SelectListItem{ Text="Ei valittu", Value = "False" }
+													})
+							@Html.ValidationMessageFor(model => model.LAS, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.GER, htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.DropDownList("GER", new List<SelectListItem>
+										{
+														new SelectListItem{ Text="", Value = "" },
+														new SelectListItem{ Text="Valittu", Value = "True" },
+														new SelectListItem{ Text="Ei valittu", Value = "False" }
+													})
+							@Html.ValidationMessageFor(model => model.GER, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.PSYK, htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.DropDownList("PSYK", new List<SelectListItem>
+										{
+														new SelectListItem{ Text="", Value = "" },
+														new SelectListItem{ Text="Valittu", Value = "True" },
+														new SelectListItem{ Text="Ei valittu", Value = "False" }
+													})
+							@Html.ValidationMessageFor(model => model.PSYK, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.ROKOTUS, htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.DropDownList("ROKOTUS", new List<SelectListItem>
+										{
+														new SelectListItem{ Text="", Value = "" },
+														new SelectListItem{ Text="Valittu", Value = "True" },
+														new SelectListItem{ Text="Ei valittu", Value = "False" }
+													})
+							@Html.ValidationMessageFor(model => model.ROKOTUS, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<br />
+					<h4 style="color:lightblue">Työkokemus</h4>
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.Tyokokemus, "Minimi työkokemus", htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.DropDownList("Tyokokemus", new List<SelectListItem>
+												{
+													new SelectListItem{ Text="0-1", Value = "01" },
+													new SelectListItem{ Text="2-5", Value = "25" },
+													new SelectListItem{ Text="6-10", Value = "610" },
+													new SelectListItem{ Text="10+", Value = "1000" },
+
+												})
+							@*@Html.DropDownListFor(model => model.Tyokokemus, Enumerable.Range(0,10).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))*@
+							@Html.ValidationMessageFor(model => model.Tyokokemus, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.Vanhustenhoito_kotihoito, "Vanhustenhoito/kotihoito", htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.DropDownList("Vanhustenhoito_kotihoito", new List<SelectListItem>
+										{
+														new SelectListItem{ Text="", Value = "" },
+														new SelectListItem{ Text="Valittu", Value = "True" },
+														new SelectListItem{ Text="Ei valittu", Value = "False" }
+													})
+							@Html.ValidationMessageFor(model => model.Vanhustenhoito_kotihoito, "", new { @class = "text-danger" })
+						</div>
+					</div>
+					<div class="form-group">
+						@Html.LabelFor(model => model.Osastotyoskentely, "Osastotyöskentely", htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.DropDownList("Osastotyoskentely", new List<SelectListItem>
+										{
+														new SelectListItem{ Text="", Value = "" },
+														new SelectListItem{ Text="Valittu", Value = "True" },
+														new SelectListItem{ Text="Ei valittu", Value = "False" }
+													})
+							@Html.ValidationMessageFor(model => model.Osastotyoskentely, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.Paivystys, "Päivystys", htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.DropDownList("Paivystys", new List<SelectListItem>
+										{
+														new SelectListItem{ Text="", Value = "" },
+														new SelectListItem{ Text="Valittu", Value = "True" },
+														new SelectListItem{ Text="Ei valittu", Value = "False" }
+													})
+							@Html.ValidationMessageFor(model => model.Paivystys, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.Teho_osasto, "Teho-osasto", htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.DropDownList("Teho_osasto", new List<SelectListItem>
+										{
+														new SelectListItem{ Text="", Value = "" },
+														new SelectListItem{ Text="Valittu", Value = "True" },
+														new SelectListItem{ Text="Ei valittu", Value = "False" }
+													})
+							@Html.ValidationMessageFor(model => model.Teho_osasto, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.Ensihoito, htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.DropDownList("Ensihoito", new List<SelectListItem>
+										{
+														new SelectListItem{ Text="", Value = "" },
+														new SelectListItem{ Text="Valittu", Value = "True" },
+														new SelectListItem{ Text="Ei valittu", Value = "False" }
+													})
+							@Html.ValidationMessageFor(model => model.Ensihoito, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.Mielenterveys, htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.DropDownList("Mielenterveys", new List<SelectListItem>
+										{
+														new SelectListItem{ Text="", Value = "" },
+														new SelectListItem{ Text="Valittu", Value = "True" },
+														new SelectListItem{ Text="Ei valittu", Value = "False" }
+													})
+							@Html.ValidationMessageFor(model => model.Mielenterveys, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.Lapset, htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.DropDownList("Lapset", new List<SelectListItem>
+										{
+														new SelectListItem{ Text="", Value = "" },
+														new SelectListItem{ Text="Valittu", Value = "True" },
+														new SelectListItem{ Text="Ei valittu", Value = "False" }
+													})
+							@Html.ValidationMessageFor(model => model.Lapset, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.Hengityshalvaus, htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.DropDownList("Hengityshalvaus", new List<SelectListItem>
+										{
+														new SelectListItem{ Text="", Value = "" },
+														new SelectListItem{ Text="Valittu", Value = "True" },
+														new SelectListItem{ Text="Ei valittu", Value = "False" }
+													})
+							@Html.ValidationMessageFor(model => model.Hengityshalvaus, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<br />
+					<h4 style="color:lightblue">Lisäkoulutukset</h4>
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.Ensihoitaja_AMK, "Ensihoitaja/AMK", htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.DropDownList("Ensihoitaja_AMK", new List<SelectListItem>
+										{
+														new SelectListItem{ Text="", Value = "" },
+														new SelectListItem{ Text="Valittu", Value = "True" },
+														new SelectListItem{ Text="Ei valittu", Value = "False" }
+													})
+							@Html.ValidationMessageFor(model => model.Ensihoitaja_AMK, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.Terveydenhoitaja, htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.DropDownList("Terveydenhoitaja", new List<SelectListItem>
+										{
+														new SelectListItem{ Text="", Value = "" },
+														new SelectListItem{ Text="Valittu", Value = "True" },
+														new SelectListItem{ Text="Ei valittu", Value = "False" }
+													})
+							@Html.ValidationMessageFor(model => model.Terveydenhoitaja, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.Katilo, "Kätilö", htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.DropDownList("Katilo", new List<SelectListItem>
+										{
+														new SelectListItem{ Text="", Value = "" },
+														new SelectListItem{ Text="Valittu", Value = "True" },
+														new SelectListItem{ Text="Ei valittu", Value = "False" }
+													})
+							@Html.ValidationMessageFor(model => model.Katilo, "", new { @class = "text-danger" })
+						</div>
+					</div>
+					<div class="form-group">
+						@Html.LabelFor(model => model.Kommentit, htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.TextAreaFor(model => model.Kommentit, new { maxlength = 199 })
+							@Html.ValidationMessageFor(model => model.Kommentit, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					@*<div class="form-group">
+							@Html.LabelFor(model => model.TarjousHinta, htmlAttributes: new { @class = "control-label col-md-2" })
+							<div class="col-md-10">
+								@Html.EditorFor(model => model.TarjousHinta, new { htmlAttributes = new { @class = "form-control" } })
+								@Html.ValidationMessageFor(model => model.TarjousHinta, "", new { @class = "text-danger" })
+							</div>
+						</div>*@
+					<br />
+					<div class="form-group">
+						<div class="col-md-offset-2 col-md-10">
+							<input type="submit" value="Lähetä" class="btn btn-default" style="color: lightblue"/>
+						</div>
+					</div>
+				</div>}
+
+@*<div>
+	@Html.ActionLink("Back to List", "Index")
+</div>*@
+
+
