@@ -123,6 +123,7 @@
           <Property Name="Teho-osasto" Type="bit" />
           <Property Name="Ensihoito" Type="bit" />
           <Property Name="Kommentit" Type="varchar" MaxLength="200" />
+          <Property Name="Kuva" Type="longblob" />
         </EntityType>
         <EntityType Name="vastatarjoukset">
           <Key>
@@ -449,6 +450,7 @@
           <NavigationProperty Name="login1" Relationship="Self.LoginID" FromRole="tyontekijat2" ToRole="login" />
           <NavigationProperty Name="tehtavia" Relationship="Self.HenkiloID1" FromRole="tyontekijat2" ToRole="tehtavia" />
           <NavigationProperty Name="vastatarjoukset" Relationship="Self.HenkiloID" FromRole="tyontekijat2" ToRole="vastatarjoukset" />
+          <Property Name="Kuva" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="vastatarjoukset">
           <Key>
@@ -735,6 +737,7 @@
           <EntitySetMapping Name="tyontekijat2">
             <EntityTypeMapping TypeName="pepeModel.tyontekijat2">
               <MappingFragment StoreEntitySet="tyontekijat2">
+                <ScalarProperty Name="Kuva" ColumnName="Kuva" />
                 <ScalarProperty Name="HenkiloID" ColumnName="HenkiloID" />
                 <ScalarProperty Name="LoginID" ColumnName="LoginID" />
                 <ScalarProperty Name="Etunimi" ColumnName="Etunimi" />

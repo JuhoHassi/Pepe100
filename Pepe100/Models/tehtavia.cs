@@ -11,8 +11,7 @@ namespace Pepe100.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class tehtavia
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,7 +24,6 @@ namespace Pepe100.Models
         public Nullable<int> HenkiloID { get; set; }
         public Nullable<int> YritysID { get; set; }
         public Nullable<int> LoginID { get; set; }
-        //[Required]
         public string Tehtava { get; set; }
         public Nullable<bool> Kuukausipalkkalainen { get; set; }
         public Nullable<bool> Tuntipalkkalainen { get; set; }

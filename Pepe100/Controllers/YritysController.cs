@@ -869,7 +869,8 @@ namespace Pepe10.Controllers
                               Katilo = t.Katilo,
                               Osastotyoskentely = t.Osastotyoskentely,
                               Teho_osasto = t.Teho_osasto,
-                              Ensihoito = t.Ensihoito
+                              Ensihoito = t.Ensihoito,
+                              Kuva = t.Kuva
                           });
 
             return View(testi4);
