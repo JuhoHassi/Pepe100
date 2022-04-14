@@ -52,11 +52,33 @@
 		$('[data-toggle="popover"]').popover({
 			html: true,
 			sanitize: false,
-			trigger: "hover"
+			trigger: "click",
+
 		});
 	});
 </script>
+@* uusi rivi kun count  > 3 *@
 
+<script>
+	let toggle = button => {
+		let element = document.getElementById("mytable");
+		let hidden = element.getAttribute("hidden");
+
+		if (hidden) {
+			element.removeAttribute("hidden");
+			button.innerText = "Hide table";
+		} else {
+			element.setAttribute("hidden", "hidden");
+			button.innerText = "Show table";
+		}
+
+	}
+</script>
+<style>
+	#mytable2 td:hover {
+		cursor: pointer;
+	}
+</style>
 
 <table class="table">
 	<tr>
@@ -69,6 +91,7 @@
 			@Html.DisplayNameFor(model => model.VastaTarjousHinta)
 			@*@Html.DisplayName("Tarjoushinta")*@
 		</th>
+		<th>@Html.DisplayNameFor(model => model.Arvostelu)</th>
 		<th></th>
 	</tr>
 
@@ -80,31 +103,101 @@
 			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
 			@Html.HiddenFor(modelItem => item.TyoID)
 			<tr>
+				@*<tr><th colspan='2'></th>*@
 				<td>
-					<a href="#" data-toggle="popover" title="@if (item.Kuva != null)
-					{<img src='data:image/jpeg;base64,@Convert.ToBase64String(item.Kuva)'width=100% height=100%/>}
-					else{  }" 
-					   data-content="<table><thead><th>Etunimi</th><th>Sukunimi</th><th>Email</th>@if (item.LOP == true)
-				{
-					<th>LOP</th>
-				}</thead><tbody><td>@item.Etunimi</td><td>@item.Sukunimi</td><td>@item.Email</td>@if (item.LOP == true)
-				{
-					<td>@item.LOP</td>
-				}</tbody><thead><th>Etunimi</th><th>Sukunimi</th><th>Email</th>@if (item.LOP == true)
-				{
-					<th>LOP</th>
-				}</thead><tbody><td>@item.Etunimi</td><td>@item.Sukunimi</td><td>@item.Email</td>@if (item.LOP == true)
-				{
-					<td>@item.LOP</td>
-				}</tbody></table>">Toggle popover</a>
+					<a href="#" data-toggle="popover" title="<table class='table table-bordered table-dark'><tr>@if (item.Kuva != null)
+					{<td colspan='2' rowspan='6'><img src='data:image/jpeg;base64,@Convert.ToBase64String(item.Kuva)'width=90% height=90%/></td>}
+					else{  }<th>Etunimi</th><th>Sukunimi</th></tr><tr><td>@item.Etunimi</td><td>@item.Sukunimi</td></tr><tr><th colspan='2'>Email</th></tr><tr><td colspan='2'>@item.Email</td></tr><tr><th>Työkokemus</th><th>Y-tunnus</th></tr><tr><td>@item.Tyokokemus</td><td>Y-tunnus</td></tr></table>"
+					   data-content="<table class='table table-bordered table-dark' id='mytable' hidden='hidden'><tr><th>LOP</th><th>KIPU</th><th>I.V</th></tr><tr>@if (item.LOP == true)
+					   {
+						   <td>✓✅✔</td>
+					   }
+					   else{<td></td>}@if (item.KIPU == true)
+					   {
+						   <td>✓✅✔</td>
+					   }else{<td></td>}@if (item.I_V == true)
+					   {
+						   <td>✓✅✔</td>
+					   }else{<td></td>}</tr><tr><th>LAS</th><th>GER</th><th>PSYK</th></tr><tr>@if (item.LAS == true)
+					   {
+						   <td>✓✅✔</td>
+					   }else{<td></td>}@if (item.GER == true)
+					   {
+						   <td>✓✅✔</td>
+					   }else{<td></td>}@if (item.PSYK == true)
+					   {
+						   <td>✓✅✔</td>
+					   }else{<td></td>}</tr><tr><th>ROKOTUS</th><th>Työkokemus</th><th>Vanhusten/kotihoito</th></tr><tr>@if (item.ROKOTUS == true)
+					   {
+						   <td>✓✅✔</td>
+					   }else{<td></td>}@if (item.Tyokokemus == 01)
+					   {
+						   <td>0-1 vuotta</td>
+					   }@if (item.Tyokokemus == 25)
+					   {
+						   <td>2-5 vuotta</td>
+					   }@if (item.Tyokokemus == 610)
+					   {
+						   <td>6-10 vuotta</td>
+					   }@if (item.Tyokokemus == 1000)
+					   {
+						   <td>10+ vuotta</td>
+					   }@if (item.Vanhustenhoito_kotihoito == true)
+					   {
+						   <td>✓✅✔</td>
+					   }else{<td></td>}</tr><tr><th>Mielenterveys</th><th>Päivystys/Ensihoito</th><th>Lapset</th></tr><tr>@if (item.Mielenterveys == true)
+					   {
+						   <td>✓✅✔</td>
+					   }else{<td></td>}@if (item.Paivystys_Ensihoito == true)
+					   {
+						   <td>✓✅✔</td>
+					   }else{<td></td>}@if (item.Lapset == true)
+					   {
+						   <td>✓✅✔</td>
+					   }else{<td></td>}</tr><tr><th>Kehitysvammaiset</th><th>Hengityshalvaus</th><th>Ensihoitaja AMK</th></tr><tr>@if (item.Kehitysvammaiset == true)
+					   {
+						   <td>✓✅✔</td>
+					   }else{<td></td>}@if (item.Hengityshalvaus == true)
+					   {
+						   <td>✓✅✔</td>
+					   }else{<td></td>}@if (item.Ensihoitaja_AMK == true)
+					   {
+						   <td>✓✅✔</td>
+					   }else{<td></td>}</tr><tr><th>Terveydenhoitaja</th><th>Kätilö</th><th>Osastotyöskentely</th></tr><tr>@if (item.Terveydenhoitaja == true)
+					   {
+						   <td>✓✅✔</td>
+					   }else{<td></td>}@if (item.Katilo == true)
+					   {
+						   <td>✓✅✔</td>
+					   }else{<td></td>}@if (item.Osastotyoskentely == true)
+					   {
+						   <td>✓✅✔</td>
+					   }else{<td></td>}</tr><tr><th>Päivystys</th><th>Teho-osasto</th><th>Ensihoito</th></tr><tr>@if (item.Paivystys == true)
+					   {
+						   <td>✓✅✔</td>
+					   }else{<td></td>}@if (item.Teho_osasto == true)
+					   {
+						   <td>✓✅✔</td>
+					   }else{<td></td>}@if (item.Ensihoito == true)
+					   {
+						   <td>✓✅✔</td>
+					   }else{<td></td>}</tr><tfoot><tr><th colspan='3'>Kommentit</th></tr><tr><td colspan='3'>@item.Kommentit</td></tr></tfoot></table><table class='table table-bordered table-dark' id='mytable2'><tfoot><tr><td align='center' style='text-decoration:underline; color:lightblue font-weight:600;' onclick='toggle(this);'>Katso lisätiedot</td></tr></tfoot></table>">Toggle popover</a>
+					@*<table class='table table-bordered table-dark'><tr><th align='center' onclick='toggle(this);' style='font-weight:600; color:lightblue'>Hide table</th></tr></table>*@
+					@*<table class='table table-bordered table-dark'><tfoot><tr><th><a href='' onclick='toggle(this);' style='font-weight:600; color:lightblue'>Hide table</a></th></tr></tfoot></table>*@
+					@*<table><tfoot><tr><td><button onclick='toggle(this);'>Hide table</button></td></tr></tfoot></table>*@
+					@*<tr><th colspan='3'>Kommentit</th></tr><tr><td colspan='3'>@item.Kommentit</td></tr>*@
 				</td>
-				<td>@Html.DisplayFor(modelItem => item.TyoID, new { htmlAttributes = new { @class = "form-control" } })</td>
-				<td>@Html.DisplayFor(modelItem => item.Etunimi, new { htmlAttributes = new { @class = "form-control" } })</td>
-				<td>@Html.DisplayFor(modelItem => item.VastaTarjousHinta, new { htmlAttributes = new { @class = "form-control" } })</td>
-				<td>
-					<a href="@Url.Action("_HyvaksyTarjous", "Yritys", new { tyoid = item.TyoID,henid = item.HenkiloID, vhinta = item.VastaTarjousHinta })" style="font-weight:600; color:lightblue">HYVÄKSY</a>
-					<a href="@Url.Action("KatsoTarjouksia", "Yritys", new { henkid = item.HenkiloID })" style="font-weight:600; color:lightblue">KATSO</a>
-				</td>
+
+
+			<td>@Html.DisplayFor(modelItem => item.TyoID, new { htmlAttributes = new { @class = "form-control" } })</td>
+			<td>@Html.DisplayFor(modelItem => item.Etunimi, new { htmlAttributes = new { @class = "form-control" } })</td>
+			<td>@Html.DisplayFor(modelItem => item.VastaTarjousHinta, new { htmlAttributes = new { @class = "form-control" } })</td>
+			<td>@Html.DisplayFor(modelItem => item.Arvostelu, new { htmlAttributes = new { @class = "form-control" } })</td>
+
+			<td>
+				<a href="@Url.Action("_HyvaksyTarjous", "Yritys", new { tyoid = item.TyoID,henid = item.HenkiloID, vhinta = item.VastaTarjousHinta })" style="font-weight:600; color:lightblue">HYVÄKSY</a>
+				@*<a href="@Url.Action("KatsoTarjouksia", "Yritys", new { henkid = item.HenkiloID })" style="font-weight:600; color:lightblue">KATSO</a>*@
+			</td>
 			</tr>
 		}
 	}

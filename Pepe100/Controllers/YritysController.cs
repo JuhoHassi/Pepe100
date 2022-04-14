@@ -730,7 +730,7 @@ namespace Pepe10.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult TulevatVuorotHyvaksyYritys(int id)
+        public ActionResult TulevatVuorotHyvaksyYritys([Bind(Include = "Arvostelu")] tehtavia tehtavia,int id, int? rate)
         {
             //var id2 = Session["YritysID"];
             //int? id3 = (int?)id;
@@ -743,8 +743,20 @@ namespace Pepe10.Controllers
                 tehtavia teht = (from t in db.tehtavia
                                  where t.TyoID == id
                                  select t).FirstOrDefault();
-
+                teht.Arvostelu = rate;
                 teht.TehtavaValmis = true;
+                db.SaveChanges();
+
+
+                tyontekijat2 tyontekijat = (from t in db.tyontekijat2
+                                            where teht.HenkiloID == t.HenkiloID
+                                            select t).FirstOrDefault();
+
+                Double? arvostelu = ((tyontekijat.Arvostelu * tyontekijat.ArvosteluMaara) + rate) / (tyontekijat.ArvosteluMaara + 1);
+
+
+                tyontekijat.Arvostelu = arvostelu;
+                tyontekijat.ArvosteluMaara++;
                 db.SaveChanges();
 
                 return RedirectToAction("TulevatVuorotYritys");
@@ -870,7 +882,9 @@ namespace Pepe10.Controllers
                               Osastotyoskentely = t.Osastotyoskentely,
                               Teho_osasto = t.Teho_osasto,
                               Ensihoito = t.Ensihoito,
-                              Kuva = t.Kuva
+                              Kommentit = t.Kommentit,
+                              Kuva = t.Kuva,
+                              Arvostelu = Math.Round((double)t.Arvostelu,2)
                           });
 
             return View(testi4);

@@ -7,7 +7,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>*@
-
+@*<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">*@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 @section scripts{
 	<script type="text/javascript">
 		$(window).on('load', function () {
@@ -22,8 +23,7 @@
 				$(document).ready(function () {
 				alert("@TempData["Message"]");
 			});
-</script>
-}
+</script>}
 	<script type="text/javascript">
 		$(window).on('load', function () {
 			if (@ViewBag.LoginErrorYritys == 1) {
@@ -36,90 +36,87 @@
 <script type="text/javascript">
 				$(document).ready(function () {
 				alert("@TempData["MessageYritys"]");
-			});
+				});
 </script>
-} @*<script>
-		$("[data-toggle=popover]").popover();
-		$("[data-toggle=tooltip]").tooltip();
-			//$(function () {
-			//	$('[data-toggle="popover"]').popover(
-			//		{
-			//			sanitize: false
-			//	});
-			//});
-			//$("[data-toggle=popover]").popover({
-			//	html: true,
-			//	content: function () {
-			//		return $('#popover-content').html();
-			//	}
-			//});
-	</script>*@
-
-
-
 }
+}
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+
+<script>
+	$(document).ready(function () {
+		$('[data-toggle="popover"]').popover({
+			html: true,
+			sanitize: false,
+			trigger: "click",
+
+		});
+	});
+</script>
+
+<script>
+	let toggle = button => {
+		let element = document.getElementById("mytable");
+		let hidden = element.getAttribute("hidden");
+
+		if (hidden) {
+			element.removeAttribute("hidden");
+			button.innerText = "Hide table";
+		} else {
+			element.setAttribute("hidden", "hidden");
+			button.innerText = "Show table";
+		}
+	}
+</script>
+<style>
+	#mytable2 td:hover {
+		background: #ff0000;
+		cursor: pointer;
+	}
+</style>
+
+<td>
+	<a href="#" data-toggle="popover" title="AA"
+	   data-content="<table><thead><th>Etunimi</th><th>Sukunimi</th><th>Email</th></thead><tbody><td>Etunimi</td><td>Sukunimi</td><td>Email</td></tbody><thead><th>LOP</th><th>KIPU</th><th>I.V</th></thead><tbody><td>tem.LOP</td><td>em.KIPU</td><td>item.I_V</td></tbody><thead><th>LAS</th><th>GER</th><th>PSYK</th></thead><tbody><td>.LAS</td><td>item.GER</td><td>item.PSYK</td></tbody><thead><th>ROKOTUS</th><th>Työkokemus</th><th>Vanhustenhoito/kotihoito</th></thead><tbody><td>item.ROKOTUS</td><td>item.Tyokokemus</td><td>item.Vanhustenhoito_kotihoito</td></tbody><thead><th>Mielenterveys</th><th>Päivystys/Ensihoito</th><th>Lapset</th></thead><tbody><td>item.Mielenterveys</td><td>item.Paivystys_Ensihoito</td><td>item.Lapset</td></tbody><thead><th>Kehitysvammaiset</th><th>Hengityshalvaus</th><th>Ensihoitaja AMK</th></thead><tbody><td>item.Kehitysvammaiset</td><td>item.Hengityshalvaus</td><td@item.Ensihoitaja_AMK</td></tbody><thead><th>Terveydenhoitaja</th><th>Kätilö</th><th>Osastotyöskentely</th></thead><tbody><td>item.Terveydenhoitaja</td><td>item.Katilo</td><td>item.Osastotyoskentely</td></tbody><thead><th>Päivystys</th><th>Teho-osasto</th><th>Ensihoito</th></thead><tbody><td>item.Paivystys</td><td>item.Teho_osasto</td><td>tem.Ensihoito</td></tbody><thead><th>Kommentit</th></thead><tbody><td>item.Kommentit</td></tbody></table>">Toggle popover</a>
+</td>
+<table class="table table-bordered table-dark" id="mytable2" style="max-width:200px">
+	<tr>
+		<th align="right" colspan="2" style="font-size:15px; font-weight:600">AAAAA</th>
+		<th>BBBBB</th>
+	</tr>
+	<tr>
+		<td colspan="2" rowspan="4">aaaaaaa aaaaaaaaa aaaaa aaaaaaaaaaaaa aaaaaa aaaaaaaaaa aaaa</td>
+		<td>bbbbb</td>
+	</tr>
+	<tr>
+		<th align="right">CC</th>
+	</tr>
+	<tr>
+		<td align="right">ccc</td>
+	</tr>
+	<tbody id="mytable" hidden="hidden">
+		<tr>
+			<th align="center">DDDDD</th>
+		</tr>
+		<tr>
+			<th>DDDDD</th>
+		</tr>
+		<tr id="mytable">
+			<td>DDDDD</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td align="center" colspan="3" onclick="toggle(this);" style="text-decoration:underline;">
+				Hide table
+			</td>
+		</tr>
+	</tfoot>
+</table>
+
 <h1>@DateTime.Now</h1>
 
-@*<html lang="en">
-	<head>
-		<title>Bootstrap Example</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">*@
-@*<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">*@
-@*<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>*@
-@*<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>*@
-@*<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>*@
-@*</head>
-	<body>*@
-
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-
-	<div class="container">
-		<h3>Popover Example</h3>
-		<a href="#" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover">Toggle popover</a>
-	</div>
-
-	<script>
-		$(document).ready(function () {
-			$('[data-toggle="popover"]').popover();
-		});
-	</script>
-
-@*</body>
-	</html>*@
-
-
-
-
-
-@*<html lang="en">
-	<head>
-		<title>Bootstrap Example</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	</head>
-	<body>
-
-		<div class="container">
-			<h3>Popover Example</h3>
-			<a href="#" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover">Toggle popover</a>
-		</div>
-
-		<script>
-			$(document).ready(function () {
-				$('[data-toggle="popover"]').popover();
-			});
-		</script>
-
-	</body>
-	</html>*@
-
-
-@*<button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
-	<button type="button" class="btn btn-lg btn-danger" data-toggle="tooltip" title="Tooltip title" data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle tooltip</button>*@
 
 
 <div class="container-fluid">

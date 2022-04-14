@@ -34,6 +34,7 @@ namespace Pepe100.ViewModels
         public Nullable<bool> I_V { get; set; }
         public Nullable<bool> LAS { get; set; }
         public Nullable<bool> GER { get; set; }
+        public Nullable<bool> KIPU { get; set; }
         public Nullable<bool> PSYK { get; set; }
         public Nullable<bool> ROKOTUS { get; set; }
         public int? Tyokokemus { get; set; }
@@ -52,7 +53,9 @@ namespace Pepe100.ViewModels
         public Nullable<bool> Ensihoito { get; set; }
         public string Kommentit { get; set; }
         public byte[] Kuva { get; set; }
-        public Nullable<bool> KIPU { get; set; }
+        
+        public Nullable<double> Arvostelu { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<login> Login { get; set; }
     }

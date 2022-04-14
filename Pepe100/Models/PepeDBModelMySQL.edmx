@@ -80,6 +80,7 @@
           <Property Name="Teho-osasto" Type="bit" />
           <Property Name="Ensihoito" Type="bit" />
           <Property Name="Kommentit" Type="varchar" MaxLength="200" />
+          <Property Name="Arvostelu" Type="double" />
         </EntityType>
         <EntityType Name="tyontekijat2">
           <Key>
@@ -124,6 +125,8 @@
           <Property Name="Ensihoito" Type="bit" />
           <Property Name="Kommentit" Type="varchar" MaxLength="200" />
           <Property Name="Kuva" Type="longblob" />
+          <Property Name="Arvostelu" Type="double" />
+          <Property Name="ArvosteluMaara" Type="int" />
         </EntityType>
         <EntityType Name="vastatarjoukset">
           <Key>
@@ -403,6 +406,7 @@
           <NavigationProperty Name="vastatarjoukset" Relationship="Self.TyoID" FromRole="tehtavia" ToRole="vastatarjoukset" />
           <NavigationProperty Name="yritys" Relationship="Self.YritysID1" FromRole="tehtavia" ToRole="yritys" />
           <Property Name="TarjousMaara" Type="Int32" />
+          <Property Name="Arvostelu" Type="Double" />
         </EntityType>
         <EntityType Name="tyontekijat2">
           <Key>
@@ -451,6 +455,8 @@
           <NavigationProperty Name="tehtavia" Relationship="Self.HenkiloID1" FromRole="tyontekijat2" ToRole="tehtavia" />
           <NavigationProperty Name="vastatarjoukset" Relationship="Self.HenkiloID" FromRole="tyontekijat2" ToRole="vastatarjoukset" />
           <Property Name="Kuva" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Arvostelu" Type="Double" />
+          <Property Name="ArvosteluMaara" Type="Int32" />
         </EntityType>
         <EntityType Name="vastatarjoukset">
           <Key>
@@ -681,6 +687,7 @@
           <EntitySetMapping Name="tehtavia">
             <EntityTypeMapping TypeName="pepeModel.tehtavia">
               <MappingFragment StoreEntitySet="tehtavia">
+                <ScalarProperty Name="Arvostelu" ColumnName="Arvostelu" />
                 <ScalarProperty Name="TarjousMaara" ColumnName="TarjousMaara" />
                 <ScalarProperty Name="TyoID" ColumnName="TyoID" />
                 <ScalarProperty Name="HenkiloID" ColumnName="HenkiloID" />
@@ -737,6 +744,8 @@
           <EntitySetMapping Name="tyontekijat2">
             <EntityTypeMapping TypeName="pepeModel.tyontekijat2">
               <MappingFragment StoreEntitySet="tyontekijat2">
+                <ScalarProperty Name="ArvosteluMaara" ColumnName="ArvosteluMaara" />
+                <ScalarProperty Name="Arvostelu" ColumnName="Arvostelu" />
                 <ScalarProperty Name="Kuva" ColumnName="Kuva" />
                 <ScalarProperty Name="HenkiloID" ColumnName="HenkiloID" />
                 <ScalarProperty Name="LoginID" ColumnName="LoginID" />

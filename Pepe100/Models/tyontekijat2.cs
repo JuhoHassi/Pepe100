@@ -61,6 +61,8 @@ namespace Pepe100.Models
         public Nullable<bool> Ensihoito { get; set; }
         public string Kommentit { get; set; }
         public byte[] Kuva { get; set; }
+        public Nullable<double> Arvostelu { get; set; }
+        public Nullable<int> ArvosteluMaara { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<login> login { get; set; }

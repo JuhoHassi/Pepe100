@@ -70,6 +70,7 @@ namespace Pepe100.Models
         public Nullable<bool> Ensihoito { get; set; }
         public string Kommentit { get; set; }
         public Nullable<int> TarjousMaara { get; set; }
+        public Nullable<double> Arvostelu { get; set; }
     
         public virtual login login { get; set; }
         public virtual tyontekijat2 tyontekijat2 { get; set; }

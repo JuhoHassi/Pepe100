@@ -6392,7 +6392,9 @@ fieldset:disabled .btn {
   left: 0 /* rtl:ignore */;
   z-index: 1070;
   display: block;
-  max-width: 276px;
+  /*max-width: 900px;*/
+  width:470px;
+  /*max-width: 276px;*/
   font-family: var(--bs-font-sans-serif);
   font-style: normal;
   font-weight: 400;
@@ -6517,6 +6519,7 @@ fieldset:disabled .btn {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   border-top-left-radius: calc(0.3rem - 1px);
   border-top-right-radius: calc(0.3rem - 1px);
+  width:auto;
 }
 
 .popover-header:empty {
@@ -6526,6 +6529,7 @@ fieldset:disabled .btn {
 .popover-body {
   padding: 1rem 1rem;
   color: #aaa;
+  /*width:auto;*/
 }
 
 .carousel {
