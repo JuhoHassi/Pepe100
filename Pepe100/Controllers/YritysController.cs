@@ -17,7 +17,6 @@ using PdfSharp.Pdf.Content;
 using PdfSharp.Pdf.IO;
 using Pepe100.Models;
 using Pepe100.ViewModels;
-using SelectPdf;
 
 namespace Pepe10.Controllers
 {
@@ -345,30 +344,25 @@ namespace Pepe10.Controllers
                                     "Yhteensä: " + (tyontekijat.Lopetusaika - tyontekijat.Aloitusaika) +
                                     "Tarjous: " + tyontekijat.TarjousHinta +
                                     "Hyväksy vuoro tai jätä vastatarjous täällä https://localhost:44344/";
+
+
+
+
+
+
+
                                 //string fileName = FilePathResult.
                                 //string fileName = FilePathResult
                                 //mail.Attachments.Add(new Attachment());
                                 //String filePath = "Sopimusdocx.docx";
-                                //String filePath = "C:\\Users\\juhoh\\source\\repos\\Pepe100\\Pepe100\\Sopimus\\SOPIMUSdocx.docx";
                                 //var doc = PdfReader.Open(ControllerContext.HttpContext.Server.MapPath("C:\\Users\\juhoh\\source\\repos\\Pepe100\\Pepe100\\Sopimus\\Sopmiustesti.pdf"), PdfDocumentOpenMode.Modify);
-                                //var doc = PdfReader.Open(ControllerContext.HttpContext.Server.MapPath("~/Sopimus/Sopimus2.pdf"), PdfDocumentOpenMode.Modify);
 
-                                //if (doc.AcroForm.Elements.ContainsKey("/NeedAppearances") == false)
-                                //{
-                                //    doc.AcroForm.Elements.Add("/NeedAppearances", new PdfBoolean(true));
-                                //}
-                                //else
-                                //{
-                                //    doc.AcroForm.Elements.SetValue("/NeedAppearances", new PdfBoolean(true));
-                                //}
 
-                                //doc.AcroForm.Fields["1005"].Value = new PdfString("Teesti");
                                 //doc.AcroForm.Elements.SetValue("yy", new PdfString("Teesti"));
 
                                 //doc.AcroForm.Fields["1005"].ReadOnly = false;
                                 //doc.AcroForm.Elements.SetString("1005","Teesti");
 
-                                //Attachment data = new Attachment(filePath, MediaTypeNames.Application.Octet);
 
 
                                 //Response.ContentType = "application/ms-word";
@@ -398,7 +392,8 @@ namespace Pepe10.Controllers
                                 //Vastuuhenkilo.Text = "TOIMISKO JO?";
                                 //Vastuuhenkilo.ReadOnly = true;
                                 //doc2.Save(Server.MapPath("~/Sopimus/TestiSoppari1212.pdf"));
-                                //doc.Info.Title = "UUSI SOPIMUS TÄSÄ";
+
+
                                 //PdfPage page = doc2.AddPage();
                                 //XGraphics gfx = XGraphics.FromPdfPage(page);
 
@@ -490,7 +485,6 @@ namespace Pepe10.Controllers
                                 ////return fileResult;
 
 
-                                //mail.Attachments.Add(data);
                                 SmtpServer.Host = "smtp.gmail.com";
                                 SmtpServer.Port = 587;
                                 SmtpServer.EnableSsl = true;
@@ -799,6 +793,52 @@ namespace Pepe10.Controllers
             teht.TehtavaTaytetty = true;
             teht.ToteutunutHinta = vhinta;
             db.SaveChanges();
+
+            tyontekijat2 tyy = (from ty in db.tyontekijat2
+                                where henid == ty.HenkiloID
+                                select ty).FirstOrDefault();
+
+
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+            mail.From = new MailAddress("juho.hassi@gmail.com", "NurseBid");
+            mail.To.Add(new MailAddress(tyy.Email));
+            mail.Subject = "Avoin työvuoro";
+            mail.Body = "Tarjouksesi on hyväksytty. Liitteenä sopimus";
+
+            //var doc2 = PdfReader.Open
+            var doc = PdfReader.Open(ControllerContext.HttpContext.Server.MapPath("~/Sopimus/testipdf.pdf"), PdfDocumentOpenMode.Modify);
+
+            if (doc.AcroForm.Elements.ContainsKey("/NeedAppearances") == false)
+            {
+                doc.AcroForm.Elements.Add("/NeedAppearances", new PdfBoolean(true));
+            }
+            else
+            {
+                doc.AcroForm.Elements.SetValue("/NeedAppearances", new PdfBoolean(true));
+            }
+
+            doc.AcroForm.Fields["Etunimi"].Value = new PdfString(vhinta.ToString());
+            doc.Info.Title = "UUSI SOPIMUS TÄSÄ";
+            doc.Save("C:\\Users\\juhoh\\source\\repos\\Pepe100\\Pepe100\\Sopimus\\testipdf.pdf");
+            //doc.Save(Server.MapPath("~/Sopimus/testipdf2.pdf"));
+            //doc.Close();
+            String filePath = "C:\\Users\\juhoh\\source\\repos\\Pepe100\\Pepe100\\Sopimus\\testipdf.pdf";
+            //String filePath = "~/Sopimus/testipdf2.pdf"";
+
+            Attachment data = new Attachment(filePath, MediaTypeNames.Application.Octet);
+            mail.Attachments.Add(data);
+            doc.Close();
+
+            SmtpServer.Host = "smtp.gmail.com";
+            SmtpServer.Port = 587;
+            SmtpServer.EnableSsl = true;
+            SmtpServer.UseDefaultCredentials = false;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("juho.hassi@gmail.com", "Hasa6666");
+
+            SmtpServer.Send(mail);
+
             return RedirectToAction("AvoimetVuorotYritysTesti");
             //return View("AvoimetVuorotYritysTesti");
             //return View(testi);

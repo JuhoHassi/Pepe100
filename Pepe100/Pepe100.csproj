@@ -94,9 +94,6 @@
     <Reference Include="PdfSharp.Charting, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp.1.50.5147\lib\net20\PdfSharp.Charting.dll</HintPath>
     </Reference>
-    <Reference Include="Select.Pdf, Version=22.1.0.0, Culture=neutral, PublicKeyToken=e0ae9f6e27a97018, processorArchitecture=MSIL">
-      <HintPath>..\packages\Select.Pdf.22.1.0\lib\net40\Select.Pdf.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -528,6 +525,7 @@
     <Content Include="Sopimus\SOPIMUSdocx.docx" />
     <Content Include="Sopimus\Sopmiustesti.pdf" />
     <Content Include="Views\Yritys\_InfoRuutu.cshtml" />
+    <Content Include="Sopimus\testipdf.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
