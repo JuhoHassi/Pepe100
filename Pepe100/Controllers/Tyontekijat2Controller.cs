@@ -390,18 +390,19 @@ namespace Pepe100.Controllers
                               select t.Email).ToArray();
                 //email.ToString();
                 MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                SmtpClient SmtpServer = new SmtpClient("smtp-mail.outlook.com");
 
-                mail.From = new MailAddress("juho.hassi@gmail.com", "NurseBid");
+                mail.From = new MailAddress("juhoh-@hotmail.com", "NurseBid");
                 mail.To.Add(new MailAddress(email2[0]));
                 mail.Subject = "Uusi tarjous";
                 mail.Body = "Uusi tarjous työvuoroon " + tehtavia.TyoID +/*" Oma hinta: " + tehtavia.TarjousHinta +*/ " Hinta: " + tehtavia.TarjousHinta + " https://localhost:44344/";
 
-                SmtpServer.Host = "smtp.gmail.com";
+                SmtpServer.Host = "smtp-mail.outlook.com";
                 SmtpServer.Port = 587;
                 SmtpServer.EnableSsl = true;
                 SmtpServer.UseDefaultCredentials = false;
-                SmtpServer.Credentials = new System.Net.NetworkCredential("juho.hassi@gmail.com", "Hasa6666");
+                SmtpServer.Credentials = new System.Net.NetworkCredential("juhoh-@hotmail.com", "KarpalO");
+
 
                 SmtpServer.Send(mail);
             }

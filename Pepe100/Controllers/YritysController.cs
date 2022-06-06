@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -250,7 +251,7 @@ namespace Pepe10.Controllers
                                       where yid2 == y.YritysID
                                       select y.YritysEmail).FirstOrDefault();
 
-                        string aika = DateTime.Now.ToString();
+                        string aika = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
                         DateTime aika3 = DateTime.ParseExact(aika, "dd/MM/yyyy HH:mm:ss", null);
 
                         tehtavia teh = new tehtavia()
@@ -335,9 +336,9 @@ namespace Pepe10.Controllers
                             try
                             {
                                 MailMessage mail = new MailMessage();
-                                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                                SmtpClient SmtpServer = new SmtpClient("smtp-mail.outlook.com");
 
-                                mail.From = new MailAddress("juho.hassi@gmail.com", "NurseBid");
+                                mail.From = new MailAddress("juhoh-@hotmail.com", "NurseBid");
                                 mail.To.Add(new MailAddress(testi[i]));
                                 mail.Subject = "Avoin työvuoro";
                                 mail.Body = "Avoin työvuoro." + "Aloitusaika: " + tyontekijat.Aloitusaika +
@@ -345,6 +346,27 @@ namespace Pepe10.Controllers
                                     "Yhteensä: " + (tyontekijat.Lopetusaika - tyontekijat.Aloitusaika) +
                                     "Tarjous: " + tyontekijat.TarjousHinta +
                                     "Hyväksy vuoro tai jätä vastatarjous täällä https://localhost:44344/";
+
+                                SmtpServer.Host = "smtp-mail.outlook.com";
+                                SmtpServer.Port = 587;
+                                SmtpServer.EnableSsl = true;
+                                SmtpServer.UseDefaultCredentials = false;
+                                SmtpServer.Credentials = new System.Net.NetworkCredential("juhoh-@hotmail.com", "KarpalO");
+                                SmtpServer.Send(mail);
+
+
+
+                                //MailMessage mail = new MailMessage();
+                                //SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+                                //mail.From = new MailAddress("juho.hassi@gmail.com", "NurseBid");
+                                //mail.To.Add(new MailAddress(testi[i]));
+                                //mail.Subject = "Avoin työvuoro";
+                                //mail.Body = "Avoin työvuoro." + "Aloitusaika: " + tyontekijat.Aloitusaika +
+                                //    "Lopetusaika: " + tyontekijat.Lopetusaika +
+                                //    "Yhteensä: " + (tyontekijat.Lopetusaika - tyontekijat.Aloitusaika) +
+                                //    "Tarjous: " + tyontekijat.TarjousHinta +
+                                //    "Hyväksy vuoro tai jätä vastatarjous täällä https://localhost:44344/";
 
 
 
@@ -486,13 +508,13 @@ namespace Pepe10.Controllers
                                 ////return fileResult;
 
 
-                                SmtpServer.Host = "smtp.gmail.com";
-                                SmtpServer.Port = 587;
-                                SmtpServer.EnableSsl = true;
-                                SmtpServer.UseDefaultCredentials = false;
-                                SmtpServer.Credentials = new System.Net.NetworkCredential("juho.hassi@gmail.com", "Hasa6666");
+                                //SmtpServer.Host = "smtp.gmail.com";
+                                //SmtpServer.Port = 587;
+                                //SmtpServer.EnableSsl = true;
+                                //SmtpServer.UseDefaultCredentials = false;
+                                //SmtpServer.Credentials = new System.Net.NetworkCredential("juho.hassi@gmail.com", "Hasa6666");
 
-                                SmtpServer.Send(mail);
+                                //SmtpServer.Send(mail);
                                 //filePath.Insert(0, "TESTI INSERTTI");
                                 
 
@@ -554,8 +576,17 @@ namespace Pepe10.Controllers
                         var sposti = (from y in db.yritys
                                       where yid2 == y.YritysID
                                       select y.YritysEmail).FirstOrDefault();
-                        string aika = DateTime.Now.ToString();
+
+                        var infoCulture = new CultureInfo("fi-FI");
+                        string aika = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+                        //DateTime aika3 = DateTime.ParseExact(aika, "dd-MM-yyyy HH:mm:ss", null);
+                        //DateTime aika3 = DateTime.Parse(aika, "dd-MM-yyyy HH:mm:ss");
                         DateTime aika3 = DateTime.ParseExact(aika, "dd/MM/yyyy HH:mm:ss", null);
+                        //DateTime aika3 = DateTime.ParseExact(aika, "dd/MM/yyyy", null);
+                        //string aika3 = DateTime.ParseExact(aika, "dd/MM/yyyy", null).ToString();
+
+                        //DateTime aika3 = DateTime.ParseExact(aika, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                        //DateTime aika3 = DateTime.ParseExact(aika, "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
                         tehtavia teh = new tehtavia()
                         {
@@ -641,9 +672,9 @@ namespace Pepe10.Controllers
                             try
                             {
                                 MailMessage mail = new MailMessage();
-                                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                                SmtpClient SmtpServer = new SmtpClient("smtp-mail.outlook.com");
 
-                                mail.From = new MailAddress("juho.hassi@gmail.com", "NurseBid");
+                                mail.From = new MailAddress("juhoh-@hotmail.com", "NurseBid");
                                 mail.To.Add(new MailAddress(testi[i]));
                                 mail.Subject = "Avoin työvuoro";
                                 mail.Body = "Avoin työvuoro." + "Aloitusaika: " + tyontekijat.Aloitusaika +
@@ -652,12 +683,32 @@ namespace Pepe10.Controllers
                                     "Tarjous: " + tyontekijat.TarjousHinta +
                                     "Hyväksy vuoro tai jätä vastatarjous täällä https://localhost:44344/";
 
-                                SmtpServer.Host = "smtp.gmail.com";
+                                SmtpServer.Host = "smtp-mail.outlook.com";
                                 SmtpServer.Port = 587;
                                 SmtpServer.EnableSsl = true;
                                 SmtpServer.UseDefaultCredentials = false;
-                                SmtpServer.Credentials = new System.Net.NetworkCredential("juho.hassi@gmail.com", "Hasa6666");
+                                SmtpServer.Credentials = new System.Net.NetworkCredential("juhoh-@hotmail.com", "KarpalO");
                                 SmtpServer.Send(mail);
+
+
+                                //MailMessage mail = new MailMessage();
+                                //SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+                                //mail.From = new MailAddress("juho.hassi@gmail.com", "NurseBid");
+                                //mail.To.Add(new MailAddress(testi[i]));
+                                //mail.Subject = "Avoin työvuoro";
+                                //mail.Body = "Avoin työvuoro." + "Aloitusaika: " + tyontekijat.Aloitusaika +
+                                //    "Lopetusaika: " + tyontekijat.Lopetusaika +
+                                //    "Yhteensä: " + (tyontekijat.Lopetusaika - tyontekijat.Aloitusaika) +
+                                //    "Tarjous: " + tyontekijat.TarjousHinta +
+                                //    "Hyväksy vuoro tai jätä vastatarjous täällä https://localhost:44344/";
+
+                                //SmtpServer.Host = "smtp.gmail.com";
+                                //SmtpServer.Port = 587;
+                                //SmtpServer.EnableSsl = true;
+                                //SmtpServer.UseDefaultCredentials = false;
+                                //SmtpServer.Credentials = new System.Net.NetworkCredential("juho.hassi@gmail.com", "Hasa6666");
+                                //SmtpServer.Send(mail);
                             }
                             catch (Exception)
                             {
