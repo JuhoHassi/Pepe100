@@ -27,6 +27,7 @@ namespace Pepe100.Models
         public string YritysNimi { get; set; }
         public string YritysEmail { get; set; }
         public Nullable<int> Prosentti { get; set; }
+        public byte[] Sopimus { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<login> login { get; set; }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -776,6 +777,7 @@ namespace Pepe10.Controllers
             //             v.HenkiloID == henid
             //             select v);
 
+
             vastatarjoukset tarjoukset = (from v in db.vastatarjoukset
                                           where tyoid == v.TyoID &&
                                           henid == v.HenkiloID
@@ -807,8 +809,13 @@ namespace Pepe10.Controllers
             mail.Subject = "Avoin työvuoro";
             mail.Body = "Tarjouksesi on hyväksytty. Liitteenä sopimus";
 
-            //var doc2 = PdfReader.Open
-            var doc = PdfReader.Open(ControllerContext.HttpContext.Server.MapPath("~/Sopimus/testipdf.pdf"), PdfDocumentOpenMode.Modify);
+            byte [] sopimus3 = (from y in db.yritys
+                           where id2 == y.YritysID
+                           select y.Sopimus).FirstOrDefault();
+
+            MemoryStream stream = new MemoryStream(sopimus3);
+
+            var doc = PdfReader.Open(stream,PdfDocumentOpenMode.Modify);
 
             if (doc.AcroForm.Elements.ContainsKey("/NeedAppearances") == false)
             {
@@ -821,15 +828,25 @@ namespace Pepe10.Controllers
 
             doc.AcroForm.Fields["Etunimi"].Value = new PdfString(vhinta.ToString());
             doc.Info.Title = "UUSI SOPIMUS TÄSÄ";
-            doc.Save("C:\\Users\\juhoh\\source\\repos\\Pepe100\\Pepe100\\Sopimus\\testipdf.pdf");
-            //doc.Save(Server.MapPath("~/Sopimus/testipdf2.pdf"));
-            //doc.Close();
-            String filePath = "C:\\Users\\juhoh\\source\\repos\\Pepe100\\Pepe100\\Sopimus\\testipdf.pdf";
-            //String filePath = "~/Sopimus/testipdf2.pdf"";
 
-            Attachment data = new Attachment(filePath, MediaTypeNames.Application.Octet);
-            mail.Attachments.Add(data);
+            MemoryStream aa = new MemoryStream();
+            doc.Save(aa, false);
+            byte[] bytes = aa.ToArray();
             doc.Close();
+
+            yritys yri = (from yy in db.yritys
+                          where id2 == yy.YritysID
+                          select yy).FirstOrDefault();
+            //Convert.ToBase64String(doc);
+            yri.Sopimus = bytes;
+            string sopimustasa= "sopimuss.pdf";
+            db.SaveChanges();
+            Attachment att = new Attachment(new MemoryStream(bytes),sopimustasa);
+            mail.Attachments.Add(att);
+
+
+        //https://stackoverflow.com/questions/2583982/how-to-add-an-email-attachment-from-a-byte-array
+
 
             SmtpServer.Host = "smtp.gmail.com";
             SmtpServer.Port = 587;
@@ -840,9 +857,7 @@ namespace Pepe10.Controllers
             SmtpServer.Send(mail);
 
             return RedirectToAction("AvoimetVuorotYritysTesti");
-            //return View("AvoimetVuorotYritysTesti");
-            //return View(testi);
-            //return PartialView("_HyvaksyTarjous",testi);
+
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
