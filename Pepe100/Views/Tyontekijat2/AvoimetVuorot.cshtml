@@ -1,518 +1,428 @@
 ﻿@model IEnumerable<Pepe100.Models.tehtavia>
-@*@model IEnumerable<Pepe10.ViewModels.Tarjoukset>*@
 
 @{ ViewBag.Title = "AvoimetVuorot"; }
 @section scripts{
-	<script type="text/javascript">$(function () {
-			$(".naytaTehtava").click(function () {
-				let tyoid = $(this).data("tyoid");
-				var url = "/Tyontekijat2/_AvoimetVuorot/?tyoid=" + tyoid;
-				$("#tehtavaDetails_" + tyoid).append(" <b>Ladataan tilauksen " + tyoid + " rivejä...</b>");
-				var $detailDiv = $("#tehtavaDetails_" + tyoid);
-				$.get(url, function (data) {
-					$detailDiv.replaceWith(data);
-				});
-			});
-		});</script>
+    <script type="text/javascript">
+        $(function () {
+            $(".naytaTehtava").click(function () {
+                let tyoid = $(this).data("tyoid");
+                var url = "/Tyontekijat2/_AvoimetVuorot/?tyoid=" + tyoid;
+                $("#tehtavaDetails_" + tyoid).append(" <b>Ladataan tilauksen " + tyoid + " rivejä...</b>");
+                var $detailDiv = $("#tehtavaDetails_" + tyoid);
+                $.get(url, function (data) {
+                    $detailDiv.replaceWith(data);
+                });
+            });
+        });</script>
 }
 <div class="container-fluid">
-	<div class="col-md-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				Avoimet Vuorot
-			</div>
-			<div class="panel-body">
-				<table class="table table-bordered active">
-					@*<table class="table-responsive-lg table-bordered active">*@
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Avoimet Vuorot
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered active">
+                    @foreach (var item in Model)
+                    {
+                        <thead>
+                            <tr class="info">
+                                <th style="width: 16.66666666666667%"></th>
+                                @if (item.Tehtava != null)
+                                {
+                                    <th style="width: 16.66666666666667%">Tehtava</th>
+                                }
+                                @if (item.TarjousHinta != null)
+                                {
+                                    <th style="width: 16.66666666666667%">TarjousHinta</th>
+                                }
+                                @if (item.Aloitusaika != null)
+                                {
+                                    <th style="width: 16.66666666666667%">Aloitusaika</th>
+                                }
+                                @if (item.Lopetusaika != null)
+                                {
+                                    <th style="width: 16.66666666666667%">Lopetusaika</th>
+                                }
+                                @if (item.AikaYhteensa != null)
+                                {
+                                    <th style="width: 16.66666666666667%">AikaYhteensa</th>
+                                }
+                        </thead>
+                        <tbody>
+                            <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
+                                <td style="width: 16.66666666666667%"><span class="form-control bg-dark">@Html.ActionLink("Tarjoa", "VastaTarjous", new { id = item.TyoID, yid = item.YritysID, henkid = Session["HenkiloID"] })</span></td>
+                                @if (item.Tehtava != null)
+                                {
+                                    <td style="width: 16.66666666666667%">@item.Tehtava</td>
+                                }
+                                @if (item.TarjousHinta != null)
+                                {
+                                    <td style="width: 16.66666666666667%">@item.TarjousHinta</td>
+                                }
+                                @if (item.Aloitusaika != null)
+                                {
+                                    <td style="width: 16.66666666666667%">@item.Aloitusaika</td>
+                                }
+                                @if (item.Lopetusaika != null)
+                                {
+                                    <td style="width: 16.66666666666667%">@item.Lopetusaika</td>
+                                }
+                                @if (item.AikaYhteensa != null)
+                                {
+                                    <td style="width: 16.66666666666667%">@item.AikaYhteensa</td>
+                                }
+                            </tr>
 
-					@foreach (var item in Model)
-					{
-		<thead>
-			<tr class="info">
-				<th style="width: 16.66666666666667%"></th>
-				@if (item.Tehtava != null)
-				{
-<th style="width: 16.66666666666667%">Tehtava</th>}
-				@if (item.TarjousHinta != null)
-				{
-<th style="width: 16.66666666666667%">TarjousHinta</th>}
-				@if (item.Aloitusaika != null)
-				{
-<th style="width: 16.66666666666667%">Aloitusaika</th>}
-				@if (item.Lopetusaika != null)
-				{
-<th style="width: 16.66666666666667%">Lopetusaika</th>}
-				@if (item.AikaYhteensa != null)
-				{
-<th style="width: 16.66666666666667%">AikaYhteensa</th> } @*<th style="width: 16.66666666666667%">Sijainti</th>*@ @*<th style="width: 16.66666666666667%">Aloitusaika</th>
-					<th style="width: 16.66666666666667%">Lopetusaika</th>
-					<th style="width: 16.66666666666667%">AikaYhteensa</th>*@
-			</tr>
-		</thead>
-						<tbody>
-							<tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
-								@*<td><span class="form-control text-light bg-dark px-2">@Html.ActionLink("Hyväksy", "HyvaksyVuoro", new { id = item.TyoID, henkid = Session["HenkiloID"] })</span></td>*@
-								@*<td style="width: 16.66666666666667%"><span class="form-control bg-dark">@Html.ActionLink("Hyväksy", "HyvaksyVuoro", new { id = item.TyoID, henkid = Session["HenkiloID"] })</span></td>*@
-								<td style="width: 16.66666666666667%"><span class="form-control bg-dark">@Html.ActionLink("Tarjoa", "VastaTarjous", new { id = item.TyoID, yid = item.YritysID, henkid = Session["HenkiloID"] })</span></td>
-								@if (item.Tehtava != null)
-								{
-				<td style="width: 16.66666666666667%">@item.Tehtava</td>}
-								@if (item.TarjousHinta != null)
-								{
-				<td style="width: 16.66666666666667%">@item.TarjousHinta</td>}
-								@if (item.Aloitusaika != null)
-								{
-				<td style="width: 16.66666666666667%">@item.Aloitusaika</td>}
-								@if (item.Lopetusaika != null)
-								{
-				<td style="width: 16.66666666666667%">@item.Lopetusaika</td>}
-								@if (item.AikaYhteensa != null)
-								{
-				<td style="width: 16.66666666666667%">@item.AikaYhteensa</td>}
-								<!--<td style="width: 16.66666666666667%">@item.Tehtava</td>
-								<td style="width: 16.66666666666667%">@item.TarjousHinta</td>-->
-								@*<td style="width: 16.66666666666667%">@item.Sijainti</td>*@
-								<!--<td style="width: 16.66666666666667%">@item.Aloitusaika</td>-->
-								@*<td style="width: 16.66666666666667%">@item.VastaTarjoukset.Where(x => x.HenkiloID == item.HenkiloID && x.TyoID == item.TyoID))</td>*@
-								<!--<td style="width: 16.66666666666667%">@item.Lopetusaika</td>
-								<td style="width: 16.66666666666667%">@item.AikaYhteensa</td>-->
-							</tr>
+                            <tr>
+                                <td colspan="6" class="hiddenRow">
+                                    <div class="accordian-body collapse" id="demo1">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr class="info">
+                                                    @if (item.Lahihoitaja != null)
+                                                    {
+                                                        <th style="width: 16.66666666666667%">Lahihoitaja</th>
+                                                    }
+                                                    @if (item.Sairaanhoitaja != null)
+                                                    {
+                                                        <th style="width: 16.66666666666667%">Sairaanhoitaja</th>
+                                                    }
+                                                    @if (item.LOP != null)
+                                                    {
+                                                        <th style="width: 16.66666666666667%">LOP</th>
+                                                    }
+                                                    @if (item.KIPU != null)
+                                                    {
+                                                        <th style="width: 16.66666666666667%">KIPU</th>
+                                                    }
+                                                    @if (item.I_V != null)
+                                                    {
+                                                        <th style="width: 16.66666666666667%">I_V</th>
+                                                    }
+                                                    @if (item.LAS != null)
+                                                    {
+                                                        <th style="width: 16.66666666666667%">LAS</th>
+                                                    }
+                                                </tr>
+                                            </thead>
 
-							<tr>
-								<td colspan="6" class="hiddenRow">
-									<div class="accordian-body collapse" id="demo1">
-										<table class="table table-bordered">
-											@*//active*@
-											<thead>
-												<tr class="info">
-													@if (item.Lahihoitaja != null)
-													{
-									<th style="width: 16.66666666666667%">Lahihoitaja</th>}
-													@if (item.Sairaanhoitaja != null)
-													{
-									<th style="width: 16.66666666666667%">Sairaanhoitaja</th>}
-													@if (item.LOP != null)
-													{
-									<th style="width: 16.66666666666667%">LOP</th>}
-													@if (item.KIPU != null)
-													{
-									<th style="width: 16.66666666666667%">KIPU</th>}
-													@if (item.I_V != null)
-													{
-									<th style="width: 16.66666666666667%">I_V</th>}
-													@if (item.LAS != null)
-													{
-									<th style="width: 16.66666666666667%">LAS</th> } @*<th style="width: 16.66666666666667%">Lahihoitaja</th>
-										<th style="width: 16.66666666666667%">Sairaanhoitaja</th>
-										<th style="width: 16.66666666666667%">LOP</th>
-										<th style="width: 16.66666666666667%">KIPU</th>
-										<th style="width: 16.66666666666667%">I_V</th>
-										<th style="width: 16.66666666666667%">LAS</th>*@
-												</tr>
-											</thead>
+                                            <tbody>
+                                                <tr data-toggle="collapse" class="accordion-toggle" data-target="#demo10">
+                                                    @if (item.Lahihoitaja != null)
+                                                    {
+                                                        <td style="width: 16.66666666666667%">
+                                                            <svg viewBox="0 0 512 512" width="20" title="check-circle">
+                                                                <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
+                                                            </svg>
+                                                        </td>
+                                                    }
 
-											<tbody>
-												<tr data-toggle="collapse" class="accordion-toggle" data-target="#demo10">
-													@if (item.Lahihoitaja != null)
-													{
-									<td style="width: 16.66666666666667%">
-										<svg viewBox="0 0 512 512" width="20" title="check-circle">
-											<path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
-										</svg>
-									</td>}
+                                                    @if (item.Sairaanhoitaja != null)
+                                                    {
+                                                        <td style="width: 16.66666666666667%">
+                                                            <svg viewBox="0 0 512 512" width="20" title="check-circle">
+                                                                <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
+                                                            </svg>
+                                                        </td>
+                                                    }
 
-													@if (item.Sairaanhoitaja != null)
-													{
-									<td style="width: 16.66666666666667%">
-										<svg viewBox="0 0 512 512" width="20" title="check-circle">
-											<path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
-										</svg>
-									</td>}
+                                                    @if (item.LOP != null)
+                                                    {
+                                                        <td style="width: 16.66666666666667%">
+                                                            <svg viewBox="0 0 512 512" width="20" title="check-circle">
+                                                                <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
+                                                            </svg>
+                                                        </td>
+                                                    }
 
-													@if (item.LOP != null)
-													{
-									<td style="width: 16.66666666666667%">
-										<svg viewBox="0 0 512 512" width="20" title="check-circle">
-											<path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
-										</svg>
-									</td>}
+                                                    @if (item.KIPU != null)
+                                                    {
+                                                        <td style="width: 16.66666666666667%">
+                                                            <svg viewBox="0 0 512 512" width="20" title="check-circle">
+                                                                <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
+                                                            </svg>
+                                                        </td>
+                                                    }
 
-													@if (item.KIPU != null)
-													{
-									<td style="width: 16.66666666666667%">
-										<svg viewBox="0 0 512 512" width="20" title="check-circle">
-											<path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
-										</svg>
-									</td>}
+                                                    @if (item.I_V != null)
+                                                    {
+                                                        <td style="width: 16.66666666666667%">
+                                                            <svg viewBox="0 0 512 512" width="20" title="check-circle">
+                                                                <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
+                                                            </svg>
+                                                        </td>
+                                                    }
 
-													@if (item.I_V != null)
-													{
-									<td style="width: 16.66666666666667%">
-										<svg viewBox="0 0 512 512" width="20" title="check-circle">
-											<path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
-										</svg>
-									</td>}
+                                                    @if (item.LAS != null)
+                                                    {
+                                                        <td style="width: 16.66666666666667%">
+                                                            <svg viewBox="0 0 512 512" width="20" title="check-circle">
+                                                                <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
+                                                            </svg>
+                                                        </td>
+                                                    }
 
-													@if (item.LAS != null)
-													{
-									<td style="width: 16.66666666666667%">
-										<svg viewBox="0 0 512 512" width="20" title="check-circle">
-											<path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
-										</svg>
-									</td>}
+                                                </tr>
+                                            </tbody>
+                                            <thead>
+                                                <tr class="info">
+                                                    @if (item.GER != null)
+                                                    {
+                                                        <th style="width: 16.66666666666667%">GER</th>
+                                                    }
+                                                    @if (item.PSYK != null)
+                                                    {
+                                                        <th style="width: 16.66666666666667%">PSYK</th>
+                                                    }
+                                                    @if (item.ROKOTUS != null)
+                                                    {
+                                                        <th style="width: 16.66666666666667%">ROKOTUS</th>
+                                                    }
+                                                    @if (item.Tyokokemus != null)
+                                                    {
+                                                        <th style="width: 16.66666666666667%">Tyokokemus</th>
+                                                    }
+                                                    @if (item.Vanhustenhoito_kotihoito != null)
+                                                    {
+                                                        <th style="width: 16.66666666666667%">Vanhustenhoito_kotihoito</th>
+                                                    }
+                                                    @if (item.Mielenterveys != null)
+                                                    {
+                                                        <th style="width: 16.66666666666667%">Mielenterveys</th>
+                                                    }
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-toggle="collapse" class="accordion-toggle" data-target="#demo10">
+                                                    @if (item.GER != null)
+                                                    {
+                                                        <td>
+                                                            <svg viewBox="0 0 512 512" width="20" title="check-circle">
+                                                                <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
+                                                            </svg>
+                                                        </td>
+                                                    }
 
-												</tr>
-											</tbody>
-											<thead>
-												<tr class="info">
-													@if (item.GER != null)
-													{
-									<th style="width: 16.66666666666667%">GER</th>}
-													@if (item.PSYK != null)
-													{
-									<th style="width: 16.66666666666667%">PSYK</th>}
-													@if (item.ROKOTUS != null)
-													{
-									<th style="width: 16.66666666666667%">ROKOTUS</th>}
-													@if (item.Tyokokemus != null)
-													{
-									<th style="width: 16.66666666666667%">Tyokokemus</th>}
-													@if (item.Vanhustenhoito_kotihoito != null)
-													{
-									<th style="width: 16.66666666666667%">Vanhustenhoito_kotihoito</th>}
-													@if (item.Mielenterveys != null)
-													{
-									<th style="width: 16.66666666666667%">Mielenterveys</th> } @*<th>GER</th>
-										<th>PSYK</th>
-										<th>ROKOTUS</th>
-										<th>Tyokokemus</th>
-										<th>Vanhustenhoito_kotihoito</th>
-										<th>Mielenterveys</th>*@
-												</tr>
-											</thead>
-											<tbody>
-												<tr data-toggle="collapse" class="accordion-toggle" data-target="#demo10">
-													@if (item.GER != null)
-													{
-									<td>
-										<svg viewBox="0 0 512 512" width="20" title="check-circle">
-											<path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
-										</svg>
-									</td>}
+                                                    @if (item.PSYK != null)
+                                                    {
+                                                        <td>
+                                                            <svg viewBox="0 0 512 512" width="20" title="check-circle">
+                                                                <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
+                                                            </svg>
+                                                        </td>
+                                                    }
 
-													@if (item.PSYK != null)
-													{
-									<td>
-										<svg viewBox="0 0 512 512" width="20" title="check-circle">
-											<path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
-										</svg>
-									</td>}
+                                                    @if (item.ROKOTUS != null)
+                                                    {
+                                                        <td>
+                                                            <svg viewBox="0 0 512 512" width="20" title="check-circle">
+                                                                <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
+                                                            </svg>
+                                                        </td>
+                                                    }
 
-													@if (item.ROKOTUS != null)
-													{
-									<td>
-										<svg viewBox="0 0 512 512" width="20" title="check-circle">
-											<path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
-										</svg>
-									</td>}
-
-													<td>@item.Tyokokemus</td>
+                                                    <td>@item.Tyokokemus</td>
 
 
-													@if (item.Vanhustenhoito_kotihoito != null)
-													{
-									<td>
-										<svg viewBox="0 0 512 512" width="20" title="check-circle">
-											<path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
-										</svg>
-									</td>}
+                                                    @if (item.Vanhustenhoito_kotihoito != null)
+                                                    {
+                                                        <td>
+                                                            <svg viewBox="0 0 512 512" width="20" title="check-circle">
+                                                                <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
+                                                            </svg>
+                                                        </td>
+                                                    }
 
-													@if (item.Mielenterveys != null)
-													{
-									<td>
-										<svg viewBox="0 0 512 512" width="20" title="check-circle">
-											<path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
-										</svg>
-									</td>}
+                                                    @if (item.Mielenterveys != null)
+                                                    {
+                                                        <td>
+                                                            <svg viewBox="0 0 512 512" width="20" title="check-circle">
+                                                                <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
+                                                            </svg>
+                                                        </td>
+                                                    }
 
-												</tr>
-											</tbody>
-											<thead>
-												<tr class="info">
-													@if (item.Paivystys_Ensihoito != null)
-													{
-									<th style="width: 16.66666666666667%">Paivystys_Ensihoito</th>}
-													@if (item.Lapset != null)
-													{
-									<th style="width: 16.66666666666667%">Lapset</th>}
-													@if (item.Kehitysvammaiset != null)
-													{
-									<th style="width: 16.66666666666667%">Kehitysvammaiset</th>}
-													@if (item.Hengityshalvaus != null)
-													{
-									<th style="width: 16.66666666666667%">Hengityshalvaus</th>}
-													@if (item.Ensihoitaja_AMK != null)
-													{
-									<th style="width: 16.66666666666667%">Ensihoitaja_AMK</th>}
-													@if (item.Terveydenhoitaja != null)
-													{
-									<th style="width: 16.66666666666667%">Terveydenhoitaja</th> } @*<th>Paivystys_Ensihoito</th>
-										<th>Lapset</th>
-										<th>Kehitysvammaiset</th>
-										<th>Hengityshalvaus</th>
-										<th>Ensihoitaja_AMK</th>
-										<th>Terveydenhoitaja</th>*@
-												</tr>
-											</thead>
-											<tbody>
-												<tr data-toggle="collapse" class="accordion-toggle" data-target="#demo10">
-													@if (item.Paivystys_Ensihoito != null)
-													{
-									<td>
-										<svg viewBox="0 0 512 512" width="20" title="check-circle">
-											<path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
-										</svg>
-									</td>}
+                                                </tr>
+                                            </tbody>
+                                            <thead>
+                                                <tr class="info">
+                                                    @if (item.Paivystys_Ensihoito != null)
+                                                    {
+                                                        <th style="width: 16.66666666666667%">Paivystys_Ensihoito</th>
+                                                    }
+                                                    @if (item.Lapset != null)
+                                                    {
+                                                        <th style="width: 16.66666666666667%">Lapset</th>
+                                                    }
+                                                    @if (item.Kehitysvammaiset != null)
+                                                    {
+                                                        <th style="width: 16.66666666666667%">Kehitysvammaiset</th>
+                                                    }
+                                                    @if (item.Hengityshalvaus != null)
+                                                    {
+                                                        <th style="width: 16.66666666666667%">Hengityshalvaus</th>
+                                                    }
+                                                    @if (item.Ensihoitaja_AMK != null)
+                                                    {
+                                                        <th style="width: 16.66666666666667%">Ensihoitaja_AMK</th>
+                                                    }
+                                                    @if (item.Terveydenhoitaja != null)
+                                                    {
+                                                        <th style="width: 16.66666666666667%">Terveydenhoitaja</th>
+                                                    }
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-toggle="collapse" class="accordion-toggle" data-target="#demo10">
+                                                    @if (item.Paivystys_Ensihoito != null)
+                                                    {
+                                                        <td>
+                                                            <svg viewBox="0 0 512 512" width="20" title="check-circle">
+                                                                <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
+                                                            </svg>
+                                                        </td>
+                                                    }
 
-													@if (item.Lapset != null)
-													{
-									<td>
-										<svg viewBox="0 0 512 512" width="20" title="check-circle">
-											<path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
-										</svg>
-									</td>}
+                                                    @if (item.Lapset != null)
+                                                    {
+                                                        <td>
+                                                            <svg viewBox="0 0 512 512" width="20" title="check-circle">
+                                                                <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
+                                                            </svg>
+                                                        </td>
+                                                    }
 
-													@if (item.Kehitysvammaiset != null)
-													{
-									<td>
-										<svg viewBox="0 0 512 512" width="20" title="check-circle">
-											<path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
-										</svg>
-									</td>}
+                                                    @if (item.Kehitysvammaiset != null)
+                                                    {
+                                                        <td>
+                                                            <svg viewBox="0 0 512 512" width="20" title="check-circle">
+                                                                <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
+                                                            </svg>
+                                                        </td>
+                                                    }
 
-													@if (item.Hengityshalvaus != null)
-													{
-									<td>
-										<svg viewBox="0 0 512 512" width="20" title="check-circle">
-											<path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
-										</svg>
-									</td>}
+                                                    @if (item.Hengityshalvaus != null)
+                                                    {
+                                                        <td>
+                                                            <svg viewBox="0 0 512 512" width="20" title="check-circle">
+                                                                <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
+                                                            </svg>
+                                                        </td>
+                                                    }
 
-													@if (item.Ensihoitaja_AMK != null)
-													{
-									<td>
-										<svg viewBox="0 0 512 512" width="20" title="check-circle">
-											<path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
-										</svg>
-									</td>}
+                                                    @if (item.Ensihoitaja_AMK != null)
+                                                    {
+                                                        <td>
+                                                            <svg viewBox="0 0 512 512" width="20" title="check-circle">
+                                                                <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
+                                                            </svg>
+                                                        </td>
+                                                    }
 
-													@if (item.Terveydenhoitaja != null)
-													{
-									<td>
-										<svg viewBox="0 0 512 512" width="20" title="check-circle">
-											<path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
-										</svg>
-									</td>}
+                                                    @if (item.Terveydenhoitaja != null)
+                                                    {
+                                                        <td>
+                                                            <svg viewBox="0 0 512 512" width="20" title="check-circle">
+                                                                <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
+                                                            </svg>
+                                                        </td>
+                                                    }
 
-												</tr>
-											</tbody>
-											<thead>
-												<tr class="info">
-													@if (item.Katilo != null)
-													{
-									<th style="width: 16.66666666666667%">Katilo</th>}
-													@if (item.Osastotyoskentely != null)
-													{
-									<th style="width: 16.66666666666667%">Osastotyoskentely</th>}
-													@if (item.Paivystys != null)
-													{
-									<th style="width: 16.66666666666667%">Paivystys</th>}
-													@if (item.Teho_osasto != null)
-													{
-									<th style="width: 16.66666666666667%">Teho_osasto</th>}
-													@if (item.Ensihoito != null)
-													{
-									<th style="width: 16.66666666666667%">Ensihoito</th> } @*<th>Katilo</th>
-										<th>Osastotyoskentely</th>
-										<th>Paivystys</th>
-										<th>Teho_osasto</th>
-										<th>Ensihoito</th>*@
-												</tr>
-											</thead>
-											<tbody>
-												<tr data-toggle="collapse" class="accordion-toggle" data-target="#demo10">
-													@if (item.Katilo != null)
-													{
-									<td>
-										<svg viewBox="0 0 512 512" width="20" title="check-circle">
-											<path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
-										</svg>
-									</td>}
+                                                </tr>
+                                            </tbody>
+                                            <thead>
+                                                <tr class="info">
+                                                    @if (item.Katilo != null)
+                                                    {
+                                                        <th style="width: 16.66666666666667%">Katilo</th>
+                                                    }
+                                                    @if (item.Osastotyoskentely != null)
+                                                    {
+                                                        <th style="width: 16.66666666666667%">Osastotyoskentely</th>
+                                                    }
+                                                    @if (item.Paivystys != null)
+                                                    {
+                                                        <th style="width: 16.66666666666667%">Paivystys</th>
+                                                    }
+                                                    @if (item.Teho_osasto != null)
+                                                    {
+                                                        <th style="width: 16.66666666666667%">Teho_osasto</th>
+                                                    }
+                                                    @if (item.Ensihoito != null)
+                                                    {
+                                                        <th style="width: 16.66666666666667%">Ensihoito</th>
+                                                    }
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-toggle="collapse" class="accordion-toggle" data-target="#demo10">
+                                                    @if (item.Katilo != null)
+                                                    {
+                                                        <td>
+                                                            <svg viewBox="0 0 512 512" width="20" title="check-circle">
+                                                                <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
+                                                            </svg>
+                                                        </td>
+                                                    }
 
-													@if (item.Osastotyoskentely != null)
-													{
-									<td>
-										<svg viewBox="0 0 512 512" width="20" title="check-circle">
-											<path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
-										</svg>
-									</td>}
+                                                    @if (item.Osastotyoskentely != null)
+                                                    {
+                                                        <td>
+                                                            <svg viewBox="0 0 512 512" width="20" title="check-circle">
+                                                                <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
+                                                            </svg>
+                                                        </td>
+                                                    }
 
-													@if (item.Paivystys != null)
-													{
-									<td>
-										<svg viewBox="0 0 512 512" width="20" title="check-circle">
-											<path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
-										</svg>
-									</td>}
+                                                    @if (item.Paivystys != null)
+                                                    {
+                                                        <td>
+                                                            <svg viewBox="0 0 512 512" width="20" title="check-circle">
+                                                                <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
+                                                            </svg>
+                                                        </td>
+                                                    }
 
-													@if (item.Teho_osasto != null)
-													{
-									<td>
-										<svg viewBox="0 0 512 512" width="20" title="check-circle">
-											<path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
-										</svg>
-									</td>}
+                                                    @if (item.Teho_osasto != null)
+                                                    {
+                                                        <td>
+                                                            <svg viewBox="0 0 512 512" width="20" title="check-circle">
+                                                                <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
+                                                            </svg>
+                                                        </td>
+                                                    }
 
-													@if (item.Ensihoito != null)
-													{
-									<td>
-										<svg viewBox="0 0 512 512" width="20" title="check-circle">
-											<path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
-										</svg>
-									</td>}
-												</tr>
-											</tbody>
-											<thead>
-												<tr class="info">
-													<th>Kommentit</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr data-toggle="collapse" class="accordion-toggle" data-target="#demo10">
-													<td>@item.Kommentit</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</td>
-							</tr>
+                                                    @if (item.Ensihoito != null)
+                                                    {
+                                                        <td>
+                                                            <svg viewBox="0 0 512 512" width="20" title="check-circle">
+                                                                <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
+                                                            </svg>
+                                                        </td>
+                                                    }
+                                                </tr>
+                                            </tbody>
+                                            <thead>
+                                                <tr class="info">
+                                                    <th>Kommentit</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-toggle="collapse" class="accordion-toggle" data-target="#demo10">
+                                                    <td>@item.Kommentit</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
 
-						</tbody>}
-				</table>
-			</div>
-		</div>
-	</div>
+                        </tbody>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
-
-@*<div class="container-fluid">
-		<div class="card-header bg-dark">
-			<form>
-				<div class="input-group">
-					<span class="form-control text-light bg-primary px-2"></span>
-					<span class="form-control text-light bg-primary px-2">TyoID</span>
-					<span class="form-control text-light bg-primary px-2">Tehtava</span>
-					<span class="form-control text-light bg-primary px-2">Sijainti</span>
-					<span class="form-control text-light bg-primary px-2">Aloitusaika</span>
-					<span class="form-control text-light bg-primary px-2">Lopetusaika</span>
-					<span class="form-control text-light bg-primary px-2">AikaYhteensa</span>
-					<span class="form-control text-light bg-primary px-2">Lahihoitaja</span>
-					<span class="form-control text-light bg-primary px-2">Sairaanhoitaja</span>
-					<span class="form-control text-light bg-primary px-2">LOP</span>
-					<span class="form-control text-light bg-primary px-2">KIPU</span>
-					<span class="form-control text-light bg-primary px-2">I_V</span>
-					<span class="form-control text-light bg-primary px-2">LAS</span>
-					<span class="form-control text-light bg-primary px-2">GER</span>
-					<span class="form-control text-light bg-primary px-2">PSYK</span>
-					<span class="form-control text-light bg-primary px-2">ROKOTUS</span>
-				</div>
-			</form>
-		</div>
-
-		<div class="accordion" id="accordion">
-			@foreach (var item in Model)
-			{
-				<div class="card">
-					<div class="card-header">
-						<a class="card-link naytaTehtava" data-tyoid="@item.TyoID" data-target="#collapse_" data-toggle="collapse" href="#collapse_@item.TyoID">
-							<form>
-								<div class="input-group">
-									<span class="form-control text-light bg-dark px-2">@Html.ActionLink("Hyväksy", "HyvaksyVuoro", new { id = item.TyoID, henkid = Session["HenkiloID"] })</span>
-									<span class="form-control text-light bg-dark px-2">@item.TyoID</span>
-									<span class="form-control text-light bg-dark px-2">@item.Tehtava</span>
-									<span class="form-control text-light bg-dark px-2">@item.Sijainti</span>
-									<span class="form-control text-light bg-dark px-2">@item.Aloitusaika</span>
-									<span class="form-control text-light bg-dark px-2">@item.Lopetusaika</span>
-									<span class="form-control text-light bg-dark px-2">@item.AikaYhteensa</span>
-									<span class="form-control text-light bg-dark px-2">@item.Lahihoitaja</span>
-									<span class="form-control text-light bg-dark px-2">@item.Sairaanhoitaja</span>
-									<span class="form-control text-light bg-dark px-2">@item.LOP</span>
-									<span class="form-control text-light bg-dark px-2">@item.KIPU</span>
-									<span class="form-control text-light bg-dark px-2">@item.I_V</span>
-									<span class="form-control text-light bg-dark px-2">@item.LAS</span>
-									<span class="form-control text-light bg-dark px-2">@item.GER</span>
-									<span class="form-control text-light bg-dark px-2">@item.PSYK</span>
-									<span class="form-control text-light bg-dark px-2">@item.ROKOTUS</span>
-								</div>
-							</form>
-						</a>
-					</div>
-					<div id="collapse_@item.TyoID" class="collapse" data-parent="#accordion">
-						<div class="card-body">
-							<div id="tehtavaDetails_@item.TyoID"></div>
-						</div>
-					</div>
-				</div>
-			}
-		</div>
-	</div>*@
-
-
-@*<th>@Html.DisplayNameFor(model => model.Tehtava)</th>
-	<th>@Html.DisplayNameFor(model => model.Sijainti)</th>
-	<th>@Html.DisplayNameFor(model => model.Aloitusaika)</th>
-	<th>@Html.DisplayNameFor(model => model.Lopetusaika)</th>
-	<th>@Html.DisplayNameFor(model => model.AikaYhteensa)</th>
-	<th>@Html.DisplayNameFor(model => model.Lahihoitaja)</th>
-	<th>@Html.DisplayNameFor(model => model.Sairaanhoitaja)</th>
-	<th>@Html.DisplayNameFor(model => model.LOP)</th>
-	<th>@Html.DisplayNameFor(model => model.KIPU)</th>
-	<th>@Html.DisplayNameFor(model => model.I_V)</th>
-	<th>@Html.DisplayNameFor(model => model.LAS)</th>
-	<th>@Html.DisplayNameFor(model => model.GER)</th>
-	<th>@Html.DisplayNameFor(model => model.PSYK)</th>
-	<th>@Html.DisplayNameFor(model => model.ROKOTUS)</th>
-	<th>@Html.DisplayNameFor(model => model.Tyokokemus)</th>
-	<th>@Html.DisplayNameFor(model => model.Vanhustenhoito_kotihoito)</th>
-	<th>@Html.DisplayNameFor(model => model.Mielenterveys)</th>
-	<th>@Html.DisplayNameFor(model => model.Paivystys_Ensihoito)</th>
-	<th>@Html.DisplayNameFor(model => model.Lapset)</th>
-	<th>@Html.DisplayNameFor(model => model.Kehitysvammaiset)</th>
-	<th>@Html.DisplayNameFor(model => model.Hengityshalvaus)</th>
-	<th>@Html.DisplayNameFor(model => model.Ensihoitaja_AMK)</th>
-	<th>@Html.DisplayNameFor(model => model.Terveydenhoitaja)</th>
-	<th>@Html.DisplayNameFor(model => model.Katilo)</th>
-	<th>@Html.DisplayNameFor(model => model.Osastotyoskentely)</th>
-	<th>@Html.DisplayNameFor(model => model.Paivystys)</th>
-	<th>@Html.DisplayNameFor(model => model.Teho_osasto)</th>
-	<th>@Html.DisplayNameFor(model => model.Ensihoito)</th>
-	<th>@Html.DisplayNameFor(model => model.Kommentit)</th>
-	<th>@Html.DisplayNameFor(model => model.Yrity.YritysNimi)</th>*@
-
-
-@*<td>@Html.DisplayFor(modelItem => item.Tyokokemus)</td>
-	<td>@Html.DisplayFor(modelItem => item.Vanhustenhoito_kotihoito)</td>
-	<td>@Html.DisplayFor(modelItem => item.Mielenterveys)</td>
-	<td>@Html.DisplayFor(modelItem => item.Paivystys_Ensihoito)</td>
-	<td>@Html.DisplayFor(modelItem => item.Lapset)</td>
-	<td>@Html.DisplayFor(modelItem => item.Kehitysvammaiset)</td>
-	<td>@Html.DisplayFor(modelItem => item.Hengityshalvaus)</td>
-	<td>@Html.DisplayFor(modelItem => item.Ensihoitaja_AMK)</td>
-	<td>@Html.DisplayFor(modelItem => item.Terveydenhoitaja)</td>
-	<td>@Html.DisplayFor(modelItem => item.Katilo)</td>
-	<td>@Html.DisplayFor(modelItem => item.Osastotyoskentely)</td>
-	<td>@Html.DisplayFor(modelItem => item.Paivystys)</td>
-	<td>@Html.DisplayFor(modelItem => item.Teho_osasto)</td>
-	<td>@Html.DisplayFor(modelItem => item.Ensihoito)</td>
-	<td>@Html.DisplayFor(modelItem => item.Kommentit)</td>
-			<>@Html.DisplayFor(modelItem => item.Yrity.YritysNimi)</>*@
 

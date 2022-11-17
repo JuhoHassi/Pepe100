@@ -2,128 +2,135 @@
 
 @foreach (var item in Model)
 {
-	<div class="card-body" style="padding: 10px 6px 4px 6px">
-		<h6 class="card-title text-center" style="font-weight:600; color:lightblue">LOVET</h6>
+    <div class="card-body" style="padding: 10px 6px 4px 6px">
+        <h6 class="card-title text-center" style="font-weight:600; color:lightblue">LOVET</h6>
 
-			<ul class="list-group list-group-flush">
+        <ul class="list-group list-group-flush">
 
-				<li class="list-group-item text-center"></li>
+            <li class="list-group-item text-center"></li>
 
-					@if (item.LOP != null)
-						{
-						<li class="list-group-item text-center">LOP</li>}
-					@if (item.KIPU != null)
-					{
-						<li class="list-group-item text-center">KIPU</li>}
-					@if (item.I_V != null)
-					{
-						<li class="list-group-item text-center">I_V</li>}
-					@if (item.LAS != null)
-					{
-						<li class="list-group-item text-center">LAS</li>}
-					@if (item.GER != null)
-					{
-						<li class="list-group-item text-center">GER</li>}
-					@if (item.PSYK != null)
-					{
-						<li class="list-group-item text-center">PSYK</li>}
-					@if (item.ROKOTUS != null)
-					{
-						<li class="list-group-item text-center">ROKOTUS</li>}
-					<li class="list-group-item text-center"></li>
-			</ul>
-		<h6 class="card-title text-center" style="font-weight:600; color:lightblue">VAADITTU TYÖKOKEMUS</h6>
+            @if (item.LOP != null)
+            {
+                <li class="list-group-item text-center">LOP</li>
+}
+            @if (item.KIPU != null)
+            {
+                <li class="list-group-item text-center">KIPU</li>
+}
+            @if (item.I_V != null)
+            {
+                <li class="list-group-item text-center">I_V</li>
+}
+            @if (item.LAS != null)
+            {
+                <li class="list-group-item text-center">LAS</li>
+}
+            @if (item.GER != null)
+            {
+                <li class="list-group-item text-center">GER</li>
+}
+            @if (item.PSYK != null)
+            {
+                <li class="list-group-item text-center">PSYK</li>
+}
+            @if (item.ROKOTUS != null)
+            {
+                <li class="list-group-item text-center">ROKOTUS</li>
+}
+            <li class="list-group-item text-center"></li>
+        </ul>
+        <h6 class="card-title text-center" style="font-weight:600; color:lightblue">VAADITTU TYÖKOKEMUS</h6>
 
-		<ul class="list-group list-group-flush">
-			<li class="list-group-item text-center"></li>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item text-center"></li>
 
-			@if (item.Tyokokemus != null)
-			{
-				if (item.Tyokokemus == 1)
-				{
-				<li class="list-group-item text-center">
-					Työkokemus: 0-1 v.
-				</li>
-				 }
-				else if (item.Tyokokemus == 25)
-				{
-				<li class="list-group-item text-center">
-					Työkokemus: 2-5 v.
-				</li>
-				 }
-				else if (item.Tyokokemus == 610)
-				{
-				<li class="list-group-item text-center">
-					Työkokemus: 6-10 v.
-				</li>
-				 }
-				else if (item.Tyokokemus == 1000)
-				{
-				<li class="list-group-item text-center">
-					Työkokemus: 10+ v.
-				</li>
-				}
-			}
+            @if (item.Tyokokemus != null)
+            {
+                if (item.Tyokokemus == 1)
+                {
+                    <li class="list-group-item text-center">
+                        Työkokemus: 0-1 v.
+                    </li>
+                }
+                else if (item.Tyokokemus == 25)
+                {
+                    <li class="list-group-item text-center">
+                        Työkokemus: 2-5 v.
+                    </li>
+                }
+                else if (item.Tyokokemus == 610)
+                {
+                    <li class="list-group-item text-center">
+                        Työkokemus: 6-10 v.
+                    </li>
+                }
+                else if (item.Tyokokemus == 1000)
+                {
+                    <li class="list-group-item text-center">
+                        Työkokemus: 10+ v.
+                    </li>
+                }
+            }
 
-				@if (item.Vanhustenhoito_kotihoito != null)
-				{
-				<li class="list-group-item text-center">Vanhustenhoito/kotihoito</li>
-				}
-				@if (item.Mielenterveys != null)
-				{
-					<li class="list-group-item text-center">Mielenterveys</li>
-				}
-				@if (item.Paivystys_Ensihoito != null)
-				{
-					<li class="list-group-item text-center">Päivystys/Ensihoito</li>
-				}
-				@if (item.Lapset != null)
-				{
-					<li class="list-group-item text-center">Lapset</li>
-				}
-				@if (item.Kehitysvammaiset != null)
-				{
-					<li class="list-group-item text-center">Kehitysvammaiset</li>
-				}
-				@if (item.Hengityshalvaus != null)
-				{
-					<li class="list-group-item text-center">Hengityshalvaus</li>
-				}
-				@if (item.Ensihoitaja_AMK != null)
-				{
-					<li class="list-group-item text-center">Ensihoitaja_AMK</li>
-				}
-				@if (item.Terveydenhoitaja != null)
-				{
-					<li class="list-group-item text-center">Terveydenhoitaja</li>
-				}
-				@if (item.Katilo != null)
-				{
-					<li class="list-group-item text-center">Kätilo</li>
-				}
-				@if (item.Osastotyoskentely != null)
-				{
-					<li class="list-group-item text-center">Osastotyöskentely</li>
-				}
-				@if (item.Paivystys != null)
-				{
-					<li class="list-group-item text-center">Päivystys</li>
-				}
-				@if (item.Teho_osasto != null)
-				{
-					<li class="list-group-item text-center">Teho-osasto</li>
-				}
-				@if (item.Ensihoito != null)
-				{
-					<li class="list-group-item text-center">Ensihoito</li>
-				}
-				@if (item.Kommentit != null)
-				{
-					<li class="list-group-item text-center">@item.Kommentit</li>
-				}
-			<li class="btn btn-dark text-center" ><a href="@Url.Action("Index2", "Tyontekijat2", new { tyoid = item.TyoID })" style="font-weight:600; color:lightblue">TARJOA</a></li>
-		</ul>
+            @if (item.Vanhustenhoito_kotihoito != null)
+            {
+                <li class="list-group-item text-center">Vanhustenhoito/kotihoito</li>
+            }
+            @if (item.Mielenterveys != null)
+            {
+                <li class="list-group-item text-center">Mielenterveys</li>
+            }
+            @if (item.Paivystys_Ensihoito != null)
+            {
+                <li class="list-group-item text-center">Päivystys/Ensihoito</li>
+            }
+            @if (item.Lapset != null)
+            {
+                <li class="list-group-item text-center">Lapset</li>
+            }
+            @if (item.Kehitysvammaiset != null)
+            {
+                <li class="list-group-item text-center">Kehitysvammaiset</li>
+            }
+            @if (item.Hengityshalvaus != null)
+            {
+                <li class="list-group-item text-center">Hengityshalvaus</li>
+            }
+            @if (item.Ensihoitaja_AMK != null)
+            {
+                <li class="list-group-item text-center">Ensihoitaja_AMK</li>
+            }
+            @if (item.Terveydenhoitaja != null)
+            {
+                <li class="list-group-item text-center">Terveydenhoitaja</li>
+            }
+            @if (item.Katilo != null)
+            {
+                <li class="list-group-item text-center">Kätilo</li>
+            }
+            @if (item.Osastotyoskentely != null)
+            {
+                <li class="list-group-item text-center">Osastotyöskentely</li>
+            }
+            @if (item.Paivystys != null)
+            {
+                <li class="list-group-item text-center">Päivystys</li>
+            }
+            @if (item.Teho_osasto != null)
+            {
+                <li class="list-group-item text-center">Teho-osasto</li>
+            }
+            @if (item.Ensihoito != null)
+            {
+                <li class="list-group-item text-center">Ensihoito</li>
+            }
+            @if (item.Kommentit != null)
+            {
+                <li class="list-group-item text-center">@item.Kommentit</li>
+            }
+            <li class="btn btn-dark text-center"><a href="@Url.Action("Index2", "Tyontekijat2", new { tyoid = item.TyoID })" style="font-weight:600; color:lightblue">TARJOA</a></li>
+        </ul>
 
-</div>
+    </div>
 }
 

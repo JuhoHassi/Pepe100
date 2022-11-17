@@ -1,188 +1,60 @@
 ﻿@{ ViewBag.Title = "Home Page"; }
 <head>
-	@*<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-				integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-				crossorigin="anonymous"></script>
-		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
-		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>*@
-	@*<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">*@
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-	<script src="https://kit.fontawesome.com/72a8c2d9af.js" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/72a8c2d9af.js" crossorigin="anonymous"></script>
 </head>
 @section scripts{
-	<script type="text/javascript">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
 		$(window).on('load', function () {
 			if (@ViewBag.LoginError == 1) {
 				$('#LoginRuutu').modal('show');
 			}
 		});
-	</script>
-	@if (TempData["Message"] != null) //Alert kun sposti on lähtetty
-	{
-		<script type="text/javascript">
-				$(document).ready(function () {
-				alert("@TempData["Message"]");
-			});
-		</script>
-	}
-	<script type="text/javascript">
+    </script>
+
+    <script type="text/javascript">
 		$(window).on('load', function () {
 			if (@ViewBag.LoginErrorYritys == 1) {
 				$('#LoginRuutuYritys').modal('show');
 			}
 		});
-	</script>
-	@if (TempData["MessageYritys"] != null) //Alert kun sposti on lähtetty
-	{
-		<script type="text/javascript">
-				$(document).ready(function () {
-				alert("@TempData["MessageYritys"]");
-				});
-		</script>
-	}
+    </script>
 }
 
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+@{
+    Html.RenderPartial("_LoginModal");
+    Html.RenderPartial("_LoginModalYritys");
+}
 
-
-<script>
-	$(document).ready(function () {
-		$('[data-toggle="popover"]').popover({
-			html: true,
-			sanitize: false,
-			trigger: "click",
-
-		});
-	});
-</script>
-@*<style>
-		h1 {
-			content: "&#9733";
-		}
-	</style>
-
-	<h1 id="tahtia"></h1>*@
-<style>
-	.content {
-		position: relative;
-		font-size: 50px;
-		color: transparent;
-	}
-
-		.content:after {
-			position: absolute;
-			overflow: hidden;
-			content: "★";
-			color: black;
-			top: 0;
-			left: 0;
-			width: 50%;
-		}
-</style>
-
-
-	<div>Half star with pseudo elements: <span class="content">★</span></div>
-	<div>Half star with pseudo elements: <span><i class="fa-solid fa-star-half-stroke"></i></span></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-	let toggle = button => {
-		let element = document.getElementById("mytable");
-		let hidden = element.getAttribute("hidden");
-
-		if (hidden) {
-			element.removeAttribute("hidden");
-			button.innerText = "Hide table";
-		} else {
-			element.setAttribute("hidden", "hidden");
-			button.innerText = "Show table";
-		}
-	}
-</script>
-<style>
-	#mytable2 td:hover {
-		background: #ff0000;
-		cursor: pointer;
-	}
-</style>
-
-<td>
-	<a href="#" data-toggle="popover" title="AA"
-	   data-content="<table><thead><th>Etunimi</th><th>Sukunimi</th><th>Email</th></thead><tbody><td>Etunimi</td><td>Sukunimi</td><td>Email</td></tbody><thead><th>LOP</th><th>KIPU</th><th>I.V</th></thead><tbody><td>tem.LOP</td><td>em.KIPU</td><td>item.I_V</td></tbody><thead><th>LAS</th><th>GER</th><th>PSYK</th></thead><tbody><td>.LAS</td><td>item.GER</td><td>item.PSYK</td></tbody><thead><th>ROKOTUS</th><th>Työkokemus</th><th>Vanhustenhoito/kotihoito</th></thead><tbody><td>item.ROKOTUS</td><td>item.Tyokokemus</td><td>item.Vanhustenhoito_kotihoito</td></tbody><thead><th>Mielenterveys</th><th>Päivystys/Ensihoito</th><th>Lapset</th></thead><tbody><td>item.Mielenterveys</td><td>item.Paivystys_Ensihoito</td><td>item.Lapset</td></tbody><thead><th>Kehitysvammaiset</th><th>Hengityshalvaus</th><th>Ensihoitaja AMK</th></thead><tbody><td>item.Kehitysvammaiset</td><td>item.Hengityshalvaus</td><td@item.Ensihoitaja_AMK</td></tbody><thead><th>Terveydenhoitaja</th><th>Kätilö</th><th>Osastotyöskentely</th></thead><tbody><td>item.Terveydenhoitaja</td><td>item.Katilo</td><td>item.Osastotyoskentely</td></tbody><thead><th>Päivystys</th><th>Teho-osasto</th><th>Ensihoito</th></thead><tbody><td>item.Paivystys</td><td>item.Teho_osasto</td><td>tem.Ensihoito</td></tbody><thead><th>Kommentit</th></thead><tbody><td>item.Kommentit</td></tbody></table>">Toggle popover</a>
-</td>
-<table class="table table-bordered table-dark" id="mytable2" style="max-width:200px">
-	<tr>
-		<th align="right" colspan="2" style="font-size:15px; font-weight:600">AAAAA</th>
-		<th>BBBBB</th>
-	</tr>
-	<tr>
-		<td colspan="2" rowspan="4">aaaaaaa aaaaaaaaa aaaaa aaaaaaaaaaaaa aaaaaa aaaaaaaaaa aaaa</td>
-		<td>bbbbb</td>
-	</tr>
-	<tr>
-		<th align="right">CC</th>
-	</tr>
-	<tr>
-		<td align="right" style="font-size:13px">ccc</td>
-	</tr>
-	<tbody id="mytable" hidden="hidden">
-		<tr>
-			<th align="center">DDDDD</th>
-		</tr>
-		<tr>
-			<th>DDDDD</th>
-		</tr>
-		<tr id="mytable">
-			<td>DDDDD</td>
-		</tr>
-	</tbody>
-	<tfoot>
-		<tr>
-			<td align="center" colspan="3" onclick="toggle(this);" style="text-decoration: underline; color: lightblue; font-weight:600;">
-				Hide table
-			</td>
-		</tr>
-	</tfoot>
-</table>
 
 <h1>@DateTime.Now</h1>
 
 
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover({
+            html: true,
+            sanitize: false,
+            trigger: "click",
+            content: "<table><thead><th>Etunimi</th><th>Sukunimi</th><th>Email</th></thead><tbody><td>Etunimi</td><td>Sukunimi</td><td>Email</td></tbody><thead><th>LOP</th><th>KIPU</th><th>I.V</th></thead><tbody><td>tem.LOP</td><td>em.KIPU</td><td>item.I_V</td></tbody><thead><th>LAS</th><th>GER</th><th>PSYK</th></thead><tbody><td>.LAS</td><td>item.GER</td><td>item.PSYK</td></tbody><thead><th>ROKOTUS</th><th>Työkokemus</th><th>Vanhustenhoito/kotihoito</th></thead><tbody><td>item.ROKOTUS</td><td>item.Tyokokemus</td><td>item.Vanhustenhoito_kotihoito</td></tbody><thead><th>Mielenterveys</th><th>Päivystys/Ensihoito</th><th>Lapset</th></thead><tbody><td>item.Mielenterveys</td><td>item.Paivystys_Ensihoito</td><td>item.Lapset</td></tbody><thead><th>Kehitysvammaiset</th><th>Hengityshalvaus</th><th>Ensihoitaja AMK</th></thead><tbody><td>item.Kehitysvammaiset</td><td>item.Hengityshalvaus</td><td@item.Ensihoitaja_AMK</td></tbody><thead><th>Terveydenhoitaja</th><th>Kätilö</th><th>Osastotyöskentely</th></thead><tbody><td>item.Terveydenhoitaja</td><td>item.Katilo</td><td>item.Osastotyoskentely</td></tbody><thead><th>Päivystys</th><th>Teho-osasto</th><th>Ensihoito</th></thead><tbody><td>item.Paivystys</td><td>item.Teho_osasto</td><td>tem.Ensihoito</td></tbody><thead><th>Kommentit</th></thead><tbody><td>item.Kommentit</td></tbody></table>"
 
-<div class="container-fluid">
-	@*<img src="~/Images/pepekuva.jpg" style="height:auto; width:auto;" />*@
-	@*<img src="~/Images/pepekuva.jpg" style="height:500px; width:800px;" allowfullscreen />*@
-</div>
-@{ if (ViewBag.LoginError == 0)
-	{
-		Html.RenderPartial("_LoginModal");
-		Html.RenderPartial("_LoginModalYritys");
+        });
+    });
+</script>
 
-	} }
-
-
+<td>
+    <a href="#" data-toggle="popover" title="AA"
+</td>
 

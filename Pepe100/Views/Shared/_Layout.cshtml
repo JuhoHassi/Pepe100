@@ -9,8 +9,6 @@
 	@Scripts.Render("~/bundles/jquery")
 	@Scripts.Render("~/bundles/modernizr")
 
-
-
 </head>
 <body>
 	@{ if (Session["UserName"] == null)
@@ -29,9 +27,6 @@
 			<p style="text-align:center">&copy; @DateTime.Now.Year - NurseBid</p>
 		</footer>
 	</div>
-
-
-
 
 	@Scripts.Render("~/bundles/bootstrap")
 	@RenderSection("scripts", required: false)

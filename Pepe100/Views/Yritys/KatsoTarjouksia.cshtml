@@ -2,95 +2,79 @@
 
 
 <head>
-	<script src="https://kit.fontawesome.com/72a8c2d9af.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/72a8c2d9af.js" crossorigin="anonymous"></script>
 
 </head>
 <h1 style="color:lightpink">NurseBid</h1>
 
 @section scripts{
-	<script type="text/javascript">
-		$(window).on('load', function () {
-			if (@ViewBag.HyvaksyTarjousError == 1) {
-				$('#HyvaksyTarjousRuutu').modal('show');
-			}
-		});
-	</script>
-}
-@{if (ViewBag.HyvaksyTarjousError == 1)
-	{ Html.RenderPartial("_HyvaksyVuoro"); }
-}
-@{if (ViewBag.Info == 1)
-	{ Html.RenderPartial("_InfoRuutu"); }
-}
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover({
+                container: "body",
+                html: true,
+                sanitize: false,
+                trigger: "click",
+
+            });
+        });
+    </script>
+
+}
 
 <script>
-	$(document).ready(function () {
-		$('[data-toggle="popover"]').popover({
-			html: true,
-			sanitize: false,
-			trigger: "click",
+    let toggle = button => {
+        let element = document.getElementById("mytable");
+        let hidden = element.getAttribute("hidden");
 
-		});
-	});
-</script>
+        if (hidden) {
+            element.removeAttribute("hidden");
+            button.innerText = "Näytä vähemmän";
+        } else {
+            element.setAttribute("hidden", "hidden");
+            button.innerText = "Näytä enemmän";
+        }
 
-<script>
-	let toggle = button => {
-		let element = document.getElementById("mytable");
-		let hidden = element.getAttribute("hidden");
-
-		if (hidden) {
-			element.removeAttribute("hidden");
-			button.innerText = "Näytä vähemmän";
-		} else {
-			element.setAttribute("hidden", "hidden");
-			button.innerText = "Näytä enemmän";
-		}
-
-	}
+    }
 </script>
 <style>
-	#mytable2 td:hover {
-		cursor: pointer;
-	}
+    #mytable2 td:hover {
+        cursor: pointer;
+    }
 
-	#mytable2 td {
-		cursor: pointer;
-		color: lightblue;
-		font-weight: 600;
-		text-decoration: underline;
-	}
+    #mytable2 td {
+        cursor: pointer;
+        color: lightblue;
+        font-weight: 600;
+        text-decoration: underline;
+    }
 </style>
 
 <table class="table">
-	<tr>
-		<th></th>
-		@*<th>@Html.DisplayNameFor(model => model.Kuva)</th>*@
-		@*<th></th>*@
-		<th>@Html.DisplayNameFor(model => model.TyoID)</th>
-		@*<th>@Html.DisplayNameFor(model => model.Etunimi)</th>*@
-		<th>Hinta
-			@*@Html.DisplayNameFor(model => model.VastaTarjousHinta)*@
-			@*@Html.DisplayName("Tarjoushinta")*@
-		</th>
-		@*<th>@Html.DisplayNameFor(model => model.Arvostelu)</th>*@
-		<th>Arvostelu 0-5</th>
-		<th></th>
-	</tr>
+    <tr>
+        <th></th>
+        <th>@Html.DisplayNameFor(model => model.TyoID)</th>
+        <th>
+            Hinta
+        </th>
+        <th>Arvostelu 0-5</th>
+        <th></th>
+    </tr>
 
-	@foreach (var item in Model)
-	{
-		using (Html.BeginForm("KatsoTarjouksia", "Yritys", FormMethod.Post))
-		{
-			@Html.AntiForgeryToken()
-			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-			@Html.HiddenFor(modelItem => item.TyoID)
-			<tr>
-				@*<tr><th colspan='2'></th>*@
-				<td>
-					<a href="#" data-toggle="popover" style="text-decoration: underline; color: lightblue; font-weight:600;" title="<table class='table table-bordered table-dark'><tr>@if (item.Kuva != null)
+    @foreach (var item in Model)
+    {
+        using (Html.BeginForm("KatsoTarjouksia", "Yritys", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(modelItem => item.TyoID)
+            <tr>
+                <td>
+                    <a href="#" data-toggle="popover" style="text-decoration: underline; color: lightblue; font-weight:600;" title="<table class='table table-bordered table-dark'><tr>@if (item.Kuva != null)
 					{<td colspan='2' rowspan='6'><img src='data:image/jpeg;base64,@Convert.ToBase64String(item.Kuva)'width=90% height=90%/></td>}
 					else{  }<th>Etunimi</th><th>Sukunimi</th></tr><tr><td>@item.Etunimi</td><td>@item.Sukunimi</td></tr><tr><th colspan='2'>Email</th></tr><tr>@if (@item.Email.Length < 30)
 					{
@@ -108,7 +92,7 @@
 					   {
 						   <td>10+ vuotta</td>
 					   }<td>Y-tunnus</td></tr></table>"
-					   data-content="<table class='table table-bordered table-dark' id='mytable' hidden='hidden'><tr><th>LOP</th><th>KIPU</th><th>I.V</th></tr><tr>@if (item.LOP == true)
+                       data-bs-content="<table class='table table-bordered table-dark' id='mytable' hidden='hidden'><tr><th>LOP</th><th>KIPU</th><th>I.V</th></tr><tr>@if (item.LOP == true)
 					   {
 						   <td>✓</td>
 					   }
@@ -183,82 +167,75 @@
 						   <td>✓✅✔</td>
 					   }else{<td></td>}</tr><tfoot><tr><th colspan='3'>Kommentit</th></tr><tr><td colspan='3'>@item.Kommentit</td></tr></tfoot></table><table class='table table-bordered table-dark' id='mytable2'><tfoot><tr><td align='center' onclick='toggle(this);'>Näytä enemmän</td></tr></tfoot></table>">Katso profiili</a>
 
-				</td>
+                </td>
 
 
-				<td>@Html.DisplayFor(modelItem => item.TyoID, new { htmlAttributes = new { @class = "form-control" } })</td>
-				@*<td>@Html.DisplayFor(modelItem => item.Etunimi, new { htmlAttributes = new { @class = "form-control" } })</td>*@
-				<td>@Html.DisplayFor(modelItem => item.VastaTarjousHinta, new { htmlAttributes = new { @class = "form-control" } })</td>
-				@*<td>@Html.DisplayFor(modelItem => item.Arvostelu, new { htmlAttributes = new { @class = "form-control" } })</td>*@
+                <td>@Html.DisplayFor(modelItem => item.TyoID, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td>@Html.DisplayFor(modelItem => item.VastaTarjousHinta, new { htmlAttributes = new { @class = "form-control" } })</td>
 
-				<td>
+                <td>
 
-					@if (item.Arvostelu.Value >= 4.75)
-					{
-						<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-						}
-					@if (item.Arvostelu.Value >= 4.25 && item.Arvostelu.Value <= 4.74)
-					{
-						<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half"></i>
-					}
-					@if (item.Arvostelu.Value >= 3.75 && item.Arvostelu.Value <= 4.24)
-					{
-						<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-					}
-					@if (item.Arvostelu.Value >= 3.25 && item.Arvostelu.Value <= 3.74)
-					{
-						<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half"></i>
-					}
-					@if (item.Arvostelu >= 2.75 && item.Arvostelu <= 3.24)
-					{
-						<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-					}
-					@if (item.Arvostelu >= 2.25 && item.Arvostelu <= 2.74)
-					{
-						<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half"></i>
-					}
-					@if (item.Arvostelu >= 1.75 && item.Arvostelu <= 2.24)
-					{
-						<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-					}
-					@if (item.Arvostelu >= 1.25 && item.Arvostelu <= 1.74)
-					{
-						<i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half"></i>
-					}
-					@if (item.Arvostelu >= 0.75 && item.Arvostelu <= 1.24)
-					{
-						<i class="fa-solid fa-star"></i>
-					}
-					@if (item.Arvostelu >= 0.25 && item.Arvostelu <= 0.74)
-					{
-						<i class="fa-solid fa-star-half"></i>
-					}
-					@if (item.Arvostelu >= 0.01 && item.Arvostelu <= 0.24)
-					{
-						<i class="fa-regular fa-star"></i>
-					}
-					@if (item.Arvostelu == 0 || item.Arvostelu == null)
-					{
-						<i>"Ei vielä arvosteluita"</i>
-					}
+                    @if (item.Arvostelu.Value >= 4.75)
+                    {
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    }
+                    @if (item.Arvostelu.Value >= 4.25 && item.Arvostelu.Value <= 4.74)
+                    {
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half"></i>
+                    }
+                    @if (item.Arvostelu.Value >= 3.75 && item.Arvostelu.Value <= 4.24)
+                    {
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    }
+                    @if (item.Arvostelu.Value >= 3.25 && item.Arvostelu.Value <= 3.74)
+                    {
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half"></i>
+                    }
+                    @if (item.Arvostelu >= 2.75 && item.Arvostelu <= 3.24)
+                    {
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    }
+                    @if (item.Arvostelu >= 2.25 && item.Arvostelu <= 2.74)
+                    {
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half"></i>
+                    }
+                    @if (item.Arvostelu >= 1.75 && item.Arvostelu <= 2.24)
+                    {
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    }
+                    @if (item.Arvostelu >= 1.25 && item.Arvostelu <= 1.74)
+                    {
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half"></i>
+                    }
+                    @if (item.Arvostelu >= 0.75 && item.Arvostelu <= 1.24)
+                    {
+                        <i class="fa-solid fa-star"></i>
+                    }
+                    @if (item.Arvostelu >= 0.25 && item.Arvostelu <= 0.74)
+                    {
+                        <i class="fa-solid fa-star-half"></i>
+                    }
+                    @if (item.Arvostelu >= 0.01 && item.Arvostelu <= 0.24)
+                    {
+                        <i class="fa-regular fa-star"></i>
+                    }
+                    @if (item.Arvostelu == 0 || item.Arvostelu == null)
+                    {
+                        <i>"Ei vielä arvosteluita"</i>
+                    }
+                </td>
 
+                <td>
+                    <a href="@Url.Action("_HyvaksyTarjous", "Yritys", new { tyoid = item.TyoID,henid = item.HenkiloID, vhinta = item.VastaTarjousHinta })" style="font-weight:600; color:lightblue">HYVÄKSY</a>
+                </td>
+            </tr>
 
-
-				</td>
-
-
-				<td>
-					<a href="@Url.Action("_HyvaksyTarjous", "Yritys", new { tyoid = item.TyoID,henid = item.HenkiloID, vhinta = item.VastaTarjousHinta })" style="font-weight:600; color:lightblue">HYVÄKSY</a>
-					@*<a href="@Url.Action("KatsoTarjouksia", "Yritys", new { henkid = item.HenkiloID })" style="font-weight:600; color:lightblue">KATSO</a>*@
-				</td>
-			</tr>
-			
-		}
-	}
+        }
+    }
 </table>
 
 <style>
-	#tahti i {
-		content: "\F586";
-	}
+    #tahti i {
+        content: "\F586";
+    }
 </style>

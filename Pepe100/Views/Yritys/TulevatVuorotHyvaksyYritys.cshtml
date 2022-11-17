@@ -5,254 +5,90 @@
 <h2>TulevatVuorotHyvaksyYritys</h2>
 
 <style>
-	* {
-		margin: 0;
-		padding: 0;
-	}
+    * {
+        margin: 0;
+        padding: 0;
+    }
 
-	.rate {
-		float: left;
-		height: 46px;
-		padding: 0 10px;
-	}
+    .rate {
+        float: left;
+        height: 46px;
+        padding: 0 10px;
+    }
 
-		.rate:not(:checked) > input {
-			position: absolute;
-			top: -9999px;
-		}
+        .rate:not(:checked) > input {
+            position: absolute;
+            top: -9999px;
+        }
 
-		.rate:not(:checked) > label {
-			float: right;
-			width: 1em;
-			overflow: hidden;
-			white-space: nowrap;
-			cursor: pointer;
-			font-size: 30px;
-			color: #ccc;
-		}
+        .rate:not(:checked) > label {
+            float: right;
+            width: 1em;
+            overflow: hidden;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 30px;
+            color: #ccc;
+        }
 
-			.rate:not(:checked) > label:before {
-				/*content: '\2BE8 ';*/
-				/*content: '\2BE8 ';*/
-				/*content: 'U+2BEA';*/
-				content: '\2605 ';
-				/*content: '★ ';*/
-			}
+            .rate:not(:checked) > label:before {
+                content: '\2605 ';
+            }
 
-		.rate > input:checked ~ label {
-			color: #ffc700;
-		}
+        .rate > input:checked ~ label {
+            color: #ffc700;
+        }
 
-		.rate:not(:checked) > label:hover,
-		.rate:not(:checked) > label:hover ~ label {
-			color: #deb217;
-		}
+        .rate:not(:checked) > label:hover,
+        .rate:not(:checked) > label:hover ~ label {
+            color: #deb217;
+        }
 
-		.rate > input:checked + label:hover,
-		.rate > input:checked + label:hover ~ label,
-		.rate > input:checked ~ label:hover,
-		.rate > input:checked ~ label:hover ~ label,
-		.rate > label:hover ~ input:checked ~ label {
-			color: #c59b08;
-		}
+        .rate > input:checked + label:hover,
+        .rate > input:checked + label:hover ~ label,
+        .rate > input:checked ~ label:hover,
+        .rate > input:checked ~ label:hover ~ label,
+        .rate > label:hover ~ input:checked ~ label {
+            color: #c59b08;
+        }
 </style>
 
 
 @using (Html.BeginForm())
 {
-	@Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
 
-	<div class="form-horizontal">
-		<h4>Tehtavia</h4>
-		<hr />
-		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-		@Html.HiddenFor(model => model.TyoID)
-		@Html.HiddenFor(model => model.YritysID)
+    <div class="form-horizontal">
+        <h4>Tehtavia</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.TyoID)
+        @Html.HiddenFor(model => model.YritysID)
 
-		<div class="form-group">
+        <div class="form-group">
 
-			<div class="rate">
-				<input type="radio" id="star5" name="rate" value="5" />
-				<label for="star5" title="text"></label>
-				<input type="radio" id="star4" name="rate" value="4" />
-				<label for="star4" title="text"></label>
-				<input type="radio" id="star3" name="rate" value="3" />
-				<label for="star3" title="text"></label>
-				<input type="radio" id="star2" name="rate" value="2" />
-				<label for="star2" title="text"></label>
-				<input type="radio" id="star1" name="rate" value="1" />
-				<label for="star1" title="text"></label>
+            <div class="rate">
+                <input type="radio" id="star5" name="rate" value="5" />
+                <label for="star5" title="text"></label>
+                <input type="radio" id="star4" name="rate" value="4" />
+                <label for="star4" title="text"></label>
+                <input type="radio" id="star3" name="rate" value="3" />
+                <label for="star3" title="text"></label>
+                <input type="radio" id="star2" name="rate" value="2" />
+                <label for="star2" title="text"></label>
+                <input type="radio" id="star1" name="rate" value="1" />
+                <label for="star1" title="text"></label>
 
-				@Html.ValidationMessageFor(model => model.Arvostelu, "", new { @class = "text-danger" })
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-md-offset-2 col-md-10">
-				<input type="submit" value="Save" class="btn btn-default" />
-			</div>
-		</div>
-	</div>}
-@*			<div class="col-md-10">*@
-
-@*@Html.RadioButtonFor(model => model.Arvostelu, 5, htmlAttributes: new { @class = "rate" })
-	@Html.RadioButtonFor(model => model.Arvostelu, 4, htmlAttributes: new { @class = "rate" })
-	@Html.RadioButtonFor(model => model.Arvostelu, 3)
-	@Html.RadioButtonFor(model => model.Arvostelu, 2)
-	@Html.RadioButtonFor(model => model.Arvostelu, 1)*@
-
-
-
-@*<input type="radio" id="star5" name="rate" value="5" />
-	<label for="star5" title="text">5 stars</label>
-	<input type="radio" id="star4" name="rate" value="4" />
-	<label for="star4" title="text">4 stars</label>
-	<input type="radio" id="star3" name="rate" value="3" />
-	<label for="star3" title="text">3 stars</label>
-	<input type="radio" id="star2" name="rate" value="2" />
-	<label for="star2" title="text">2 stars</label>
-	<input type="radio" id="star1" name="rate" value="1" />
-	<label for="star1" title="text">1 star</label>*@
-
-
-
-@*@Html.DropDownList("Arvostelu", new List<SelectListItem>
-	{
-			new SelectListItem{ Text="1", Value = "1" },
-			new SelectListItem{ Text="2", Value = "2" },
-			new SelectListItem{ Text="3", Value = "3" },
-			new SelectListItem{ Text="4", Value = "4" },
-			new SelectListItem{ Text="5", Value = "5" }
-
-		})*@
-@*</div>*@
-@*</div>*@
-@*<input type="radio" id="star5" name="rate" value="5" />
-	<label for="star5" title="text">5 stars</label>
-	<input type="radio" id="star4" name="rate" value="4" />
-	<label for="star4" title="text">4 stars</label>
-	<input type="radio" id="star3" name="rate" value="3" />
-	<label for="star3" title="text">3 stars</label>
-	<input type="radio" id="star2" name="rate" value="2" />
-	<label for="star2" title="text">2 stars</label>
-	<input type="radio" id="star1" name="rate" value="1" />
-	<label for="star1" title="text">1 star</label>*@
-
-@*<div class="form-group">
-		@Html.LabelFor(model => model.TarjousHinta, htmlAttributes: new { @class = "control-label col-md-2" })
-		<div class="col-md-10">
-			@Html.EditorFor(model => model.TarjousHinta, new { htmlAttributes = new { @class = "form-control" } })
-			@Html.ValidationMessageFor(model => model.TarjousHinta, "", new { @class = "text-danger" })
-		</div>
-	</div>*@
-
-
-
-
-<!--<dl class="dl-horizontal">
-	<dt style="color: white">@Html.DisplayNameFor(model => model.YritysID)</dt>
-	<dd>@Html.DisplayFor(model => model.YritysID)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.Tehtava)</dt>
-	<dd>@Html.DisplayFor(model => model.Tehtava)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.Sijainti)</dt>
-	<dd>@Html.DisplayFor(model => model.Sijainti)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.Puhelin)</dt>
-	<dd>@Html.DisplayFor(model => model.Puhelin)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.Aloitusaika)</dt>
-	<dd>@Html.DisplayFor(model => model.Aloitusaika)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.Lopetusaika)</dt>
-	<dd>@Html.DisplayFor(model => model.Lopetusaika)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.AikaYhteensa)</dt>
-	<dd>@Html.DisplayFor(model => model.AikaYhteensa)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.Lahihoitaja)</dt>
-	<dd>@Html.DisplayFor(model => model.Lahihoitaja)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.Sairaanhoitaja)</dt>
-	<dd>@Html.DisplayFor(model => model.Sairaanhoitaja)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.LOP)</dt>
-	<dd>@Html.DisplayFor(model => model.LOP)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.KIPU)</dt>
-	<dd>@Html.DisplayFor(model => model.KIPU)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.I_V)</dt>
-	<dd>@Html.DisplayFor(model => model.I_V)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.LAS)</dt>
-	<dd>@Html.DisplayFor(model => model.LAS)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.GER)</dt>
-	<dd>@Html.DisplayFor(model => model.GER)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.PSYK)</dt>
-	<dd>@Html.DisplayFor(model => model.PSYK)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.ROKOTUS)</dt>
-	<dd>@Html.DisplayFor(model => model.ROKOTUS)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.Tyokokemus)</dt>
-	<dd>@Html.DisplayFor(model => model.Tyokokemus)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.Vanhustenhoito_kotihoito)</dt>
-	<dd>@Html.DisplayFor(model => model.Vanhustenhoito_kotihoito)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.Mielenterveys)</dt>
-	<dd>@Html.DisplayFor(model => model.Mielenterveys)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.Paivystys_Ensihoito)</dt>
-	<dd>@Html.DisplayFor(model => model.Paivystys_Ensihoito)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.Lapset)</dt>
-	<dd>@Html.DisplayFor(model => model.Lapset)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.Kehitysvammaiset)</dt>
-	<dd>@Html.DisplayFor(model => model.Kehitysvammaiset)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.Hengityshalvaus)</dt>
-	<dd>@Html.DisplayFor(model => model.Hengityshalvaus)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.Ensihoitaja_AMK)</dt>
-	<dd>@Html.DisplayFor(model => model.Ensihoitaja_AMK)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.Terveydenhoitaja)</dt>
-	<dd>@Html.DisplayFor(model => model.Terveydenhoitaja)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.Katilo)</dt>
-	<dd>@Html.DisplayFor(model => model.Katilo)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.Osastotyoskentely)</dt>
-	<dd>@Html.DisplayFor(model => model.Osastotyoskentely)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.Paivystys)</dt>
-	<dd>@Html.DisplayFor(model => model.Paivystys)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.Teho_osasto)</dt>
-	<dd>@Html.DisplayFor(model => model.Teho_osasto)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.Ensihoito)</dt>
-	<dd>@Html.DisplayFor(model => model.Ensihoito)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.TarjousHinta)</dt>
-	<dd>@Html.DisplayFor(model => model.TarjousHinta)</dd>
-
-	<dt style="color: white">@Html.DisplayNameFor(model => model.Kommentit)</dt>
-	<dd>@Html.DisplayFor(model => model.Kommentit)</dd>-->
-@*<dt style="color: white">@Html.DisplayNameFor(model => model.Arvostelu)</dt>
-	<dd>@Html.DisplayFor(model => model.Arvostelu)</dd>*@
-
-@*@Html.EditorFor(model => model.Arvostelu, new { htmlAttributes = new { @class = "form-control" } })
-	@Html.ValidationMessageFor(model => model.Arvostelu, "", new { @class = "text-danger" })*@
-
-
-<!--</dl>-->
+                @Html.ValidationMessageFor(model => model.Arvostelu, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>}
 
 <div>
-	@Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index")
 </div>

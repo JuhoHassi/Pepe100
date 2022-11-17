@@ -10,6 +10,8 @@ namespace Pepe100.ViewModels
 {
     public class Program
     {
+        ///// PDF MUOKKAUS TESTIÄ
+
         //static void Main(string[] args)
         //{
         //    string originalPdf = @"C:\Users\juhoh\source\repos\Pepe100\Pepe100\Sopimus\Sopimus2.pdf";

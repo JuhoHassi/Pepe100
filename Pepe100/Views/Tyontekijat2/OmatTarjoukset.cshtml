@@ -6,89 +6,78 @@
 
 
 <table class="table table-bordered">
-	<tr>
-		<th>@Html.DisplayNameFor(model => model.Tehtava)</th>
-		<th>@Html.DisplayNameFor(model => model.TarjousHinta)</th>
-		<th>@Html.DisplayNameFor(model => model.VastaTarjousHinta)</th>
-		<th>@Html.DisplayNameFor(model => model.TehtavaValmis)</th>
-		<th>@Html.DisplayNameFor(model => model.Sijainti)</th>
-		<th>@Html.DisplayNameFor(model => model.Aloitusaika)</th>
-		<th>@Html.DisplayNameFor(model => model.Lopetusaika)</th>
-		<th>@Html.DisplayNameFor(model => model.AikaYhteensa)</th>
-		<th>@Html.DisplayNameFor(model => model.Lahihoitaja)</th>
-		<th>@Html.DisplayNameFor(model => model.Sairaanhoitaja)</th>
-		<th>@Html.DisplayNameFor(model => model.LOP)</th>
-		<th>@Html.DisplayNameFor(model => model.KIPU)</th>
-		<th>@Html.DisplayNameFor(model => model.I_V)</th>
-		<th>@Html.DisplayNameFor(model => model.LAS)</th>
-		<th>@Html.DisplayNameFor(model => model.GER)</th>
-		<th>@Html.DisplayNameFor(model => model.PSYK)</th>
-		<th>@Html.DisplayNameFor(model => model.ROKOTUS)</th>
-		<th>@Html.DisplayNameFor(model => model.Tyokokemus)</th>
-		<th>@Html.DisplayNameFor(model => model.Vanhustenhoito_kotihoito)</th>
-		<th>@Html.DisplayNameFor(model => model.Mielenterveys)</th>
-		<th>@Html.DisplayNameFor(model => model.Paivystys_Ensihoito)</th>
-		<th>@Html.DisplayNameFor(model => model.Lapset)</th>
-		<th>@Html.DisplayNameFor(model => model.Kehitysvammaiset)</th>
-		<th>@Html.DisplayNameFor(model => model.Hengityshalvaus)</th>
-		<th>@Html.DisplayNameFor(model => model.Ensihoitaja_AMK)</th>
-		<th>@Html.DisplayNameFor(model => model.Terveydenhoitaja)</th>
-		<th>@Html.DisplayNameFor(model => model.Katilo)</th>
-		<th>@Html.DisplayNameFor(model => model.Osastotyoskentely)</th>
-		<th>@Html.DisplayNameFor(model => model.Paivystys)</th>
-		<th>@Html.DisplayNameFor(model => model.Teho_osasto)</th>
-		<th>@Html.DisplayNameFor(model => model.Ensihoito)</th>
-		<th>@Html.DisplayNameFor(model => model.Kommentit)</th>
-		@*<th>@Html.DisplayNameFor(model => model.Login.UserName)</th>*@
-		@*<th>@Html.DisplayNameFor(model => model.Tyontekijat2.Etunimi)</th>*@
-		@*<th>@Html.DisplayNameFor(model => model.Yritys.YritysNimi)</th>*@
-		@*<th></th>*@
-	</tr>
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Tehtava)</th>
+        <th>@Html.DisplayNameFor(model => model.TarjousHinta)</th>
+        <th>@Html.DisplayNameFor(model => model.VastaTarjousHinta)</th>
+        <th>@Html.DisplayNameFor(model => model.TehtavaValmis)</th>
+        <th>@Html.DisplayNameFor(model => model.Sijainti)</th>
+        <th>@Html.DisplayNameFor(model => model.Aloitusaika)</th>
+        <th>@Html.DisplayNameFor(model => model.Lopetusaika)</th>
+        <th>@Html.DisplayNameFor(model => model.AikaYhteensa)</th>
+        <th>@Html.DisplayNameFor(model => model.Lahihoitaja)</th>
+        <th>@Html.DisplayNameFor(model => model.Sairaanhoitaja)</th>
+        <th>@Html.DisplayNameFor(model => model.LOP)</th>
+        <th>@Html.DisplayNameFor(model => model.KIPU)</th>
+        <th>@Html.DisplayNameFor(model => model.I_V)</th>
+        <th>@Html.DisplayNameFor(model => model.LAS)</th>
+        <th>@Html.DisplayNameFor(model => model.GER)</th>
+        <th>@Html.DisplayNameFor(model => model.PSYK)</th>
+        <th>@Html.DisplayNameFor(model => model.ROKOTUS)</th>
+        <th>@Html.DisplayNameFor(model => model.Tyokokemus)</th>
+        <th>@Html.DisplayNameFor(model => model.Vanhustenhoito_kotihoito)</th>
+        <th>@Html.DisplayNameFor(model => model.Mielenterveys)</th>
+        <th>@Html.DisplayNameFor(model => model.Paivystys_Ensihoito)</th>
+        <th>@Html.DisplayNameFor(model => model.Lapset)</th>
+        <th>@Html.DisplayNameFor(model => model.Kehitysvammaiset)</th>
+        <th>@Html.DisplayNameFor(model => model.Hengityshalvaus)</th>
+        <th>@Html.DisplayNameFor(model => model.Ensihoitaja_AMK)</th>
+        <th>@Html.DisplayNameFor(model => model.Terveydenhoitaja)</th>
+        <th>@Html.DisplayNameFor(model => model.Katilo)</th>
+        <th>@Html.DisplayNameFor(model => model.Osastotyoskentely)</th>
+        <th>@Html.DisplayNameFor(model => model.Paivystys)</th>
+        <th>@Html.DisplayNameFor(model => model.Teho_osasto)</th>
+        <th>@Html.DisplayNameFor(model => model.Ensihoito)</th>
+        <th>@Html.DisplayNameFor(model => model.Kommentit)</th>
+    </tr>
 
-	@foreach (var item in Model)
-	{
-<tr>
-	<td>@Html.DisplayFor(modelItem => item.Tehtava)</td>
-	<td>@Html.DisplayFor(modelItem => item.TarjousHinta)</td>
-	<td>@Html.DisplayFor(modelItem => item.VastaTarjousHinta)</td>
-	<td>@Html.DisplayFor(modelItem => item.TehtavaValmis)</td>
-	<td>@Html.DisplayFor(modelItem => item.Sijainti)</td>
-	<td>@Html.DisplayFor(modelItem => item.Aloitusaika)</td>
-	<td>@Html.DisplayFor(modelItem => item.Lopetusaika)</td>
-	<td>@Html.DisplayFor(modelItem => item.AikaYhteensa)</td>
-	<td>@Html.DisplayFor(modelItem => item.Lahihoitaja)</td>
-	<td>@Html.DisplayFor(modelItem => item.Sairaanhoitaja)</td>
-	<td>@Html.DisplayFor(modelItem => item.LOP)</td>
-	<td>@Html.DisplayFor(modelItem => item.KIPU)</td>
-	<td>@Html.DisplayFor(modelItem => item.I_V)</td>
-	<td>@Html.DisplayFor(modelItem => item.LAS)</td>
-	<td>@Html.DisplayFor(modelItem => item.GER)</td>
-	<td>@Html.DisplayFor(modelItem => item.PSYK)</td>
-	<td>@Html.DisplayFor(modelItem => item.ROKOTUS)</td>
-	<td>@Html.DisplayFor(modelItem => item.Tyokokemus)</td>
-	<td>@Html.DisplayFor(modelItem => item.Vanhustenhoito_kotihoito)</td>
-	<td>@Html.DisplayFor(modelItem => item.Mielenterveys)</td>
-	<td>@Html.DisplayFor(modelItem => item.Paivystys_Ensihoito)</td>
-	<td>@Html.DisplayFor(modelItem => item.Lapset)</td>
-	<td>@Html.DisplayFor(modelItem => item.Kehitysvammaiset)</td>
-	<td>@Html.DisplayFor(modelItem => item.Hengityshalvaus)</td>
-	<td>@Html.DisplayFor(modelItem => item.Ensihoitaja_AMK)</td>
-	<td>@Html.DisplayFor(modelItem => item.Terveydenhoitaja)</td>
-	<td>@Html.DisplayFor(modelItem => item.Katilo)</td>
-	<td>@Html.DisplayFor(modelItem => item.Osastotyoskentely)</td>
-	<td>@Html.DisplayFor(modelItem => item.Paivystys)</td>
-	<td>@Html.DisplayFor(modelItem => item.Teho_osasto)</td>
-	<td>@Html.DisplayFor(modelItem => item.Ensihoito)</td>
-	<td>@Html.DisplayFor(modelItem => item.Kommentit)</td>
-	@*<td>@Html.DisplayFor(modelItem => item.Login.UserName)</td>*@
-	@*<td>@Html.DisplayFor(modelItem => item.Tyontekijat2.Etunimi)</td>*@
-	@*<td>@Html.DisplayFor(modelItem => item.Yritys.YritysNimi)</td>*@
-	@*<td>
-			@Html.ActionLink("Edit", "Edit", new { id=item.TyoID }) |
-			@Html.ActionLink("Details", "Details", new { id=item.TyoID }) |
-			@Html.ActionLink("Delete", "Delete", new { id=item.TyoID })
-		</td>*@
-</tr>}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Tehtava)</td>
+            <td>@Html.DisplayFor(modelItem => item.TarjousHinta)</td>
+            <td>@Html.DisplayFor(modelItem => item.VastaTarjousHinta)</td>
+            <td>@Html.DisplayFor(modelItem => item.TehtavaValmis)</td>
+            <td>@Html.DisplayFor(modelItem => item.Sijainti)</td>
+            <td>@Html.DisplayFor(modelItem => item.Aloitusaika)</td>
+            <td>@Html.DisplayFor(modelItem => item.Lopetusaika)</td>
+            <td>@Html.DisplayFor(modelItem => item.AikaYhteensa)</td>
+            <td>@Html.DisplayFor(modelItem => item.Lahihoitaja)</td>
+            <td>@Html.DisplayFor(modelItem => item.Sairaanhoitaja)</td>
+            <td>@Html.DisplayFor(modelItem => item.LOP)</td>
+            <td>@Html.DisplayFor(modelItem => item.KIPU)</td>
+            <td>@Html.DisplayFor(modelItem => item.I_V)</td>
+            <td>@Html.DisplayFor(modelItem => item.LAS)</td>
+            <td>@Html.DisplayFor(modelItem => item.GER)</td>
+            <td>@Html.DisplayFor(modelItem => item.PSYK)</td>
+            <td>@Html.DisplayFor(modelItem => item.ROKOTUS)</td>
+            <td>@Html.DisplayFor(modelItem => item.Tyokokemus)</td>
+            <td>@Html.DisplayFor(modelItem => item.Vanhustenhoito_kotihoito)</td>
+            <td>@Html.DisplayFor(modelItem => item.Mielenterveys)</td>
+            <td>@Html.DisplayFor(modelItem => item.Paivystys_Ensihoito)</td>
+            <td>@Html.DisplayFor(modelItem => item.Lapset)</td>
+            <td>@Html.DisplayFor(modelItem => item.Kehitysvammaiset)</td>
+            <td>@Html.DisplayFor(modelItem => item.Hengityshalvaus)</td>
+            <td>@Html.DisplayFor(modelItem => item.Ensihoitaja_AMK)</td>
+            <td>@Html.DisplayFor(modelItem => item.Terveydenhoitaja)</td>
+            <td>@Html.DisplayFor(modelItem => item.Katilo)</td>
+            <td>@Html.DisplayFor(modelItem => item.Osastotyoskentely)</td>
+            <td>@Html.DisplayFor(modelItem => item.Paivystys)</td>
+            <td>@Html.DisplayFor(modelItem => item.Teho_osasto)</td>
+            <td>@Html.DisplayFor(modelItem => item.Ensihoito)</td>
+            <td>@Html.DisplayFor(modelItem => item.Kommentit)</td>
+        </tr>
+}
 
 </table>
 

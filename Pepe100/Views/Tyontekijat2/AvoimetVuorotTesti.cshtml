@@ -1,233 +1,89 @@
 ﻿@model IEnumerable<Pepe100.Models.tehtavia>
 
-@*@{ ViewBag.Title = "AvoimetVuorotTesti"; }*@
 <br />
 <h2 style="color:lightblue">Avoimet Vuorot Testi</h2>
 <hr />
-@*@{ ViewBag.Title = "AvoimetVuorotTesti"; }*@
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
 @section scripts{
-	<script type="text/javascript">$(function () {
-			$(".naytaTehtava").click(function () {
-				let tyoid = $(this).data("tyoid");
-				var url = "/Tyontekijat2/_AvoimetVuorot/?tyoid=" + tyoid;
-				$("#tehtavaDetails_" + tyoid).append(" <b>Ladataan tilauksen " + tyoid + " rivejä...</b>");
-				var $detailDiv = $("#tehtavaDetails_" + tyoid);
-				$.get(url, function (data) {
-					$detailDiv.replaceWith(data);
-				});
-			});
-		});</script>
-	<script type="text/javascript">
+    <script type="text/javascript">
+        $(function () {
+            $(".naytaTehtava").click(function () {
+                let tyoid = $(this).data("tyoid");
+                var url = "/Tyontekijat2/_AvoimetVuorot/?tyoid=" + tyoid;
+                $("#tehtavaDetails_" + tyoid).append(" <b>Ladataan tilauksen " + tyoid + " rivejä...</b>");
+                var $detailDiv = $("#tehtavaDetails_" + tyoid);
+                $.get(url, function (data) {
+                    $detailDiv.replaceWith(data);
+                });
+            });
+        });</script>
+    <script type="text/javascript">
 		$(window).on('load', function () {
 			if (@ViewBag.TarjousError == 1) {
 				$('#TarjousRuutu').modal('show');
 			}
 		});
-	</script>
+    </script>
 }
 @{if (ViewBag.TarjousError == 1)
-	{
-		Html.RenderPartial("_JataTarjous");
-	} }
+    {
+        Html.RenderPartial("_JataTarjous");
+    } }
 
 
 <div class="accordion" id="accordion">
 
-	@foreach (var item in Model)
-	{
+    @foreach (var item in Model)
+    {
 
-<div class="card border-light" style="width: 18rem;">
+        <div class="card border-light" style="width: 18rem;">
 
-	<div class="card-body text-white">
-		<h5 class="card-title text-center">@item.Tehtava.ToUpper()</h5>
-		<h5 class="card-title text-center">@item.Sijainti.ToUpper()</h5>
-		@if (item.Lahihoitaja != null)
-		{<h5 class="card-title text-center">LÄHIHOITAJA</h5>}
-		@if (item.Sairaanhoitaja != null)
-		{<h5 class="card-title text-center">SAIRAANHOITAJA</h5>}
-	</div>
-	<ul class="list-group">
-		<li class="list-group-item text-center">Aloitus: @item.Aloitusaika</li>
-		<li class="list-group-item text-center">Lopetus: @item.Lopetusaika</li>
-		<li class="list-group-item text-center">Yhteensä: @item.AikaYhteensa</li>
-		@if (item.Kuukausipalkkalainen != null)
-		{
-<li class="list-group-item text-center">Kuukausipalkkalainen</li>				}
-		@if (item.Tuntipalkkalainen != null)
-		{
-<li class="list-group-item text-center">Tuntipalkkalainen</li>				}
-	</ul>
+            <div class="card-body text-white">
+                <h5 class="card-title text-center">@item.Tehtava.ToUpper()</h5>
+                <h5 class="card-title text-center">@item.Sijainti.ToUpper()</h5>
+                @if (item.Lahihoitaja != null)
+                {<h5 class="card-title text-center">LÄHIHOITAJA</h5>}
+                @if (item.Sairaanhoitaja != null)
+                {<h5 class="card-title text-center">SAIRAANHOITAJA</h5>}
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item text-center">Aloitus: @item.Aloitusaika</li>
+                <li class="list-group-item text-center">Lopetus: @item.Lopetusaika</li>
+                <li class="list-group-item text-center">Yhteensä: @item.AikaYhteensa</li>
+                @if (item.Kuukausipalkkalainen != null)
+                {
+                    <li class="list-group-item text-center">Kuukausipalkkalainen</li>
+                }
+                @if (item.Tuntipalkkalainen != null)
+                {
+                    <li class="list-group-item text-center">Tuntipalkkalainen</li>
+                }
+            </ul>
 
-	<div id="collapse_@item.TyoID" class="collapse" data-parent="#accordion">
-		<div class="card-body">
-			<div id="tehtavaDetails_@item.TyoID"></div>
-		</div>
-	</div>
+            <div id="collapse_@item.TyoID" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                    <div id="tehtavaDetails_@item.TyoID"></div>
+                </div>
+            </div>
 
-	<a class="card-link naytaTehtava" data-tyoid="@item.TyoID" data-toggle="collapse" href="#collapse_@item.TyoID">
+            <a class="card-link naytaTehtava" data-tyoid="@item.TyoID" data-toggle="collapse" href="#collapse_@item.TyoID">
 
-		@*<a data-toggle="collapse" href="#collapse-ex">*@
-		<div class="card-body" style="padding:10px 6px 6px 6px">
-			<h6 class="card-title text-center" style="color: lightblue">Katso lisätiedot tästä</h6>
-		</div>
-		@*</a>*@
-	</a>
+                <div class="card-body" style="padding:10px 6px 6px 6px">
+                    <h6 class="card-title text-center" style="color: lightblue">Katso lisätiedot tästä</h6>
+                </div>
+            </a>
+        </div>
+        <br>
+        <br>}
+    @if (!Model.Any())
+    {
+        <h2>Ei avoimia vuoroja</h2>}
 </div>
-				<br>
-								<br>}
-	@if (!Model.Any())
-	{
-<h2>Ei avoimia vuoroja</h2>}
-</div>
-
-
-
-
-
-@*<ul class="list-group">
-		<li class="list-group-item text-center">Aloitus: @item.Aloitusaika</li>
-		<li class="list-group-item text-center">Lopetus: @item.Lopetusaika</li>
-		<li class="list-group-item text-center">Yhteensä: @item.AikaYhteensa</li>
-		@if (item.Kuukausipalkkalainen != null)
-		{
-			<li class="list-group-item text-center">Kuukausipalkkalainen</li>
-		}
-		@if (item.Tuntipalkkalainen != null)
-		{
-			<li class="list-group-item text-center">Tuntipalkkalainen</li>
-		}
-	</ul>
-
-	<div id="collapse-ex" class="collapse">
-		<div class="card-body">
-			<h5 class="card-title text-center text-white">LOVET</h5>
-
-			<ul class="list-group list-group-flush">
-
-				<li class="list-group-item text-center"></li>
-
-				@if (item.LOP != null)
-				{
-					<li class="list-group-item text-center">LOP</li>
-				}
-				@if (item.KIPU != null)
-				{
-					<li class="list-group-item text-center">KIPU</li>
-				}
-				@if (item.I_V != null)
-				{
-					<li class="list-group-item text-center">I_V</li>
-				}
-				@if (item.LAS != null)
-				{
-					<li class="list-group-item text-center">LAS</li>
-				}
-				@if (item.GER != null)
-				{
-					<li class="list-group-item text-center">GER</li>
-				}
-				@if (item.PSYK != null)
-				{
-					<li class="list-group-item text-center">PSYK</li>
-				}
-				@if (item.ROKOTUS != null)
-				{
-					<li class="list-group-item text-center">ROKOTUS</li>
-				}
-				<li class="list-group-item text-center"></li>
-			</ul>
-			<h5 class="card-title text-center text-white">VAADITTU TYÖKOKEMUS</h5>
-
-			<ul class="list-group list-group-flush">
-				<li class="list-group-item text-center"></li>
-
-				@if (item.Tyokokemus != null)
-				{
-					if (item.Tyokokemus == 1)
-					{
-						<li class="list-group-item text-center">
-							Työkokemus: 0-1 v.
-						</li>
-					}
-					else if (item.Tyokokemus == 25)
-					{
-						<li class="list-group-item text-center">
-							Työkokemus: 2-5 v.
-						</li>
-					}
-					else if (item.Tyokokemus == 610)
-					{
-						<li class="list-group-item text-center">
-							Työkokemus: 6-10 v.
-						</li>
-					}
-					else if (item.Tyokokemus == 1000)
-					{
-						<li class="list-group-item text-center">
-							Työkokemus: 10+ v.
-						</li>
-					}
-				}
-
-				@if (item.Vanhustenhoito_kotihoito != null)
-				{
-					<li class="list-group-item text-center">Vanhustenhoito/kotihoito</li>
-				}
-				@if (item.Mielenterveys != null)
-				{
-					<li class="list-group-item text-center">Mielenterveys</li>
-				}
-				@if (item.Paivystys_Ensihoito != null)
-				{
-					<li class="list-group-item text-center">Paivystys_Ensihoito</li>
-				}
-				@if (item.Lapset != null)
-				{
-					<li class="list-group-item text-center">Lapset</li>
-				}
-				@if (item.Kehitysvammaiset != null)
-				{
-					<li class="list-group-item text-center">Kehitysvammaiset</li>
-				}
-				@if (item.Hengityshalvaus != null)
-				{
-					<li class="list-group-item text-center">Hengityshalvaus</li>
-				}
-				@if (item.Ensihoitaja_AMK != null)
-				{
-					<li class="list-group-item text-center">Ensihoitaja_AMK</li>
-				}
-				@if (item.Terveydenhoitaja != null)
-				{
-					<li class="list-group-item text-center">Terveydenhoitaja</li>
-				}
-				@if (item.Katilo != null)
-				{
-					<li class="list-group-item text-center">Katilo</li>
-				}
-				@if (item.Osastotyoskentely != null)
-				{
-					<li class="list-group-item text-center">Osastotyoskentely</li>
-				}
-				@if (item.Paivystys != null)
-				{
-					<li class="list-group-item text-center">Paivystys</li>
-				}
-				@if (item.Teho_osasto != null)
-				{
-					<li class="list-group-item text-center">Teho_osasto</li>
-				}
-				@if (item.Ensihoito != null)
-				{
-					<li class="list-group-item text-center">Ensihoito</li>
-				}
-				@if (item.Kommentit != null)
-				{
-					<li class="list-group-item text-center">@item.Kommentit</li>
-				}
-				<li class="btn btn-dark ">@Html.ActionLink("Jätä tarjous", "VastaTarjous", new { id = item.TyoID, yid = item.YritysID, henkid = Session["HenkiloID"] })</li>
-			</ul>
-		</div>
-
-	</div>*@
-

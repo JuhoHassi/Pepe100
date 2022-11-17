@@ -2,121 +2,68 @@
 <!DOCTYPE html>
 <html>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="~/Home">NurseBid</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="~/Home">NurseBid</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-		<div class="collapse navbar-collapse" id="navbarColor02">
-			<ul class="navbar-nav mr-auto">
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav mr-auto">
 
-				<!--<li class="nav-item dropdown">
-	<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-	<div class="dropdown-menu">
-		<a class="dropdown-item" href="~/Tyontekijat">Omat Sivut</a>
-		<a class="dropdown-item" href="~/Yritys">Omat Sivut</a>-->
-				@*<a class="dropdown-item" href="~/Tehtavats">Työtehtävät</a>
-		<a class="dropdown-item" href="~/Henkilot">Työntekijät</a>
-		<a class="dropdown-item" href="~/Tyoaikas">Työaika</a>
-		<a class="dropdown-item" href="~/Tyomatkas">Työmatka</a>
-		<a class="dropdown-item" href="~/Postitoimipaikat">Postitoimipaikat</a>
-		<a class="dropdown-item" href="~/Tehtavats/TehtavatLista">Tehtävien tietoja</a>*@
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Home/Logout">Kirjaudu ulos</a>
+                </li>
 
-				<!--<div class="dropdown-divider"></div>-->
-				@*<a class="dropdown-item" href="~/Tapahtuma">Kalenteri</a>
-		<a class="dropdown-item" href="~/Koonti/KoontiDataMetodi">Koonti</a>*@
-				<!--</div>
-	</li>-->
-				<li class="nav-item">
-					<a class="nav-link" href="~/Home/Logout">Kirjaudu ulos</a>
-				</li>
-				@*<li class="nav-item">
-			<a class="nav-link" href="~/Tyontekijat">Omat Sivut</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" href="~/Tehtavat">Tehtavat</a>
-		</li>*@
-				@if (Session["HenkiloID"] != null)
-				{
-			<li class="nav-item">
-				<a class="nav-link" href="~/Tyontekijat2/Create">Luo Vuoro</a>
-			</li>
-							<li class="nav-item">
-								<a class="nav-link" href="~/Tyontekijat2/AvoimetVuorot">Avoimet Vuorot</a>
-							</li>
-											<li class="nav-item">
-												<a class="nav-link" href="~/Tyontekijat2/AvoimetVuorotTesti">Avoimet Vuorot Testi</a>
-											</li>
-															<li class="nav-item">
-																<a class="nav-link" href="~/Tyontekijat2/OmatTarjoukset">Omat Tarjoukset</a>
-															</li>
-																			<li class="nav-item">
-																				<a class="nav-link" href="~/Tyontekijat2/OmatTulevatVuorot">Omat Tulevat Vuorot</a>
-																			</li>
-																							<li class="nav-item">
-																								<a class="nav-link" href="~/Tyontekijat2/OmatVuorot">Omat Tehdyt Vuorot</a>
-																							</li>
-																							@*<li class="nav-item">
-																						<a class="nav-link" href="~/Tyontekijat2/TestiVuorot">Testi Vuorot</a>
-																					</li>
-																					<li class="nav-item">
-																						<a class="nav-link" href="~/Tyontekijat2/Testi2Vuorot">Testi2 Vuorot</a>
-																					</li>*@}
+                @if (Session["HenkiloID"] != null)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Tyontekijat2/Create">Luo Vuoro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Tyontekijat2/AvoimetVuorot">Avoimet Vuorot</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Tyontekijat2/AvoimetVuorotTesti">Avoimet Vuorot Testi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Tyontekijat2/OmatTarjoukset">Omat Tarjoukset</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Tyontekijat2/OmatTulevatVuorot">Omat Tulevat Vuorot</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Tyontekijat2/OmatVuorot">Omat Tehdyt Vuorot</a>
+                    </li>
+                }
 
-				@if (Session["YritysID"] != null)
-				{@*<li class="nav-item">
-				<a class="nav-link" href="~/Yritys/Create">Luo Vuoro</a>
-			</li>*@
-								<li class="nav-item">
-									<a class="nav-link" href="~/Yritys/SairaanhoitajaTilaus">Sairaanhoitaja Tilaus</a>
-								</li>
-												<li class="nav-item">
-													<a class="nav-link" href="~/Yritys/LahihoitajaTilaus">Lahihoitaja Tilaus</a>
-												</li>
-																<li class="nav-item">
-																	<a class="nav-link" href="~/Yritys/AvoimetVuorotYritys">Omat Avoimet Vuorot</a>
-																</li>
-																				<li class="nav-item">
-																					<a class="nav-link" href="~/Yritys/AvoimetVuorotYritysTesti">Omat Avoimet Vuorot Testi</a>
-																				</li>
-																								<li class="nav-item">
-																									<a class="nav-link" href="~/Yritys/TulevatVuorotYritys">Tulevat Vuorot Yritys</a>
-																								</li>
-																												<li class="nav-item">
-																													<a class="nav-link" href="~/Yritys/OmatVuorotYritys">Omat Vuorot</a>
-																												</li>
-
-																																<li class="nav-item">
-																																	<a class="nav-link" href="~/Yritys/YleisetAvoimetVuorot">Yleiset Avoimet Vuorot</a>
-																																</li>
- } @*<li class="nav-item">
-																														<a role="button" class="nav-link" data-toggle="modal" data-target="#LahihoitajaRuutu">LahihoitajaRuutu</a>
-																													</li>
-																													<li class="nav-item">
-																														<a role="button" class="nav-link" data-toggle="modal" data-target="#SairaanhoitajaRuutu">SairaanhoitajaRuutu</a>
-																													</li>*@ @*<li class="nav-item">
-		<a role="button" class="nav-link" data-toggle="modal" data-target="#LahihoitajatRuutu">LahihoitajaRuutu</a>
-	</li>
-	<li class="nav-item">
-		<a role="button" class="nav-link" data-toggle="modal" data-target="#SairaanhoitajatRuutu">SairaanhoitajaRuutu</a>
-	</li>
-	<li class="nav-item">
-		<a role="button" class="nav-link" data-toggle="modal" data-target="#LahihoitajaTilausRuutu">Yritys LahihoitajaRuutu</a>
-	</li>
-	<li class="nav-item">
-		<a role="button" class="nav-link" data-toggle="modal" data-target="#SairaanhoitajaTilausRuutu">Yritys SairaanhoitajaRuutu</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="~/Hoitajat">Hoitajat</a>
-	</li>*@
-			</ul>
-			@*<form class="form-inline my-2 my-lg-0">
-					<input class="form-control mr-sm-2" type="text" placeholder="Search">
-					<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-				</form>*@
-		</div>
-	</nav>
+                @if (Session["YritysID"] != null)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Yritys/SairaanhoitajaTilaus">Sairaanhoitaja Tilaus</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Yritys/LahihoitajaTilaus">Lahihoitaja Tilaus</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Yritys/AvoimetVuorotYritys">Omat Avoimet Vuorot</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Yritys/AvoimetVuorotYritysTesti">Omat Avoimet Vuorot Testi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Yritys/TulevatVuorotYritys">Tulevat Vuorot Yritys</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Yritys/OmatVuorotYritys">Omat Vuorot</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Yritys/YleisetAvoimetVuorot">Yleiset Avoimet Vuorot</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </nav>
 </body>
 </html>
 

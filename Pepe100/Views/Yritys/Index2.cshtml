@@ -2,37 +2,35 @@
 
 @{ ViewBag.Title = "Index"; }
 <p>
-	@Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create")
 </p>
 
 <h2>Index</h2>
 @section scripts{
 
-	<script type="text/javascript">
+    <script type="text/javascript">
 		$(window).on('load', function () {
 			if (@ViewBag.LahiError == 1) {
 				$('#LahihoitajaTilausRuutu').modal('show');
 			}
 		});
-	</script>
-	<script type="text/javascript">
+    </script>
+    <script type="text/javascript">
 		$(window).on('load', function () {
 			if (@ViewBag.SairaanError == 1) {
 				$('#SairaanhoitajaTilausRuutu').modal('show');
 			}
 		});
-	</script>
+    </script>
 }
 
 @{ Html.RenderPartial("~/Views/Yritys/_LahihoitajaTilaus.cshtml");
-				Html.RenderPartial("~/Views/Yritys/_SairaanhoitajaTilaus.cshtml"); }
+    Html.RenderPartial("~/Views/Yritys/_SairaanhoitajaTilaus.cshtml"); }
 <p>@Html.ActionLink("Omat Vuorot", "OmatVuorotYritys")</p>
 <p>@Html.ActionLink("Avoimet Vuorot", "AvoimetVuorotYritys")</p>
 
-@*<a class="alert" href="~/Views/Yritys/_LahihoitajaTilaus.cshtml">Lahihoitaja</a>
-	<a class="alert" href="~/Views/Yritys/_LahihoitajaTilaus.cshtml">Sairaanhoitaja</a>*@
 
 <a href="~/Views/Yritys/_LahihoitajaTilaus.cshtml">AAAAAA</a>
 <p>
-	@Html.ActionLink("Create New", "_LahihoitajaTilaus.cshtml")
+    @Html.ActionLink("Create New", "_LahihoitajaTilaus.cshtml")
 </p>

@@ -2,20 +2,20 @@
 
 @{ ViewBag.Title = "Index2"; }
 @section scripts{
-	<script type="text/javascript">
+    <script type="text/javascript">
 		$(window).on('load', function () {
 			if (@ViewBag.EmailError == 1) {
 				$('#SpostiSend').modal('show');
 			}
 		});
-	</script>
+    </script>
 }
 @{ Html.RenderPartial("_SpostiModal"); }
 
 <a href="~/Views/Yritys/_LahihoitajaTilaus.cshtml">AAAAAA</a>
 
 <p>
-	@Html.ActionLink("Create New", "Yritys/_LahihoitajaTilaus.cshtml")
+    @Html.ActionLink("Create New", "Yritys/_LahihoitajaTilaus.cshtml")
 </p>
 
 

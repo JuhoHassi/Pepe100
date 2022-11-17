@@ -18,6 +18,8 @@ namespace Pepe100.Controllers
     {
         private pepeEntities db = new pepeEntities();
 
+        ////// JÄTÄTARJOUS JA VASTATARJOUS POISTETTU GITHUBI JULKAISUSTA
+
         public ActionResult Index()
         {
             var id = Session["LoginID"];
@@ -50,18 +52,9 @@ namespace Pepe100.Controllers
         {
             var id = Session["HenkiloID"];
             int? id2 = (int?)id;
-            //var joo = (from va in db.vastatarjoukset
-            //           where
-            //           //from t in db.tehtavia
-            //           //where va.TyoID == t.TyoID &&
-            //           va.HenkiloID == id2 &&
-            //           va.VastaTarjousHinta != null
-            //           select
-            //           va).ToArray();
+
             var teht = (from t in db.tehtavia
                         where t.TehtavaTaytetty != true
-                        //where t.HenkiloID == id2 &&
-                        //t.TehtavaValmis != true
                         from va in db.vastatarjoukset
                         where va.HenkiloID == id2 &&
                         va.TyoID == t.TyoID
@@ -117,7 +110,6 @@ namespace Pepe100.Controllers
                               select t);
                 return PartialView("_JataTarjous", testi2);
             }
-            //Hae työntekijän tiedot, Vertaa tehtäviin, jos tiedot on samat tai "paremmat" palauta tehtävät näkymään
             var id = Session["HenkiloID"];
             int? id2 = (int?)id;
 
@@ -133,8 +125,6 @@ namespace Pepe100.Controllers
 
             var testi = (from t in db.tehtavia
                          from ty in db.tyontekijat2
-                             //join va in db.vastatarjoukset on t.TyoID equals va.TyoID
-                             //from va in db.vastatarjoukset
                          where ty.HenkiloID == id2
                          where !joo.Contains(t.TyoID)
                          where
@@ -188,8 +178,6 @@ namespace Pepe100.Controllers
 
             var testi = (from t in db.tehtavia
                          from ty in db.tyontekijat2
-                             //join va in db.vastatarjoukset on t.TyoID equals va.TyoID
-                             //from va in db.vastatarjoukset
                          where ty.HenkiloID == id2
                          where !joo.Contains(t.TyoID)
                          where
@@ -232,15 +220,6 @@ namespace Pepe100.Controllers
             }
             else
             {
-                //var tilausRivejaLista = from t in db.tehtavia
-                //                        where t.TyoID == tyoid
-                //                        select new AvoimetVuorot
-                //                        {
-                //                            Tyokokemus = t.Tyokokemus,
-                //                            Vanhustenhoito_kotihoito = t.Vanhustenhoito_kotihoito,
-                //                            Mielenterveys = t.Mielenterveys,
-                //                        };
-
                 var tilausRivejaLista = (from t in db.tehtavia
                                          where t.TyoID == tyoid
                                          select t);
@@ -255,163 +234,17 @@ namespace Pepe100.Controllers
             return View(tehtavia);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult VastaTarjous(int? id3, int? tarjousid, [Bind(Include = "TyoID,HenkiloID,YritysID,LoginID,Tehtava,TehtavaTaytettu,TehtavaValmis,Sijainti,Etunimi,Sukunimi,Puhelin,Email,EmailMessage,Aloitusaika,Lopetusaika,AikaYhteensa,Luotu,ViimeksiMuokattu,Poistettu,Aktiivinen,Lahihoitaja,Sairaanhoitaja,LOP,KIPU,I_V,LAS,GER,PSYK,ROKOTUS,Tyokokemus,Vanhustenhoito_kotihoito,Mielenterveys,Paivystys_Ensihoito,Lapset,Kehitysvammaiset,Hengityshalvaus,Ensihoitaja_AMK,Terveydenhoitaja,Katilo,Osastotyoskentely,Paivystys,Teho_osasto,Ensihoito,Kommentit,TarjousHinta,TarjousMaara")] tehtavia tehtavia)
-        {
-            tehtavia tehtavia2 = db.tehtavia.Find(tarjousid);
-            //tehtavia tehtavia3 = (from t in db.tehtavia
-            //                      where t.TyoID == tarjousid
-            //                      select t);
-            //tehtavia2.TarjousMaara = tehtavia2.TarjousMaara++;
-            ////tehtavia2.TarjousMaara ++;
-            //db.SaveChanges();
 
-            var henid = Session["HenkiloID"];
-            int? id2 = (int?)henid;
-
-            vastatarjoukset tarjoukset = new vastatarjoukset()
-            {
-                TyoID = tehtavia2.TyoID,
-                HenkiloID = id2,
-                YritysID = tehtavia2.YritysID,
-                //VastaTarjousHinta = tehtavia2.TarjousHinta,
-                VastaTarjousHinta = id3
-
-            };
-            db.vastatarjoukset.Add(tarjoukset);
-            db.SaveChanges();
-
-            try
-            {
-                //int? jotain = (from t in db.tehtavia
-                //               where t.TyoID == tehtavia.TyoID
-                //               select t.HenkiloID).FirstOrDefault();
-
-                //var email = (from y in db.tyontekijat2
-                //             where y.HenkiloID == jotain
-                //             select y.Email).ToArray();
-
-
-                var email2 = (from t in db.tehtavia
-                              where t.TyoID == tehtavia.TyoID
-                              select t.Email).ToArray();
-                //email.ToString();
-                MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-
-                mail.From = new MailAddress("juho.hassi@gmail.com", "NurseBid");
-                mail.To.Add(new MailAddress(email2[0]));
-                mail.Subject = "Uusi tarjous";
-                mail.Body = "Uusi tarjous työvuoroon " + tehtavia.TyoID +/*" Oma hinta: " + tehtavia.TarjousHinta +*/ " Hinta: " + tehtavia.TarjousHinta + " https://localhost:44344/";
-
-                SmtpServer.Host = "smtp.gmail.com";
-                SmtpServer.Port = 587;
-                SmtpServer.EnableSsl = true;
-                SmtpServer.UseDefaultCredentials = false;
-                SmtpServer.Credentials = new System.Net.NetworkCredential("juho.hassi@gmail.com", "Hasa6666");
-
-                SmtpServer.Send(mail);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return RedirectToAction("AvoimetVuorot");
-        }
         public ActionResult Index2(int? tyoid)
         {
             tehtavia tehtavia = db.tehtavia.Find(tyoid);
 
             ViewBag.TarjousError = 1;
-            //return PartialView(tehtavia);
-
             return View(tehtavia);
         }
-        //public ActionResult _JataTarjous(int? id3)
-        //{
-        //    tehtavia tehtavia = db.tehtavia.Find(id3);
-        //    var testi = (from t in db.tehtavia
-        //                 where t.TyoID == id3
-        //                 select t);
-        //    ViewBag.TarjousError = 1;
-
-        //    return View(tehtavia);
-        //}
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        //public ActionResult _JataTarjous(int? id3, int? tarjousid, [Bind(Include = "TyoID,HenkiloID,YritysID,LoginID,Tehtava,TehtavaTaytettu,TehtavaValmis,Sijainti,Etunimi,Sukunimi,Puhelin,Email,EmailMessage,Aloitusaika,Lopetusaika,AikaYhteensa,Luotu,ViimeksiMuokattu,Poistettu,Aktiivinen,Lahihoitaja,Sairaanhoitaja,LOP,KIPU,I_V,LAS,GER,PSYK,ROKOTUS,Tyokokemus,Vanhustenhoito_kotihoito,Mielenterveys,Paivystys_Ensihoito,Lapset,Kehitysvammaiset,Hengityshalvaus,Ensihoitaja_AMK,Terveydenhoitaja,Katilo,Osastotyoskentely,Paivystys,Teho_osasto,Ensihoito,Kommentit,TarjousHinta")] tehtavia tehtavia)
-        //public ActionResult _JataTarjous(tehtavia jotain,[Bind(Include = "TyoID,HenkiloID,YritysID,LoginID,Tehtava,TehtavaTaytettu,TehtavaValmis,Sijainti,Etunimi,Sukunimi,Puhelin,Email,EmailMessage,Aloitusaika,Lopetusaika,AikaYhteensa,Luotu,ViimeksiMuokattu,Poistettu,Aktiivinen,Lahihoitaja,Sairaanhoitaja,LOP,KIPU,I_V,LAS,GER,PSYK,ROKOTUS,Tyokokemus,Vanhustenhoito_kotihoito,Mielenterveys,Paivystys_Ensihoito,Lapset,Kehitysvammaiset,Hengityshalvaus,Ensihoitaja_AMK,Terveydenhoitaja,Katilo,Osastotyoskentely,Paivystys,Teho_osasto,Ensihoito,Kommentit,TarjousHinta")] tehtavia tehtavia)
-        public ActionResult _JataTarjous(tehtavia tehtavia)
-        {
-            ViewBag.TarjousError = 0;
-            tehtavia tehtavia2 = db.tehtavia.Find(tehtavia.TyoID);
-
-            if (tehtavia2.TarjousMaara == null)
-            {
-                tehtavia2.TarjousMaara = 1;
-            }
-            else
-            {
-                tehtavia2.TarjousMaara++;
-            }
-
-            db.SaveChanges();
-
-            var henid = Session["HenkiloID"];
-            int? id2 = (int?)henid;
-
-            vastatarjoukset tarjoukset = new vastatarjoukset()
-            {
-                TyoID = tehtavia2.TyoID,
-                HenkiloID = id2,
-                YritysID = tehtavia2.YritysID,
-                //VastaTarjousHinta = tehtavia2.TarjousHinta,
-                VastaTarjousHinta = tehtavia.TarjousHinta
-
-            };
-            db.vastatarjoukset.Add(tarjoukset);
-            db.SaveChanges();
-
-            try
-            {
-                //int? jotain = (from t in db.tehtavia
-                //               where t.TyoID == tehtavia.TyoID
-                //               select t.HenkiloID).FirstOrDefault();
-
-                //var email = (from y in db.tyontekijat2
-                //             where y.HenkiloID == jotain
-                //             select y.Email).ToArray();
 
 
-                var email2 = (from t in db.tehtavia
-                              where t.TyoID == tehtavia.TyoID
-                              select t.Email).ToArray();
-                //email.ToString();
-                MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("smtp-mail.outlook.com");
 
-                mail.From = new MailAddress("juhoh-@hotmail.com", "NurseBid");
-                mail.To.Add(new MailAddress(email2[0]));
-                mail.Subject = "Uusi tarjous";
-                mail.Body = "Uusi tarjous työvuoroon " + tehtavia.TyoID +/*" Oma hinta: " + tehtavia.TarjousHinta +*/ " Hinta: " + tehtavia.TarjousHinta + " https://localhost:44344/";
-
-                SmtpServer.Host = "smtp-mail.outlook.com";
-                SmtpServer.Port = 587;
-                SmtpServer.EnableSsl = true;
-                SmtpServer.UseDefaultCredentials = false;
-                SmtpServer.Credentials = new System.Net.NetworkCredential("juhoh-@hotmail.com", "KarpalO");
-
-
-                SmtpServer.Send(mail);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return RedirectToAction("AvoimetVuorotTesti");
-        }
 
         public ActionResult Create()
         {
@@ -523,55 +356,4 @@ namespace Pepe100.Controllers
             base.Dispose(disposing);
         }
     }
-    //public ActionResult HyvaksyVuoro(int? id, int? henkid)
-    //{
-    //    Tehtavia tehtavia = db.Tehtavia.Find(id);
-    //    return View(tehtavia);
-    //}
-
-    //[HttpPost]
-    //[ValidateAntiForgeryToken]
-    //public ActionResult HyvaksyVuoro([Bind(Include = "TyoID,HenkiloID,YritysID,LoginID,Tehtava,TehtavaTaytettu,TehtavaValmis,Sijainti,Etunimi,Sukunimi,Puhelin,Email,EmailMessage,Aloitusaika,Lopetusaika,AikaYhteensa,Luotu,ViimeksiMuokattu,Poistettu,Aktiivinen,Lahihoitaja,Sairaanhoitaja,LOP,KIPU,I_V,LAS,GER,PSYK,ROKOTUS,Tyokokemus,Vanhustenhoito_kotihoito,Mielenterveys,Paivystys_Ensihoito,Lapset,Kehitysvammaiset,Hengityshalvaus,Ensihoitaja_AMK,Terveydenhoitaja,Katilo,Osastotyoskentely,Paivystys,Teho_osasto,Ensihoito,Kommentit")] Tehtavia tehtavia)
-    //{
-    //    var id = Session["HenkiloID"];
-    //    int? id2 = (int?)id;
-
-    //    Tehtavia teht = (from t in db.Tehtavia
-    //                     where tehtavia.TyoID == t.TyoID 
-    //                     select t).FirstOrDefault();
-    //    teht.HenkiloID = id2;
-    //    teht.TehtavaTaytettu = true;
-    //    db.SaveChanges();
-    //    try
-    //    {
-    //        int? jotain = (from t in db.Tehtavia
-    //                      where t.TyoID == tehtavia.TyoID
-    //                      select t.YritysID).FirstOrDefault();
-    //        var email = (from y in db.Yritys
-    //                     where y.YritysID == jotain
-    //                     select y.YritysEmail).ToArray();
-
-    //        //email.ToString();
-    //        MailMessage mail = new MailMessage();
-    //        SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-
-    //        mail.From = new MailAddress("juho.hassi@gmail.com", "NurseBid");
-    //        mail.To.Add(new MailAddress(email[0]));
-    //        mail.Subject = "Työvuoro täytetty";
-    //        mail.Body = "Työvuoro täytetty  https://localhost:44344/";
-
-    //        SmtpServer.Host = "smtp.gmail.com";
-    //        SmtpServer.Port = 587;
-    //        SmtpServer.EnableSsl = true;
-    //        SmtpServer.UseDefaultCredentials = false;
-    //        SmtpServer.Credentials = new System.Net.NetworkCredential("juho.hassi@gmail.com", "Hasa6666");
-
-    //        SmtpServer.Send(mail);
-    //    }
-    //    catch (Exception)
-    //    {
-    //        throw;
-    //    }
-    //    return RedirectToAction("AvoimetVuorot");
-    //}
 }

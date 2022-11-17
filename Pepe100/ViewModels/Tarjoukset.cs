@@ -9,11 +9,6 @@ namespace Pepe100.ViewModels
     public class Tarjoukset
     {
 
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        //public Tehtavia()
-        //{
-        //    this.VastaTarjoukset = new HashSet<VastaTarjoukset>();
-        //}
         public tehtavia tehtavia { get; set; }
         public vastatarjoukset vastatarjoukset { get; set; }
 

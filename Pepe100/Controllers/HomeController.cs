@@ -16,9 +16,12 @@ namespace Pepe100.Controllers
     {
         private pepeEntities db = new pepeEntities();
 
+        ////// EMAIL POISTETTU GITHUB JULKAISUSTA
+
         public ActionResult Index()
         {
             ViewBag.LoginError = 0;
+            ViewBag.LoginErrorYritys = 0;
             ViewBag.LoginID2 = ViewBag.LoginID;
             ViewBag.EmailError = 0;
             if (Session["LoginID"] != null)
@@ -116,7 +119,6 @@ namespace Pepe100.Controllers
                 ViewBag.LoggedStatus = "In";
                 ViewBag.LoginError = 0;
                 Session["UserName"] = LoggedUser.UserNameYritys;
-                //Session["LoginIDYritys"] = LoggedUser.LoginIDYritys;
                 Session["YritysID"] = YritysID;
                 ViewBag.LoginID = LoggedUser.LoginIDYritys;
                 TempData["LoginID"] = LoggedUser.LoginIDYritys;
@@ -138,48 +140,6 @@ namespace Pepe100.Controllers
             ViewBag.LoggedStatus = "Logged Out";
             return RedirectToAction("Index", "Home");
         }
-        public ActionResult Email(tyontekijat2 tyontekijat)
-        {
-            try
-            {
-                var sposti = db.tyontekijat2.First(x => x.Email.ToLower() == tyontekijat.Email); //tarkistetaan että sposti löytyy tietokannasta
 
-                if (sposti != null)
-                {
-                    var kayt = db.login.First(); //haetaan Login taulusta ensimmäinen rivi
-                    ViewBag.EmailError = 0;
-
-                    MailMessage mail = new MailMessage();
-                    SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-
-                    mail.From = new MailAddress("juho.hassi@gmail.com", "Jotain");
-                    //mail.To.Add(tyontekijat.Email);
-                    mail.To.Add("juhoh-@hotmail.com");
-                    mail.Subject = "Tunnuksesi";
-                    mail.Body = "Käyttäjätunnuksesi on: " + kayt.UserName + " ja salasanasi on: " + kayt.Password;
-
-                    SmtpServer.Host = "smtp.gmail.com";
-                    SmtpServer.Port = 587;
-                    SmtpServer.EnableSsl = true;
-                    SmtpServer.UseDefaultCredentials = false;
-                    SmtpServer.Credentials = new System.Net.NetworkCredential("juho.hassi@gmail.com", "Hasa6666");
-
-                    SmtpServer.Send(mail);
-                    //TempData["Message"] = "Sahkoposti on lahetetty"; // Viesti alertoituu kun palataan Index sivulle
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    ViewBag.EmailError = 1;
-                    return View("Index2", "_SpostiModal");
-                }
-            }
-            catch (Exception)
-            {
-                ViewBag.EmailError = 1;
-                tyontekijat.EmailMessage = "Sähköpostia ei löytynyt";
-                return View("Index2", tyontekijat); // jos spostia ei löydy palataan Index2 sivulle josta aukee SpostiModal ja EmailMessage
-            }
-        }
     }
 }
